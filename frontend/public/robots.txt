@@ -1,0 +1,12 @@
+# Prosektorweb Robots.txt
+# https://prosektorweb.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://prosektorweb.com/sitemap.xml
+
+# Disallow admin/private paths
+Disallow: /api/
+Disallow: /admin/

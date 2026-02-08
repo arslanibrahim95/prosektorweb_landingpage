@@ -1,14 +1,89 @@
-
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosektorweb | OSGB Dijital Ürün Mimarı</title>
+    <title>Prosektorweb | OSGB Dijital Ürün Mimarı - Önce Gör, Sonra Satın Al</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın. 48 saatte hazır, 7.000 TL tek fiyat. Sürpriz yok, risk yok!">
+    <meta name="keywords"
+        content="OSGB web sitesi, iş sağlığı güvenliği, OSGB dijital çözüm, profesyonel web tasarım, kurumsal web sitesi, OSGB yazılım">
+    <meta name="author" content="Prosektorweb">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="IpXYWdgtYmLHngJAYrqcS2GYhdD11UuGxzecA8UNVuo">
+    <link rel="canonical" href="https://prosektorweb.com">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prosektorweb.com">
+    <meta property="og:title" content="Prosektorweb | OSGB Dijital Ürün Mimarı">
+    <meta property="og:description"
+        content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın. 48 saatte hazır, 7.000 TL tek fiyat.">
+    <meta property="og:image" content="https://prosektorweb.com/og-image.png">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Prosektorweb">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://prosektorweb.com">
+    <meta name="twitter:title" content="Prosektorweb | OSGB Dijital Ürün Mimarı">
+    <meta name="twitter:description"
+        content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın.">
+    <meta name="twitter:image" content="https://prosektorweb.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5FTQKT21D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-X5FTQKT21D');
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Prosektorweb",
+      "url": "https://prosektorweb.com",
+      "logo": "https://prosektorweb.com/logo.png",
+      "description": "OSGB sektörüne özel dijital ürün mimarı. Önce gör, sonra satın al modeli ile profesyonel web sitesi tasarımı.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Turkish"
+      },
+      "sameAs": []
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Prosektorweb",
+      "url": "https://prosektorweb.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://prosektorweb.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -16,29 +91,36 @@
             color: #FFFFFF;
             scroll-behavior: smooth;
         }
+
         .font-montserrat {
             font-family: 'Montserrat', sans-serif;
         }
+
         .bg-psw-dark {
             background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
         }
+
         .gradient-text {
             background: linear-gradient(to right, #FF8C00, #FF0080);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .gradient-btn {
             background: linear-gradient(to right, #FF8C00, #FF0080);
             transition: opacity 0.3s ease;
         }
+
         .gradient-btn:hover {
             opacity: 0.9;
         }
+
         .accordion-content {
             transition: max-height 0.3s ease-out;
         }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.4",
@@ -47,10 +129,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/index.css">
 </head>
+
 <body>
     <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
