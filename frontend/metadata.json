@@ -1,0 +1,7 @@
+{
+  "name": "Prosektorweb OSGB Dijital Mimari",
+  "description": "OSGB sektörü için yüksek dönüşümlü, 'Önce Gör, Sonra Satın Al' modelli SaaS landing page ve önizleme platformu.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
