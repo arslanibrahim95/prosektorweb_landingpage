@@ -14,6 +14,17 @@ const CookieBanner: React.FC = () => {
 
     const handleAccept = () => {
         localStorage.setItem('cookie_consent', 'true');
+
+        // Update Google Consent Mode
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted'
+            });
+        }
+
         setIsVisible(false);
     };
 
