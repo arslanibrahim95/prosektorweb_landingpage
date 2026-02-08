@@ -141,6 +141,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
 
         @media (max-width: 768px) {
           .gooey-footer-content { text-align: center; }
+          .gooey-animations { display: none; }
         }
       `}</style>
 
