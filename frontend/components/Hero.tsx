@@ -104,7 +104,12 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             {/* Mockup Image */}
             <img
               src="/osgb-mockup.png"
-              alt="OSGB Web Sitesi Örneği"
+              alt="OSGB Web Sitesi Örneği - Prosektorweb"
+              width={640}
+              height={640}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="relative w-full rounded-2xl shadow-2xl border border-white/10 hover:scale-[1.02] transition-transform duration-500"
             />
 

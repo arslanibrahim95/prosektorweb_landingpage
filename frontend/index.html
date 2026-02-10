@@ -15,7 +15,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosektorweb | OSGB Dijital Ürün Mimarı - Önce Gör, Sonra Satın Al</title>
+    <title>OSGB Web Sitesi Tasarımı | Prosektorweb - Önce Gör, Satın Al</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -25,12 +25,12 @@
     <meta name="author" content="Prosektorweb">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="IpXYWdgtYmLHngJAYrqcS2GYhdD11UuGxzecA8UNVuo">
-    <link rel="canonical" href="https://prosektorweb.com">
+    <link rel="canonical" href="https://prosektorweb.com/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://prosektorweb.com">
-    <meta property="og:title" content="Prosektorweb | OSGB Dijital Ürün Mimarı">
+    <meta property="og:url" content="https://prosektorweb.com/">
+    <meta property="og:title" content="OSGB Web Sitesi Tasarımı | Prosektorweb">
     <meta property="og:description"
         content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın. 48 saatte hazır, 7.000 TL tek fiyat.">
     <meta property="og:image" content="https://prosektorweb.com/og-image.png">
@@ -39,8 +39,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://prosektorweb.com">
-    <meta name="twitter:title" content="Prosektorweb | OSGB Dijital Ürün Mimarı">
+    <meta name="twitter:url" content="https://prosektorweb.com/">
+    <meta name="twitter:title" content="OSGB Web Sitesi Tasarımı | Prosektorweb">
     <meta name="twitter:description"
         content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın.">
     <meta name="twitter:image" content="https://prosektorweb.com/og-image.png">
@@ -48,6 +48,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Preload hero image for LCP -->
+    <link rel="preload" as="image" href="/osgb-mockup.png">
 
     <!-- Google Consent Mode v2 (MUST come before gtag) -->
     <script>
@@ -85,13 +88,27 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "ProfessionalService",
       "name": "Prosektorweb",
-      "url": "https://prosektorweb.com",
+      "url": "https://prosektorweb.com/",
       "logo": "https://prosektorweb.com/logo.png",
-      "description": "OSGB sektörüne özel dijital ürün mimarı. Önce gör, sonra satın al modeli ile profesyonel web sitesi tasarımı.",
+      "image": "https://prosektorweb.com/og-image.png",
+      "description": "OSGB sektörüne özel profesyonel web sitesi tasarımı. Önce gör, sonra satın al modeli.",
+      "priceRange": "7000 TL",
+      "telephone": "+905517038599",
+      "email": "hello@prosektorweb.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Istanbul",
+        "addressCountry": "TR"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Turkey"
+      },
       "contactPoint": {
         "@type": "ContactPoint",
+        "telephone": "+905517038599",
         "contactType": "customer service",
         "availableLanguage": "Turkish"
       },
@@ -103,18 +120,99 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Prosektorweb",
-      "url": "https://prosektorweb.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://prosektorweb.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
+      "url": "https://prosektorweb.com/",
+      "inLanguage": "tr"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "OSGB Web Sitesi Tasarımı",
+      "description": "OSGB'lere özel profesyonel web sitesi tasarımı. 48 saatte hazır, önce gör sonra satın al.",
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Prosektorweb"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Turkey"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "7000",
+        "priceCurrency": "TRY",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock"
       }
     }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Bu web sitesini gerçekten ücretsiz mi görebiliyorum?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evet. OSGB'niz için hazırlanan web sitesini 7 gün boyunca ücretsiz olarak inceleyebilirsiniz. Satın almadan önce ne alacağınızı net şekilde görmeniz amaçlanır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Web sitesi hazır mı, yoksa taslak mı gösteriyorsunuz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hazır. Gösterilen site bir taslak değildir. Tüm sayfaları oluşturulmuş, yayına alınabilecek gerçek bir web sitesidir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "İnceleme sürecinde düzenleme (revize) isteyebilir miyim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evet. İnceleme süresi boyunca düzenleme talebinde bulunabilirsiniz. Toplam 3 revize hakkınız bulunur. Metin düzenlemeleri, görsel değişiklikleri ve içerik hizalamaları bu kapsamdadır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Satın alma sonrası neler oluyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Satın alma tamamlandığında web siteniz yayına alınır. Alan adı bağlantıları ve temel teknik ayarlar yapılır, süreç kapanır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bu hizmet kimler için uygun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bu sistem yalnızca OSGB'ler için tasarlanmıştır. Önizleme erişimi, OSGB yetkililerine açılır ve doğrulama yapılır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ödeme nasıl yapılıyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Web sitesini inceledikten sonra satın alma kararı verirsiniz. Ödeme tamamlandığında web siteniz yayına alınır."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect hints for third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800&display=swap"
         rel="stylesheet">

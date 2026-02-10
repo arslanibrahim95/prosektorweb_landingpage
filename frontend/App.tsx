@@ -36,11 +36,10 @@ const App: React.FC = () => {
 
   // Check Local Storage on Mount
   useEffect(() => {
-    // Test Backend Connection
+    // Test Backend Connection (silent - no console errors in production)
     fetch(apiUrl('/api/status'))
       .then(res => res.json())
-      .then(data => console.log('Backend Status:', data))
-      .catch(err => console.error('Backend Connection Error:', err));
+      .catch(() => {/* Backend not available - expected on static hosting */});
 
     const saved = localStorage.getItem('psw_session');
     if (saved) {
