@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { WHATSAPP_LINK } from '../constants';
+import { WHATSAPP_LINK, apiUrl } from '../constants';
 
 interface ContactSectionProps {
     onSubmit?: () => void;
@@ -16,14 +16,34 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        onSubmit?.();
+        setSubmitError(null);
+        try {
+            const res = await fetch(apiUrl('/api/public/contact'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    company: formData.company,
+                    message: formData.message,
+                    pageUrl: window.location.href,
+                }),
+            });
+            if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+            setIsSubmitted(true);
+            onSubmit?.();
+        } catch (err) {
+            console.error('Contact submit failed:', err);
+            setSubmitError('Gönderim başarısız oldu. Lütfen tekrar deneyin.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -85,6 +105,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         id="name"
                                         name="name"
                                         required
+                                        autoComplete="name"
                                         value={formData.name}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
@@ -102,6 +123,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         id="email"
                                         name="email"
                                         required
+                                        autoComplete="email"
+                                        inputMode="email"
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
@@ -118,6 +141,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         type="tel"
                                         id="phone"
                                         name="phone"
+                                        autoComplete="tel"
+                                        inputMode="tel"
                                         value={formData.phone}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
@@ -134,6 +159,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         type="text"
                                         id="company"
                                         name="company"
+                                        autoComplete="organization"
                                         value={formData.company}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
@@ -170,7 +196,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                             >
                                 {isSubmitting ? (
                                     <>
-                                        <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                        <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24" role="status" aria-label="Yükleniyor">
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                                         </svg>
@@ -185,6 +211,9 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                     </>
                                 )}
                             </button>
+                            {submitError && (
+                                <p className="text-red-400 font-bold text-center text-sm mt-3">{submitError}</p>
+                            )}
                         </form>
 
                         {/* Contact Info */}

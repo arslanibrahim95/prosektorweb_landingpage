@@ -74,6 +74,16 @@ export const MOCK_CODES: Record<string, string> = {
   "PROSEK": "Prosektorweb Deneme"
 };
 
+// API URL helper
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '').trim();
+
+export function apiUrl(path: string) {
+  if (!API_BASE_URL) return path;
+  const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+  if (path.startsWith('/')) return `${base}${path}`;
+  return `${base}/${path}`;
+}
+
 export const WHATSAPP_NUMBER = "905517038599";
 export const WHATSAPP_MESSAGE = "Merhaba, Prosektorweb üzerinden ulaşıyorum. OSGB'miz için dijital çözümler hakkında bilgi almak istiyorum.";
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;

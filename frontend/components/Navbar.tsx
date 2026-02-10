@@ -43,12 +43,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-[#121212]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
-        : 'bg-[#121212]/80 backdrop-blur-md border-b border-white/5'
+    <nav className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 safe-top ${isScrolled
+        ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
+        : 'bg-[#121218]/80 backdrop-blur-md border-b border-white/5'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3 group cursor-pointer">
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors"
+              className="text-gray-300 hover:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
@@ -114,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       {/* Mobile Menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-        <div className="bg-[#1A1A1A]/95 backdrop-blur-xl border-b border-white/5 py-4 px-4 space-y-2">
+        <div className="bg-[#1a1a1f]/95 backdrop-blur-xl border-b border-white/5 py-4 px-4 space-y-2">
           {navLinks.map((link) => (
             <a
               key={link.name}

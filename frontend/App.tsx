@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PreviewSession } from './types';
-import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA } from './constants';
+import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -18,14 +18,6 @@ import GlobalLegalModals, { LegalModalType } from './components/GlobalLegalModal
 
 type FlowStep = 'IDLE' | 'INFO' | 'LOGIN' | 'WELCOME' | 'PREVIEW_MOCKUP' | 'REVISE_INFO' | 'GO_LIVE' | 'PAYMENT' | 'EXPIRED' | 'LEAD_FORM' | 'LEAD_SUCCESS' | 'CONTACT_FORM' | 'CONTACT_SUCCESS';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '').trim();
-
-function apiUrl(path: string) {
-  if (!API_BASE_URL) return path;
-  const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
-  if (path.startsWith('/')) return `${base}${path}`;
-  return `${base}/${path}`;
-}
 
 const App: React.FC = () => {
   const [session, setSession] = useState<PreviewSession | null>(null);
@@ -76,11 +68,41 @@ const App: React.FC = () => {
     localStorage.removeItem('psw_session');
   };
 
+  // iOS-safe scroll lock for overlay
+  useEffect(() => {
+    if (currentStep === 'IDLE') return;
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
+    };
+  }, [currentStep]);
+
+  // Escape key to close overlay
+  const handleOverlayEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && currentStep !== 'IDLE') setCurrentStep('IDLE');
+  }, [currentStep]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleOverlayEscape);
+    return () => document.removeEventListener('keydown', handleOverlayEscape);
+  }, [handleOverlayEscape]);
+
   return (
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
       <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
 
-      <main className="pt-20">
+      <main className="pt-16 md:pt-20">
         <Hero
           onCheckCode={() => {
             if (isArchived) setCurrentStep('EXPIRED');
@@ -111,13 +133,17 @@ const App: React.FC = () => {
 
       {/* Multi-step Flow Overlay */}
       {currentStep !== 'IDLE' && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 transition-all duration-500 overflow-y-auto">
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/95 transition-all duration-500 overflow-y-auto" role="dialog" aria-modal="true" aria-label="İşlem adımı">
           <div className="w-full min-h-screen flex items-center justify-center p-4">
             <button
               onClick={() => setCurrentStep('IDLE')}
-              className="absolute top-8 right-8 text-gray-400 hover:text-white text-2xl p-4"
+              className="absolute top-8 right-8 text-gray-400 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg"
               aria-label="Kapat"
-            >✕</button>
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
             <div className="max-w-4xl w-full text-center py-12">
               {currentStep === 'INFO' && <InfoScreen onNext={() => setCurrentStep('LOGIN')} onRequestCode={() => setCurrentStep('LEAD_FORM')} />}
@@ -189,39 +215,39 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
         <p className="text-xl md:text-2xl font-bold text-gray-300">Mesajlarınıza en geç 1 iş günü içinde dönüş yapıyoruz.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-        <div className="space-y-8">
-          <div className="space-y-3">
-            <label className="text-2xl font-bold block">Adınız Soyadınız</label>
-            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" className="w-full bg-white text-black p-5 rounded-lg text-2xl outline-none focus:ring-4 ring-orange-500/30 transition-all" />
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label htmlFor="contact-name" className="form-label">Adınız Soyadınız</label>
+            <input id="contact-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white text-black" />
           </div>
-          <div className="space-y-3">
-            <label className="text-2xl font-bold block">Telefon Numaranız</label>
-            <input required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" className="w-full bg-white text-black p-5 rounded-lg text-2xl outline-none focus:ring-4 ring-orange-500/30 transition-all" />
+          <div className="space-y-2">
+            <label htmlFor="contact-phone" className="form-label">Telefon Numaranız</label>
+            <input id="contact-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white text-black" />
           </div>
-          <div className="space-y-3">
-            <label className="text-2xl font-bold block">E-Posta Adresiniz</label>
-            <input required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" className="w-full bg-white text-black p-5 rounded-lg text-2xl outline-none focus:ring-4 ring-orange-500/30 transition-all" />
+          <div className="space-y-2">
+            <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz</label>
+            <input id="contact-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white text-black" />
           </div>
         </div>
 
-        <div className="space-y-8 flex flex-col">
-          <div className="space-y-3 flex-1">
-            <label className="text-2xl font-bold block">Mesajınız</label>
-            <textarea required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="w-full bg-white text-black p-5 rounded-lg text-2xl outline-none min-h-[200px] md:h-full focus:ring-4 ring-orange-500/30 transition-all resize-none"></textarea>
+        <div className="space-y-6 flex flex-col">
+          <div className="space-y-2 flex-1">
+            <label htmlFor="contact-message" className="form-label">Mesajınız</label>
+            <textarea id="contact-message" required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="form-input bg-white text-black min-h-[200px] md:h-full resize-none"></textarea>
           </div>
 
-          <div className="space-y-6 pt-4">
-            <div className="flex items-start gap-4 cursor-pointer group">
+          <div className="space-y-4 pt-4">
+            <div className="flex items-start gap-3 cursor-pointer group">
               <input
                 type="checkbox"
                 id="kvkk-check"
                 checked={formData.kvkk}
                 onChange={e => setFormData({ ...formData, kvkk: e.target.checked })}
-                className="w-8 h-8 rounded border-white/20 bg-transparent cursor-pointer mt-1"
+                className="form-checkbox mt-0.5"
                 required
               />
-              <label htmlFor="kvkk-check" className="text-xl font-medium cursor-pointer group-hover:text-white transition-colors">
+              <label htmlFor="kvkk-check" className="text-sm font-medium cursor-pointer group-hover:text-white transition-colors">
                 KVKK onay formunu okudum, onaylıyorum.
               </label>
             </div>
@@ -229,9 +255,9 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full gradient-btn py-6 rounded-full text-3xl font-black text-white flex items-center justify-center gap-4 transition-all shadow-2xl ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
+              className={`w-full gradient-btn py-4 rounded-full text-lg font-black text-white flex items-center justify-center gap-3 transition-all shadow-2xl ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
             >
-              {isSubmitting ? 'GÖNDERİLİYOR...' : 'GÖNDER'} <span className="text-4xl">›</span>
+              {isSubmitting ? 'GÖNDERİLİYOR...' : 'GÖNDER'} <span className="text-xl">›</span>
             </button>
             {submitError && (
               <p className="text-red-400 font-bold text-center">{submitError}</p>
@@ -342,34 +368,34 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
 
       <div className="space-y-6">
         <div className="space-y-2">
-          <label className="text-xl font-bold block">OSGB Ticari Ünvanı:</label>
-          <input required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" className="w-full gradient-btn p-5 rounded-full text-white text-xl font-bold outline-none border-none placeholder-white/30" />
+          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı:</label>
+          <input id="lead-company" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label className="text-xl font-bold block">Yetkili Adı Soyadı:</label>
-          <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" className="w-full gradient-btn p-5 rounded-full text-white text-xl font-bold outline-none border-none placeholder-white/30" />
+          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı:</label>
+          <input id="lead-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label className="text-xl font-bold block">E-posta Adresi:</label>
-          <input required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" className="w-full gradient-btn p-5 rounded-full text-white text-xl font-bold outline-none border-none placeholder-white/30" />
-          <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB’ler için ek doğrulama yapılabilir.)</p>
+          <label htmlFor="lead-email" className="form-label">E-posta Adresi:</label>
+          <input id="lead-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB'ler için ek doğrulama yapılabilir.)</p>
         </div>
         <div className="space-y-2">
-          <label className="text-xl font-bold block">Cep Telefonu:</label>
-          <input required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" className="w-full gradient-btn p-5 rounded-full text-white text-xl font-bold outline-none border-none placeholder-white/30" />
+          <label htmlFor="lead-phone" className="form-label">Cep Telefonu:</label>
+          <input id="lead-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Önizleme kodu WhatsApp üzerinden gönderilecektir.)</p>
         </div>
 
-        <div className="flex items-center gap-4 py-4 group cursor-pointer">
+        <div className="flex items-center gap-3 py-4 group cursor-pointer">
           <input
             type="checkbox"
             id="auth-check"
             checked={formData.agreed}
             onChange={e => setFormData({ ...formData, agreed: e.target.checked })}
-            className="w-7 h-7 rounded bg-blue-500 border-none cursor-pointer"
+            className="form-checkbox"
             required
           />
-          <label htmlFor="auth-check" className="text-xl font-bold cursor-pointer group-hover:text-white transition-colors">
+          <label htmlFor="auth-check" className="text-sm font-bold cursor-pointer group-hover:text-white transition-colors">
             OSGB adına web sitesi önizleme talebinde bulunmaya yetkiliyim.
           </label>
         </div>
@@ -432,12 +458,12 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
       <h2 className="text-4xl md:text-5xl font-extrabold">Giriş Yap</h2>
       <div className="space-y-8 max-w-lg mx-auto">
         <div className="space-y-2">
-          <label className="text-2xl font-bold block">OSGB Adı</label>
-          <input required value={name} onChange={e => setName(e.target.value)} type="text" className="w-full gradient-btn p-6 rounded-full text-center text-white text-2xl font-bold outline-none border-none placeholder-white/50" />
+          <label htmlFor="login-name" className="form-label">OSGB Adı</label>
+          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label className="text-2xl font-bold block">Önizleme Kodu</label>
-          <input required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" className="w-full gradient-btn p-6 rounded-full text-center text-white text-2xl font-bold outline-none border-none placeholder-white/50" />
+          <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
+          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
         {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
@@ -486,7 +512,7 @@ const WelcomeScreen: React.FC<{ companyName: string, onPreview: () => void, expi
       </div>
 
       <div className="space-y-4 pt-10">
-        <div className="text-7xl font-mono font-black text-white tracking-widest">{timeLeft}</div>
+        <div className="text-4xl md:text-7xl font-mono font-black text-white tracking-widest">{timeLeft}</div>
         <p className="text-xl font-bold">Önizleme süresi: 6 gün 23 saat</p>
       </div>
     </div>

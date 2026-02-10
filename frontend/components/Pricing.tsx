@@ -1,9 +1,37 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 
 interface PricingProps {
   onPreviewClick: () => void;
 }
+
+const PricingParticles: React.FC = () => {
+  const particles = useMemo(() =>
+    Array.from({ length: 8 }).map((_, i) => ({
+      left: `${(i * 12.5) + Math.random() * 10}%`,
+      top: `${(i * 12) + Math.random() * 10}%`,
+      duration: `${3 + (i % 3) * 1.5}s`,
+      delay: `${(i * 0.4)}s`,
+    })),
+  []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 bg-orange-500/30 rounded-full"
+          style={{
+            left: p.left,
+            top: p.top,
+            animation: `float ${p.duration} ease-in-out infinite`,
+            animationDelay: p.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   const features = [
@@ -20,20 +48,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
       <div className="absolute inset-0 bg-[#0A0A0A]"></div>
 
       {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-500/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
+      <PricingParticles />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}

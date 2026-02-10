@@ -41,7 +41,7 @@ const PaymentScreen: React.FC = () => {
                             id="terms"
                             checked={agreedTerms}
                             onChange={e => setAgreedTerms(e.target.checked)}
-                            className="mt-1 w-5 h-5 rounded border-gray-600 bg-transparent checked:bg-blue-500 cursor-pointer"
+                            className="form-checkbox mt-1"
                         />
                         <label htmlFor="terms" className="text-sm text-gray-300 cursor-pointer select-none">
                             <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowTermsModal(true); }}>
@@ -57,7 +57,7 @@ const PaymentScreen: React.FC = () => {
                             id="sales"
                             checked={agreedSales}
                             onChange={e => setAgreedSales(e.target.checked)}
-                            className="mt-1 w-5 h-5 rounded border-gray-600 bg-transparent checked:bg-blue-500 cursor-pointer"
+                            className="form-checkbox mt-1"
                         />
                         <label htmlFor="sales" className="text-sm text-gray-300 cursor-pointer select-none">
                             <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowSalesModal(true); }}>
@@ -73,7 +73,7 @@ const PaymentScreen: React.FC = () => {
                             id="privacy"
                             checked={agreedPrivacy}
                             onChange={e => setAgreedPrivacy(e.target.checked)}
-                            className="mt-1 w-5 h-5 rounded border-gray-600 bg-transparent checked:bg-blue-500 cursor-pointer"
+                            className="form-checkbox mt-1"
                         />
                         <label htmlFor="privacy" className="text-sm text-gray-300 cursor-pointer select-none">
                             <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowPrivacyModal(true); }}>

@@ -33,7 +33,7 @@ const CookieBanner: React.FC = () => {
     return (
         <>
             {/* Banner */}
-            <div className="fixed bottom-0 left-0 w-full bg-[#121212] border-t border-white/10 p-6 z-[90] animate-in slide-in-from-bottom duration-500 shadow-2xl">
+            <div className="fixed bottom-0 left-0 w-full bg-[#121218] border-t border-white/10 p-6 z-[60] animate-in slide-in-from-bottom duration-500 shadow-2xl safe-bottom">
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
                     <p className="text-gray-300 text-sm md:text-base leading-relaxed text-center md:text-left">
                         Size özel hazırlanan web sitesi önizlemesini sunabilmek ve 7 günlük (168 saat) teknik süreci yönetebilmek için zorunlu çerezler kullanıyoruz. Platformu kullanmaya devam ederek bu teknik çerezlere onay vermiş sayılırsınız.{' '}

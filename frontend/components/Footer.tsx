@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
     if (!container) return;
 
     container.innerHTML = '';
-    const particleCount = 100;
+    const particleCount = 30;
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < particleCount; i++) {
