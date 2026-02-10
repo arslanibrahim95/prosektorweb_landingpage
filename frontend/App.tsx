@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { PreviewSession } from './types';
 import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
 import Navbar from './components/Navbar';
@@ -13,8 +13,11 @@ import Footer from './components/Footer';
 import PreviewBar from './components/PreviewBar';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 
-import CookieBanner from './components/CookieBanner';
-import GlobalLegalModals, { LegalModalType } from './components/GlobalLegalModals';
+// Lazy load modal components
+const CookieBanner = lazy(() => import('./components/CookieBanner'));
+const GlobalLegalModals = lazy(() => import('./components/GlobalLegalModals'));
+const PaymentScreen = lazy(() => import('./components/PaymentScreen'));
+import { LegalModalType } from './components/GlobalLegalModals';
 
 type FlowStep = 'IDLE' | 'INFO' | 'LOGIN' | 'WELCOME' | 'PREVIEW_MOCKUP' | 'REVISE_INFO' | 'GO_LIVE' | 'PAYMENT' | 'EXPIRED' | 'LEAD_FORM' | 'LEAD_SUCCESS' | 'CONTACT_FORM' | 'CONTACT_SUCCESS';
 
@@ -152,7 +155,15 @@ const App: React.FC = () => {
               {currentStep === 'PREVIEW_MOCKUP' && <MockupScreen onNext={() => setCurrentStep('REVISE_INFO')} companyName={session?.companyName || 'osgb'} />}
               {currentStep === 'REVISE_INFO' && <ReviseScreen onNext={() => setCurrentStep('GO_LIVE')} />}
               {currentStep === 'GO_LIVE' && <GoLiveScreen onNext={() => setCurrentStep('PAYMENT')} />}
-              {currentStep === 'PAYMENT' && <PaymentScreen />}
+              {currentStep === 'PAYMENT' && (
+                <Suspense fallback={
+                  <div className="text-center py-8 text-gray-400">
+                    Yükleniyor...
+                  </div>
+                }>
+                  <PaymentScreen />
+                </Suspense>
+              )}
               {currentStep === 'EXPIRED' && <ExpiredScreen onReactivate={() => setCurrentStep('INFO')} />}
               {currentStep === 'LEAD_FORM' && <LeadRequestFormScreen onComplete={() => setCurrentStep('LEAD_SUCCESS')} />}
               {currentStep === 'LEAD_SUCCESS' && <LeadSuccessScreen onFinish={() => setCurrentStep('IDLE')} />}
@@ -164,9 +175,13 @@ const App: React.FC = () => {
       )}
 
       <FloatingWhatsApp />
-      <CookieBanner />
+      <Suspense fallback={null}>
+        <CookieBanner />
+      </Suspense>
       {session && currentStep === 'IDLE' && <PreviewBar companyName={session.companyName} expiryDate={session.expiryDate} />}
-      <GlobalLegalModals activeModal={activeLegalModal} onClose={() => setActiveLegalModal(null)} />
+      <Suspense fallback={null}>
+        <GlobalLegalModals activeModal={activeLegalModal} onClose={() => setActiveLegalModal(null)} />
+      </Suspense>
     </div>
   );
 };
@@ -569,10 +584,6 @@ const GoLiveScreen: React.FC<{ onNext: () => void }> = ({ onNext }) => (
     </div>
   </div>
 );
-
-// PaymentScreen is now imported from components
-import PaymentScreen from './components/PaymentScreen';
-
 
 const ExpiredScreen: React.FC<{ onReactivate: () => void }> = ({ onReactivate }) => (
   <div className="space-y-12 animate-in fade-in duration-500">

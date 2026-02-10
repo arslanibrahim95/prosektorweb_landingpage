@@ -54,7 +54,7 @@ const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
                       : 'bg-white/5 group-hover:bg-white/10'
                     }`}>
                     <svg
-                      className={`w-4 h-4 transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-400'
+                      className={`w-4 h-4 transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-300'
                         }`}
                       fill="none"
                       stroke="currentColor"
@@ -74,7 +74,7 @@ const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
                     }`}
                 >
                   <div className="px-6 pb-6 pt-2 border-t border-white/5">
-                    <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">
+                    <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
                       {item.answer}
                     </p>
                   </div>

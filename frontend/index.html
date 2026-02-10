@@ -2,17 +2,6 @@
 <html lang="tr">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TXMLTFBC');</script>
-    <!-- End Google Tag Manager -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>OSGB Web Sitesi Tasarımı | Prosektorweb - Önce Gör, Satın Al</title>
@@ -33,7 +22,7 @@
     <meta property="og:title" content="OSGB Web Sitesi Tasarımı | Prosektorweb">
     <meta property="og:description"
         content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın. 48 saatte hazır, 7.000 TL tek fiyat.">
-    <meta property="og:image" content="https://prosektorweb.com/og-image.png">
+    <meta property="og:image" content="https://prosektorweb.com/og-image.webp">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:site_name" content="Prosektorweb">
 
@@ -43,38 +32,40 @@
     <meta name="twitter:title" content="OSGB Web Sitesi Tasarımı | Prosektorweb">
     <meta name="twitter:description"
         content="OSGB'nize özel profesyonel web sitesi tasarımı. Önce görün, beğenin, sonra satın alın.">
-    <meta name="twitter:image" content="https://prosektorweb.com/og-image.png">
+    <meta name="twitter:image" content="https://prosektorweb.com/og-image.webp">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <!-- Preload hero image for LCP -->
-    <link rel="preload" as="image" href="/osgb-mockup.png">
+    <link rel="preload" as="image" href="/osgb-mockup.webp">
 
     <!-- Google Consent Mode v2 (MUST come before gtag) -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+        window.addEventListener('load', function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
 
-        // Default consent state - denied until user accepts
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500
-        });
-
-        // Check if user has already accepted cookies
-        if (localStorage.getItem('cookie_consent') === 'true') {
-            gtag('consent', 'update', {
-                'ad_storage': 'granted',
-                'ad_user_data': 'granted',
-                'ad_personalization': 'granted',
-                'analytics_storage': 'granted'
+            // Default consent state - denied until user accepts
+            gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied',
+                'wait_for_update': 500
             });
-        }
+
+            // Check if user has already accepted cookies
+            if (localStorage.getItem('cookie_consent') === 'true') {
+                gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                    'analytics_storage': 'granted'
+                });
+            }
+        });
     </script>
 
     <!-- Google tag (gtag.js) -->
@@ -91,8 +82,8 @@
       "@type": "ProfessionalService",
       "name": "Prosektorweb",
       "url": "https://prosektorweb.com/",
-      "logo": "https://prosektorweb.com/logo.png",
-      "image": "https://prosektorweb.com/og-image.png",
+      "logo": "https://prosektorweb.com/logo.webp",
+      "image": "https://prosektorweb.com/og-image.webp",
       "description": "OSGB sektörüne özel profesyonel web sitesi tasarımı. Önce gör, sonra satın al modeli.",
       "priceRange": "7000 TL",
       "telephone": "+905517038599",
@@ -212,7 +203,6 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800&display=swap"
         rel="stylesheet">
@@ -271,6 +261,18 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="root"></div>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TXMLTFBC');</script>
+    <!-- End Google Tag Manager -->
+
     <script type="module" src="/index.tsx"></script>
 </body>
 

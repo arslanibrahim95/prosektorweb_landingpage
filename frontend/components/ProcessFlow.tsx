@@ -18,7 +18,7 @@ const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
           <h2 className="text-3xl md:text-5xl font-montserrat font-black mb-4">
             Nasıl <span className="shimmer-text">Çalışırız</span>?
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <p className="text-gray-300 max-w-xl mx-auto">
             Karmaşık süreçler yok. Net ve hızlı bir yol izliyoruz.
           </p>
         </div>

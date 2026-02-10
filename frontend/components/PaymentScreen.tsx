@@ -22,7 +22,7 @@ const PaymentScreen: React.FC = () => {
                 <div className="bg-blue-900/20 p-6 rounded-xl mb-8 border border-blue-500/20 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
                         <h3 className="text-xl font-bold text-white">Lansman Paketi (Tek Seferlik)</h3>
-                        <p className="text-gray-400">7 Günlük Önizleme Sonrası Aktivasyon</p>
+                        <p className="text-gray-300">7 Günlük Önizleme Sonrası Aktivasyon</p>
                     </div>
                     <div className="text-right">
                         <div className="text-3xl font-black text-white">7.000 TL</div>
@@ -32,7 +32,7 @@ const PaymentScreen: React.FC = () => {
 
                 {/* Legal Checkboxes */}
                 <div className="space-y-4 mb-8">
-                    <p className="text-sm text-gray-400 mb-2 font-bold">Hizmeti başlatmak için aşağıdaki sözleşmeleri onaylayınız:</p>
+                    <p className="text-sm text-gray-300 mb-2 font-bold">Hizmeti başlatmak için aşağıdaki sözleşmeleri onaylayınız:</p>
 
                     {/* Terms */}
                     <div className="flex items-start gap-3 p-3 hover:bg-white/5 rounded-lg transition-colors">

@@ -16,7 +16,7 @@
   --bg-elevated: #121218;
   --accent-red: #C62828;
   --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
+  --text-secondary: #b4b9c4; /* Changed from #9ca3af to lighter shade for better contrast */
   --text-tertiary: #6b7280;
   --focus-ring: rgba(249, 115, 22, 0.3);
 }

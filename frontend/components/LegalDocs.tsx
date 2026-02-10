@@ -225,9 +225,9 @@ export const PrivacyPolicyContent: React.FC = () => (
                 <h4 className="text-white font-bold mb-1">1. İşlenen Kişisel Veriler</h4>
                 <p className="mb-2">Platform ve önizleme alanı üzerinden aşağıdaki veriler işlenmektedir:</p>
                 <ul className="list-disc pl-5 space-y-1">
-                    <li><strong className="text-gray-400">Kimlik ve İletişim:</strong> Ad, soyad, telefon numarası ve e-posta adresi.</li>
-                    <li><strong className="text-gray-400">Kullanıcı İşlem:</strong> Önizleme erişim kodu, oturum kayıtları ve sayaç üzerindeki süre takibi hareketleri.</li>
-                    <li><strong className="text-gray-400">Firma Bilgileri:</strong> OSGB adı ve hizmet kapsamında sağlanan sektörel bilgiler.</li>
+                    <li><strong className="text-gray-300">Kimlik ve İletişim:</strong> Ad, soyad, telefon numarası ve e-posta adresi.</li>
+                    <li><strong className="text-gray-300">Kullanıcı İşlem:</strong> Önizleme erişim kodu, oturum kayıtları ve sayaç üzerindeki süre takibi hareketleri.</li>
+                    <li><strong className="text-gray-300">Firma Bilgileri:</strong> OSGB adı ve hizmet kapsamında sağlanan sektörel bilgiler.</li>
                 </ul>
             </section>
 
@@ -250,9 +250,9 @@ export const PrivacyPolicyContent: React.FC = () => (
             <section>
                 <h4 className="text-white font-bold mb-1">4. Kişisel Verilerin Saklanma Süresi</h4>
                 <ul className="list-disc pl-5 space-y-1">
-                    <li><strong className="text-gray-400">İnceleme Sürecinde:</strong> Veriler, 168 saatlik önizleme süresi boyunca aktif olarak işlenir.</li>
-                    <li><strong className="text-gray-400">Satın Alma Gerçekleşmezse:</strong> 7 günlük süre sonunda web sitesi arşivlenir. Yeniden aktivasyon talebi gelmezse veriler yasal süreler sonunda silinir.</li>
-                    <li><strong className="text-gray-400">Satın Alma Gerçekleşirse:</strong> Veriler, yasal yükümlülükler ve ticari zamanaşımı süreleri boyunca saklanır.</li>
+                    <li><strong className="text-gray-300">İnceleme Sürecinde:</strong> Veriler, 168 saatlik önizleme süresi boyunca aktif olarak işlenir.</li>
+                    <li><strong className="text-gray-300">Satın Alma Gerçekleşmezse:</strong> 7 günlük süre sonunda web sitesi arşivlenir. Yeniden aktivasyon talebi gelmezse veriler yasal süreler sonunda silinir.</li>
+                    <li><strong className="text-gray-300">Satın Alma Gerçekleşirse:</strong> Veriler, yasal yükümlülükler ve ticari zamanaşımı süreleri boyunca saklanır.</li>
                 </ul>
             </section>
 

@@ -59,12 +59,12 @@ const CookieBanner: React.FC = () => {
                     <div className="text-gray-300 space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm md:text-base">
 
                         <section>
-                            <h4 className="text-white font-bold text-lg mb-2">1. Çerez Nedir?</h4>
+                            <h3 className="text-white font-bold text-lg mb-2">1. Çerez Nedir?</h3>
                             <p>Çerezler, bir web sitesini ziyaret ettiğinizde tarayıcınız aracılığıyla cihazınıza kaydedilen küçük metin dosyalarıdır. Bu dosyalar, platformun doğru, güvenli ve size özel (kodlu giriş vb.) şekilde çalışmasını sağlar.</p>
                         </section>
 
                         <section>
-                            <h4 className="text-white font-bold text-lg mb-2">2. Çerezlerin Kullanım Amaçları</h4>
+                            <h3 className="text-white font-bold text-lg mb-2">2. Çerezlerin Kullanım Amaçları</h3>
                             <p className="mb-2">Prosektorweb olarak çerezleri aşağıdaki spesifik amaçlarla kullanırız:</p>
                             <ul className="list-disc pl-5 space-y-1">
                                 <li><strong className="text-white">Kodlu Oturum Yönetimi:</strong> Size özel iletilen giriş kodunun doğrulanması, önizleme alanına güvenli erişim sağlanması ve 7 günlük (168 saat) inceleme süresi boyunca oturumun sürekliliği.</li>
@@ -74,7 +74,7 @@ const CookieBanner: React.FC = () => {
                         </section>
 
                         <section>
-                            <h4 className="text-white font-bold text-lg mb-2">3. Kullanılan Çerez Türleri</h4>
+                            <h3 className="text-white font-bold text-lg mb-2">3. Kullanılan Çerez Türleri</h3>
                             <div className="space-y-3">
                                 <div>
                                     <strong className="text-blue-400 block mb-1">🔹 Zorunlu Çerezler (Teknik Çerezler)</strong>
@@ -88,7 +88,7 @@ const CookieBanner: React.FC = () => {
                         </section>
 
                         <section>
-                            <h4 className="text-white font-bold text-lg mb-2">4. Çerezlerin Kontrolü ve Süre Yönetimi</h4>
+                            <h3 className="text-white font-bold text-lg mb-2">4. Çerezlerin Kontrolü ve Süre Yönetimi</h3>
                             <p>Kullanıcılar, tarayıcı ayarları üzerinden çerezleri kontrol edebilir veya silebilir. Ancak;</p>
                             <div className="mt-2 p-3 bg-red-900/20 border-l-4 border-red-500 rounded text-gray-200">
                                 <strong className="text-white">Önemli Not:</strong> Zorunlu çerezlerin devre dışı bırakılması durumunda, size özel tanımlanan 168 saatlik inceleme süreci ve önizleme ekranı teknik olarak çalışmayacaktır.
@@ -96,7 +96,7 @@ const CookieBanner: React.FC = () => {
                         </section>
 
                         <section>
-                            <h4 className="text-white font-bold text-lg mb-2">5. Veri Güvenliği ve Gizlilik</h4>
+                            <h3 className="text-white font-bold text-lg mb-2">5. Veri Güvenliği ve Gizlilik</h3>
                             <p>Çerezler aracılığıyla elde edilen veriler, KVKK Aydınlatma Metni’nde belirtilen ilkelere uygun olarak işlenir. Bu veriler, 7 günlük inceleme süreci ve aktivasyon işlemleri dışında reklam veya pazarlama amacıyla üçüncü kişilerle paylaşılmaz.</p>
                         </section>
 

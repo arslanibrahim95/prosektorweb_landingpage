@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
           </h1>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed fade-in-up stagger-2">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed fade-in-up stagger-2">
             Sürprizlere yer yok. Önce ödeme yapıp sonuç beklediğiniz geleneksel ajans modelini yıktık. OSGB'nize özel, bizzat inceleyebileceğiniz hazır web sitenizi 48 saatte hazırlıyoruz.
           </p>
 
@@ -68,7 +68,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
 
           {/* Trust Badges */}
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 pt-8 fade-in-up stagger-4">
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
                 <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
               </div>
               <span>Hızlı Teslimat</span>
             </div>
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
                 <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -84,7 +84,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
               </div>
               <span>Mobil Uyumlu</span>
             </div>
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
                 <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -102,23 +102,26 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-pink-500/20 rounded-3xl blur-2xl scale-105"></div>
 
             {/* Mockup Image */}
-            <img
-              src="/osgb-mockup.png"
-              alt="OSGB Web Sitesi Örneği - Prosektorweb"
-              width={640}
-              height={640}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="relative w-full rounded-2xl shadow-2xl border border-white/10 hover:scale-[1.02] transition-transform duration-500"
-            />
+            <picture>
+              <source srcSet="/osgb-mockup.webp" type="image/webp" />
+              <img
+                src="/osgb-mockup.png"
+                alt="OSGB Web Sitesi Örneği - Prosektorweb"
+                width={640}
+                height={640}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="relative w-full rounded-2xl shadow-2xl border border-white/10 hover:scale-[1.02] transition-transform duration-500"
+              />
+            </picture>
 
             {/* Floating status badge */}
             <div className="absolute -bottom-4 -left-4 glass p-3 rounded-xl shadow-xl" style={{ animation: 'float 3s ease-in-out infinite' }}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-xl">🚀</div>
                 <div>
-                  <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Durum</div>
+                  <div className="text-[10px] text-gray-300 font-bold uppercase tracking-wider">Durum</div>
                   <div className="text-sm font-bold text-white">Yayına Hazır</div>
                 </div>
               </div>

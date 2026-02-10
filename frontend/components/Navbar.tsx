@@ -54,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
             <div className="hidden sm:flex items-center">
               <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
-              <span className="text-xs text-gray-400 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
+              <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
                 Prosektorweb
               </span>
             </div>
@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
                 href={link.href}
                 className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${activeSection === link.id
                     ? 'text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`}
               >
                 {link.name}
@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
               onClick={() => setIsMobileMenuOpen(false)}
               className={`block text-base font-medium py-2 px-4 rounded-lg transition-colors ${activeSection === link.id
                   ? 'text-white bg-white/5'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`}
             >
               {link.name}

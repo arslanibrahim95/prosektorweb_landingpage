@@ -56,7 +56,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
           <h2 className="text-3xl md:text-5xl font-montserrat font-black mb-4">
             <span className="shimmer-text">Fiyatlandırma</span>
           </h2>
-          <p className="text-gray-400">Mühendislik Gücü, Erişilebilir Fiyat</p>
+          <p className="text-gray-300">Mühendislik Gücü, Erişilebilir Fiyat</p>
         </div>
 
         {/* Pricing Card */}
@@ -84,7 +84,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
                   7.000
                   <span className="text-3xl">TL</span>
                 </span>
-                <span className="text-gray-400 font-bold">+KDV</span>
+                <span className="text-gray-300 font-bold">+KDV</span>
               </div>
 
               {/* Features List */}

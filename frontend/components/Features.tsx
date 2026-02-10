@@ -75,7 +75,7 @@ const Features: React.FC = () => {
               <h3 className="text-xl font-bold mb-4 text-white group-hover:text-orange-400 transition-colors">
                 {item.title}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-300 text-sm leading-relaxed">
                 {item.desc}
               </p>
 

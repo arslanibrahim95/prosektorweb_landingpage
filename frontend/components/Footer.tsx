@@ -158,14 +158,14 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
             <div className="text-xl font-black" style={{ color: 'var(--text-color)' }}>
               Prosektor<span className="text-white">web</span>
             </div>
-            <p className="text-sm opacity-70" style={{ color: 'var(--text-color)' }}>
+            <p className="text-sm opacity-85" style={{ color: 'var(--text-color)' }}>
               OSGB'lere özel dijital kimlik çözümleri
             </p>
             {/* Payment Logos */}
             <div className="flex items-center gap-2 pt-2">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" width={50} height={20} className="h-5 opacity-70 hover:opacity-100 transition-opacity" loading="lazy" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" width={32} height={20} className="h-5 opacity-70 hover:opacity-100 transition-opacity" loading="lazy" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Troy_logo.png/800px-Troy_logo.png" alt="Troy" width={40} height={20} className="h-5 opacity-70 hover:opacity-100 transition-opacity" loading="lazy" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" width={50} height={20} className="h-5 opacity-85 hover:opacity-100 transition-opacity" loading="lazy" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" width={32} height={20} className="h-5 opacity-85 hover:opacity-100 transition-opacity" loading="lazy" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Troy_logo.png/800px-Troy_logo.png" alt="Troy" width={40} height={20} className="h-5 opacity-85 hover:opacity-100 transition-opacity" loading="lazy" />
             </div>
             {/* SSL Badge */}
             <div className="flex items-center gap-1.5 text-[10px] font-bold bg-black/10 px-2.5 py-1 rounded-full w-fit" style={{ color: 'var(--text-color)' }}>
@@ -222,7 +222,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
               </svg>
               İletişim Formu
             </a>
-            <div className="flex items-center gap-2 text-sm opacity-60 pt-2" style={{ color: 'var(--text-color)' }}>
+            <div className="flex items-center gap-2 text-sm opacity-80 pt-2" style={{ color: 'var(--text-color)' }}>
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -234,7 +234,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
           {/* Sosyal - sadece aktif profiller eklenir */}
           <div className="space-y-3">
             <h4>Bizi Takip Edin</h4>
-            <p className="text-sm opacity-60" style={{ color: 'var(--text-color)' }}>
+            <p className="text-sm opacity-80" style={{ color: 'var(--text-color)' }}>
               Sosyal medya hesaplarımız yakında aktif olacaktır.
             </p>
           </div>
@@ -242,7 +242,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
         </div>
 
         {/* Bottom Bar */}
-        <div className="relative z-10 text-center text-sm opacity-70 pt-4 border-t border-black/10 mt-4 mx-6" style={{ color: 'var(--text-color)' }}>
+        <div className="relative z-10 text-center text-sm opacity-85 pt-4 border-t border-black/10 mt-4 mx-6" style={{ color: 'var(--text-color)' }}>
           © 2026 Prosektorweb. Tüm hakları saklıdır.
         </div>
       </footer>
