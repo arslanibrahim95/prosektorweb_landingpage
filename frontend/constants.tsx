@@ -73,3 +73,7 @@ export const MOCK_CODES: Record<string, string> = {
   "ALFA77": "Alfa Ortak Sağlık Birimi",
   "PROSEK": "Prosektorweb Deneme"
 };
+
+export const WHATSAPP_NUMBER = "905517038599";
+export const WHATSAPP_MESSAGE = "Merhaba, Prosektorweb üzerinden ulaşıyorum. OSGB'miz için dijital çözümler hakkında bilgi almak istiyorum.";
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;

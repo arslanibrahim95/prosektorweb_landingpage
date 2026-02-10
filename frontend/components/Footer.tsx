@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { LegalModalType } from './GlobalLegalModals';
+import { WHATSAPP_LINK } from '../constants';
 
 interface FooterProps {
   onContactClick: () => void;
@@ -197,7 +198,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
           <div className="space-y-3">
             <h4>İletişim</h4>
             <a href="mailto:hello@prosektorweb.com" className="footer-link">hello@prosektorweb.com</a>
-            <a href="https://wa.me/905551234567" target="_blank" rel="noopener noreferrer" className="footer-link">WhatsApp</a>
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="footer-link">WhatsApp</a>
             <a href="#" onClick={(e) => { e.preventDefault(); onContactClick(); }} className="footer-link">İletişim Formu</a>
           </div>
 

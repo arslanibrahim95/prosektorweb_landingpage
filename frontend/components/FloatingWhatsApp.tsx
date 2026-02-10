@@ -1,10 +1,11 @@
 
 import React from 'react';
+import { WHATSAPP_LINK } from '../constants';
 
 const FloatingWhatsApp: React.FC = () => {
   return (
     <a 
-      href="https://wa.me/905555555555" 
+      href={WHATSAPP_LINK} 
       target="_blank" 
       rel="noopener noreferrer"
       className="fixed bottom-24 right-6 z-50 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl shadow-green-900/40 hover:scale-110 transition-transform cursor-pointer"
