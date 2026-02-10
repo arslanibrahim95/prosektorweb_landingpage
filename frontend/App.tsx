@@ -454,7 +454,7 @@ const LeadSuccessScreen: React.FC<{ onFinish: () => void }> = ({ onFinish }) => 
       <p className="text-xl font-bold italic text-gray-400 uppercase tracking-widest">Önizleme erişimi yalnızca yetkilendirilmiş OSGB’ler için oluşturulur.</p>
     </div>
 
-    <button onClick={onFinish} className="mt-8 text-gray-500 hover:text-white underline text-lg transition-colors">Ana Sayfaya Dön</button>
+    <button onClick={onFinish} className="mt-8 text-gray-400 hover:text-white underline text-lg transition-colors">Ana Sayfaya Dön</button>
   </div>
 );
 
@@ -598,13 +598,13 @@ const ExpiredScreen: React.FC<{ onReactivate: () => void }> = ({ onReactivate })
     </button>
 
     <div className="space-y-2">
-      <h4 className="text-2xl font-bold">Yeniden Aktifleştirme Bedeli</h4>
+      <h3 className="text-2xl font-bold">Yeniden Aktifleştirme Bedeli</h3>
       <div className="flex flex-col items-center">
-        <span className="text-gray-500 line-through text-2xl">7.000 TL (tanıtım süresi sona erdi)</span>
+        <span className="text-gray-400 line-through text-2xl">7.000 TL (tanıtım süresi sona erdi)</span>
         <span className="text-5xl font-black text-white">12.500 TL</span>
       </div>
     </div>
-    <p className="text-gray-500">Bu bedel, önizleme alanının yeniden oluşturulmasını ve erişime açılmasını kapsar.</p>
+    <p className="text-gray-400">Bu bedel, önizleme alanının yeniden oluşturulmasını ve erişime açılmasını kapsar.</p>
   </div>
 );
 

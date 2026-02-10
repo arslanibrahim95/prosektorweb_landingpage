@@ -79,7 +79,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
 
               {/* Price */}
               <div className="flex items-baseline justify-center gap-3 mb-10">
-                <span className="text-gray-500 line-through text-2xl font-medium">12.500 TL</span>
+                <span className="text-gray-400 line-through text-2xl font-medium">12.500 TL</span>
                 <span className="text-5xl md:text-7xl font-montserrat font-black text-white">
                   7.000
                   <span className="text-3xl">TL</span>
@@ -117,7 +117,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
                 </span>
               </button>
 
-              <p className="mt-6 text-gray-500 text-xs italic">
+              <p className="mt-6 text-gray-400 text-xs italic">
                 Sadece OSGB'ler için geçerli, sınırlı sayıda lisans.
               </p>
             </div>

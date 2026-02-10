@@ -13,8 +13,8 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient Orbs */}
-        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-orange-600/15 rounded-full blur-[150px] animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-pink-600/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-orange-600/15 rounded-full blur-[150px]" style={{ animation: 'glow-pulse-opacity 4s ease-in-out infinite', willChange: 'opacity' }}></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-pink-600/15 rounded-full blur-[150px]" style={{ animation: 'glow-pulse-opacity 4s ease-in-out infinite 1s', willChange: 'opacity' }}></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[100px]"></div>
 
         {/* Floating Particles */}
@@ -61,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
                 </svg>
               </span>
             </button>
-            <div className="text-sm text-gray-500 font-medium">
+            <div className="text-sm text-gray-400 font-medium">
               7 Gün Geçerli • <span className="text-white font-bold">7.000 TL+KDV</span> Tek Fiyat
             </div>
           </div>

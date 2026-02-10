@@ -37,14 +37,14 @@ const PreviewBar: React.FC<PreviewBarProps> = ({ companyName, expiryDate }) => {
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-full gradient-btn flex items-center justify-center text-xl shadow-lg">👋</div>
             <div>
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Hoş Geldiniz</div>
+              <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Hoş Geldiniz</div>
               <div className="text-sm font-bold text-white">{companyName}</div>
             </div>
           </div>
 
           <div className="flex items-center gap-8">
             <div className="hidden sm:flex flex-col items-center">
-              <div className="text-[10px] text-gray-500 font-bold uppercase mb-1">Kalan İnceleme Süresi</div>
+              <div className="text-[10px] text-gray-400 font-bold uppercase mb-1">Kalan İnceleme Süresi</div>
               <div className="flex gap-2 text-sm font-mono font-black text-orange-400">
                 <span className="bg-orange-500/10 px-2 py-1 rounded">{timeLeft.hours.toString().padStart(2, '0')}sa</span>
                 <span className="bg-orange-500/10 px-2 py-1 rounded">{timeLeft.minutes.toString().padStart(2, '0')}dk</span>

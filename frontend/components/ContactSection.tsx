@@ -108,7 +108,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         autoComplete="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
                                         placeholder="Adınız Soyadınız"
                                     />
                                 </div>
@@ -127,7 +127,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         inputMode="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
                                         placeholder="ornek@email.com"
                                     />
                                 </div>
@@ -145,7 +145,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         inputMode="tel"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
                                         placeholder="05XX XXX XX XX"
                                     />
                                 </div>
@@ -162,7 +162,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         autoComplete="organization"
                                         value={formData.company}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
                                         placeholder="Şirket adınız"
                                     />
                                 </div>
@@ -180,7 +180,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                     rows={5}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all resize-none input-glow"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all resize-none input-glow"
                                     placeholder="Mesajınızı yazın..."
                                 />
                             </div>

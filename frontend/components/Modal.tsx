@@ -94,7 +94,7 @@ const Modal: React.FC<ModalProps> = ({ title, onClose, children }) => {
             <button
               ref={closeBtnRef}
               onClick={onClose}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-500 hover:text-white rounded-lg transition-colors"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-white rounded-lg transition-colors"
               aria-label="Kapat"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

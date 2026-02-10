@@ -62,7 +62,7 @@ const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
                 <h3 className="text-lg font-bold mb-2 group-hover:text-orange-400 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed max-w-[200px]">
+                <p className="text-sm text-gray-400 leading-relaxed max-w-[200px]">
                   {step.description}
                 </p>
 

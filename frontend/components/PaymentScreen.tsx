@@ -26,7 +26,7 @@ const PaymentScreen: React.FC = () => {
                     </div>
                     <div className="text-right">
                         <div className="text-3xl font-black text-white">7.000 TL</div>
-                        <div className="text-xs text-gray-500">+ KDV (%20)</div>
+                        <div className="text-xs text-gray-400">+ KDV (%20)</div>
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@ const PaymentScreen: React.FC = () => {
                     className={`w-full py-4 rounded-xl text-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2
             ${isFormValid
                             ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:scale-[1.02] shadow-green-900/20 cursor-pointer'
-                            : 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                            : 'bg-gray-800 text-gray-400 cursor-not-allowed'
                         }`}
                 >
                     {isFormValid ? 'Ödeme Yap ve Yayına Al (8.400 TL)' : 'Sözleşmeleri Onaylayınız'}
@@ -102,7 +102,7 @@ const PaymentScreen: React.FC = () => {
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-5" />
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Troy_logo.png/800px-Troy_logo.png" alt="Troy" className="h-5" />
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-400">
                         Ödemeniz <span className="text-white font-bold">256-bit SSL</span> ile şifrelenerek güvenli ödeme altyapısı üzerinden alınır. Kredi kartı bilgileriniz sistemimizde saklanmaz.
                     </p>
                 </div>

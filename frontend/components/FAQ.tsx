@@ -21,7 +21,7 @@ const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
           <h2 className="text-3xl md:text-4xl font-montserrat font-black mb-4">
             Sık Sorulan <span className="shimmer-text">Sorular</span>
           </h2>
-          <p className="text-gray-500">Merak ettiğiniz her şey burada</p>
+          <p className="text-gray-400">Merak ettiğiniz her şey burada</p>
         </div>
 
         {/* FAQ Accordion */}
@@ -46,7 +46,7 @@ const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
                 >
                   <span className={`font-bold transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-200 group-hover:text-white'
                     }`}>
-                    <span className="text-gray-500 mr-2">{item.id}.</span>
+                    <span className="text-gray-400 mr-2">{item.id}.</span>
                     {item.question}
                   </span>
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${isOpen
