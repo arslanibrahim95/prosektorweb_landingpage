@@ -7,40 +7,49 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
+const navLinks = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  // Optimized scroll handler using requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          const sections = navLinks.map(link => link.id);
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 safe-top ${isScrolled
