@@ -18,3 +18,7 @@ export const contactSchema = z.object({
   pageUrl: z.string().trim().url().optional(),
 });
 
+export const verifyCodeSchema = z.object({
+  code: z.string().trim().min(1).max(100),
+  name: z.string().trim().optional(),
+});
