@@ -18,6 +18,7 @@ const CookieBanner = lazy(() => import('./components/CookieBanner'));
 const GlobalLegalModals = lazy(() => import('./components/GlobalLegalModals'));
 const PaymentScreen = lazy(() => import('./components/PaymentScreen'));
 import { LegalModalType } from './components/GlobalLegalModals';
+import { formatPhoneNumber } from './utils';
 
 type FlowStep = 'IDLE' | 'INFO' | 'LOGIN' | 'WELCOME' | 'PREVIEW_MOCKUP' | 'REVISE_INFO' | 'GO_LIVE' | 'PAYMENT' | 'EXPIRED' | 'LEAD_FORM' | 'LEAD_SUCCESS' | 'CONTACT_FORM' | 'CONTACT_SUCCESS';
 
@@ -238,7 +239,7 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
           </div>
           <div className="space-y-2">
             <label htmlFor="contact-phone" className="form-label">Telefon Numaranız</label>
-            <input id="contact-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white text-black" />
+            <input id="contact-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white text-black" />
           </div>
           <div className="space-y-2">
             <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz</label>
@@ -397,7 +398,7 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
         </div>
         <div className="space-y-2">
           <label htmlFor="lead-phone" className="form-label">Cep Telefonu:</label>
-          <input id="lead-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <input id="lead-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Önizleme kodu WhatsApp üzerinden gönderilecektir.)</p>
         </div>
 
