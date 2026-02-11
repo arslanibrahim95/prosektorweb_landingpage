@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { WHATSAPP_LINK, apiUrl } from '../constants';
+import { formatPhoneNumber } from '../utils';
 
 interface ContactSectionProps {
     onSubmit?: () => void;
@@ -47,7 +48,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: name === 'phone' ? formatPhoneNumber(value) : value
+        }));
     };
 
     if (isSubmitted) {
