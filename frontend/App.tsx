@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { PreviewSession } from './types';
 import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
+import { formatPhoneNumber } from './utils';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -238,7 +239,18 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
           </div>
           <div className="space-y-2">
             <label htmlFor="contact-phone" className="form-label">Telefon Numaranız</label>
-            <input id="contact-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white text-black" />
+            <input
+              id="contact-phone"
+              required
+              value={formData.phone}
+              onChange={e => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })}
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              maxLength={15}
+              className="form-input bg-white text-black"
+              placeholder="05XX XXX XX XX"
+            />
           </div>
           <div className="space-y-2">
             <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz</label>
@@ -397,7 +409,18 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
         </div>
         <div className="space-y-2">
           <label htmlFor="lead-phone" className="form-label">Cep Telefonu:</label>
-          <input id="lead-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <input
+            id="lead-phone"
+            required
+            value={formData.phone}
+            onChange={e => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })}
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            maxLength={15}
+            className="form-input bg-white/5 border border-white/10 text-white rounded-xl"
+            placeholder="05XX XXX XX XX"
+          />
           <p className="text-gray-400 text-sm italic">(Önizleme kodu WhatsApp üzerinden gönderilecektir.)</p>
         </div>
 
