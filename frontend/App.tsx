@@ -103,9 +103,15 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white text-black px-4 py-2 rounded-lg font-bold shadow-xl outline-none ring-2 ring-orange-500"
+      >
+        İçeriğe Atla
+      </a>
       <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
 
-      <main className="pt-16 md:pt-20">
+      <main id="main-content" className="pt-16 md:pt-20">
         <Hero
           onCheckCode={() => {
             if (isArchived) setCurrentStep('EXPIRED');
