@@ -50,7 +50,19 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer">
+          <div
+            className="flex items-center space-x-3 group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-lg p-1"
+            role="button"
+            tabIndex={0}
+            aria-label="Prosektorweb Ana Sayfa"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
             <div className="hidden sm:flex items-center">
               <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
@@ -105,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
               aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
               aria-expanded={isMobileMenuOpen}
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
               </svg>
             </button>
