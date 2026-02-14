@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { LegalModalType } from './GlobalLegalModals';
-import { WHATSAPP_LINK } from '../constants';
+import { DASHBOARD_URL, WHATSAPP_LINK } from '../constants';
+import { openExternalByDevice } from '../utils/navigation';
 
 interface FooterProps {
   onContactClick: () => void;
@@ -44,6 +45,11 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
     e.preventDefault();
     const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleDashboardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    openExternalByDevice(DASHBOARD_URL);
   };
 
   return (
@@ -183,6 +189,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
             <a href="#process" onClick={(e) => handleScroll(e, 'process')} className="footer-link">Süreç</a>
             <a href="#pricing" onClick={(e) => handleScroll(e, 'pricing')} className="footer-link">Fiyat</a>
             <a href="#faq" onClick={(e) => handleScroll(e, 'faq')} className="footer-link">S.S.S.</a>
+            <a href={DASHBOARD_URL} onClick={handleDashboardClick} className="footer-link">Dashboard</a>
           </div>
 
           {/* Yasal */}

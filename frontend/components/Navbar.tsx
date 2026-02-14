@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
+import { DASHBOARD_URL } from '../constants';
+import { openExternalByDevice } from '../utils/navigation';
 
 interface NavbarProps {
   onLoginClick: () => void;
@@ -42,6 +44,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
     { name: 'İletişim', href: '#contact', id: 'contact' },
   ];
 
+  const handleDashboardClick = () => {
+    openExternalByDevice(DASHBOARD_URL);
+  };
+
   return (
     <nav className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 safe-top ${isScrolled
         ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
@@ -77,6 +83,13 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
                 )}
               </a>
             ))}
+
+            <button
+              onClick={handleDashboardClick}
+              className="px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300"
+            >
+              Dashboard
+            </button>
 
             <div className="w-px h-6 bg-gray-800 mx-4"></div>
 
@@ -130,6 +143,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
               {link.name}
             </a>
           ))}
+          <button
+            onClick={() => { handleDashboardClick(); setIsMobileMenuOpen(false); }}
+            className="w-full text-left text-base font-medium py-2 px-4 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+          >
+            Dashboard
+          </button>
           <button
             onClick={() => { onLoginClick(); setIsMobileMenuOpen(false); }}
             className="w-full gradient-btn px-6 py-3 rounded-xl font-bold text-sm mt-4"

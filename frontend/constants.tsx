@@ -87,3 +87,4 @@ export function apiUrl(path: string) {
 export const WHATSAPP_NUMBER = "905517038599";
 export const WHATSAPP_MESSAGE = "Merhaba, Prosektorweb üzerinden ulaşıyorum. OSGB'miz için dijital çözümler hakkında bilgi almak istiyorum.";
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+export const DASHBOARD_URL = "https://panel.prosektorweb.com";
