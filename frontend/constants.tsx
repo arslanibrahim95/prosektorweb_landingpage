@@ -68,12 +68,6 @@ export const PROCESS_STEPS: ProcessStep[] = [
   }
 ];
 
-export const MOCK_CODES: Record<string, string> = {
-  "DELTA2025": "Delta OSGB",
-  "ALFA77": "Alfa Ortak Sağlık Birimi",
-  "PROSEK": "Prosektorweb Deneme"
-};
-
 // API URL helper
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '').trim();
 
