@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { ZodError } from 'zod';
 
+import { securityHeaders } from './middleware/securityHeaders';
 import statusRouter from './routes/status';
 import publicRouter from './routes/public';
 
@@ -23,6 +24,8 @@ export const app = express();
 
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
+
+app.use(securityHeaders);
 
 app.use(
   cors({
