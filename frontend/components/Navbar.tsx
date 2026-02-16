@@ -53,10 +53,22 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
         ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
         : 'bg-[#121218]/80 backdrop-blur-md border-b border-white/5'
       }`}>
+      {/* Skip to Content Link */}
+      <a
+        href="#main-content"
+        className="absolute top-4 left-4 z-[60] px-4 py-2 bg-white text-black font-bold rounded-lg shadow-xl -translate-y-[200%] focus:translate-y-0 transition-transform duration-300"
+      >
+        Ana İçeriğe Atla
+      </a>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center space-x-3 group cursor-pointer bg-transparent border-none p-0 text-left"
+            aria-label="Sayfanın başına dön"
+          >
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
             <div className="hidden sm:flex items-center">
               <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
@@ -64,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
                 Prosektorweb
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
