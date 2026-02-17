@@ -105,7 +105,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
       <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
 
-      <main className="pt-16 md:pt-20">
+      <main id="main-content" className="pt-16 md:pt-20">
         <Hero
           onCheckCode={() => {
             if (isArchived) setCurrentStep('EXPIRED');
