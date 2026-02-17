@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { PreviewSession } from './types';
-import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
+import { PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -49,18 +49,30 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const handleVerifyCode = (code: string, name: string) => {
-    const company = MOCK_CODES[code.toUpperCase()];
-    if (company) {
-      const newSession: PreviewSession = {
-        code: code.toUpperCase(),
-        companyName: company,
-        expiryDate: Date.now() + (168 * 60 * 60 * 1000) // 7 days
-      };
-      setSession(newSession);
-      localStorage.setItem('psw_session', JSON.stringify(newSession));
-      setCurrentStep('WELCOME');
-      return true;
+  const handleVerifyCode = async (code: string, name: string) => {
+    try {
+      const res = await fetch(apiUrl('/api/public/verify-code'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.valid && data.company) {
+          const newSession: PreviewSession = {
+            code: code.toUpperCase(),
+            companyName: data.company,
+            expiryDate: Date.now() + (168 * 60 * 60 * 1000), // 7 days
+          };
+          setSession(newSession);
+          localStorage.setItem('psw_session', JSON.stringify(newSession));
+          setCurrentStep('WELCOME');
+          return true;
+        }
+      }
+    } catch (err) {
+      console.error('Verification failed:', err);
     }
     return false;
   };
@@ -458,14 +470,18 @@ const LeadSuccessScreen: React.FC<{ onFinish: () => void }> = ({ onFinish }) => 
   </div>
 );
 
-const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean }> = ({ onVerify }) => {
+const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => Promise<boolean> }> = ({ onVerify }) => {
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!onVerify(code, name)) setError(true);
+    setIsVerifying(true);
+    const success = await onVerify(code, name);
+    setIsVerifying(false);
+    if (!success) setError(true);
   };
 
   return (
@@ -486,8 +502,8 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
         </div>
-        <button type="submit" className="w-full bg-white text-black py-5 rounded-full text-2xl font-black shadow-2xl hover:scale-105 transition-all">
-          Sisteme Giriş Yap
+        <button type="submit" disabled={isVerifying} className={`w-full bg-white text-black py-5 rounded-full text-2xl font-black shadow-2xl hover:scale-105 transition-all ${isVerifying ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          {isVerifying ? 'Kontrol Ediliyor...' : 'Sisteme Giriş Yap'}
         </button>
       </div>
     </form>
