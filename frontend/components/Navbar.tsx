@@ -53,18 +53,30 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
         ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
         : 'bg-[#121218]/80 backdrop-blur-md border-b border-white/5'
       }`}>
+      {/* Skip to Content Link */}
+      <a
+        href="#main-content"
+        className="absolute -top-96 left-4 z-[100] bg-white text-black px-4 py-2 rounded-md transition-all focus:top-4 shadow-lg font-bold"
+      >
+        İçeriğe Atla
+      </a>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center space-x-3 group cursor-pointer bg-transparent border-0 p-0"
+            aria-label="Sayfanın başına dön"
+          >
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
-            <div className="hidden sm:flex items-center">
-              <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
+            <span className="hidden sm:flex items-center">
+              <span className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></span>
               <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
                 Prosektorweb
               </span>
-            </div>
-          </div>
+            </span>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
