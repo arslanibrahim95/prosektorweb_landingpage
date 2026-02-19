@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { WHATSAPP_LINK } from '../constants';
 
 const FloatingWhatsApp: React.FC = () => {
@@ -18,4 +18,4 @@ const FloatingWhatsApp: React.FC = () => {
   );
 };
 
-export default FloatingWhatsApp;
+export default memo(FloatingWhatsApp);

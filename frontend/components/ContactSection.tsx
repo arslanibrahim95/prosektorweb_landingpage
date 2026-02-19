@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { WHATSAPP_LINK, apiUrl } from '../constants';
 
 interface ContactSectionProps {
@@ -252,4 +252,4 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
     );
 };
 
-export default ContactSection;
+export default memo(ContactSection);
