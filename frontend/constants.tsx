@@ -19,24 +19,49 @@ export const FAQ_DATA: FAQItem[] = [
     answer: "Evet. İnceleme süresi boyunca düzenleme talebinde bulunabilirsiniz. Toplam 3 revize hakkınız bulunur. Metin düzenlemeleri, görsel değişiklikleri ve içerik hizalamaları bu kapsamdadır."
   },
   {
-    id: 7,
-    question: "Fiyat neden AKSİYON ve VİZYON paketlerinde aynı?",
-    answer: "Çünkü biz emeği değil, sonucu fiyatlandırıyoruz. Paketler yapı olarak farklıdır ancak süreç, kalite ve hizmet standardı aynıdır."
+    id: 4,
+    question: "Fiyata neler dahil?",
+    answer: "Pakete OSGB web sitesi, alan adı (1 yıl), hosting (1 yıl), SEO optimizasyonu, mobil uyumluluk ve 3 revize hakkı dahildir. Gizli ücret yok, şeffaf fiyatlandırma."
   },
   {
-    id: 8,
+    id: 5,
     question: "Satın alma sonrası neler oluyor?",
     answer: "Satın alma tamamlandığında web siteniz yayına alınır. Alan adı bağlantıları ve temel teknik ayarlar yapılır, süreç kapanır."
   },
   {
-    id: 9,
+    id: 6,
     question: "Bu hizmet kimler için uygun?",
     answer: "Bu sistem yalnızca OSGB'ler için tasarlanmıştır. Önizleme erişimi, OSGB yetkililerine açılır ve doğrulama yapılır."
   },
   {
-    id: 10,
+    id: 7,
     question: "Ödeme nasıl yapılıyor?",
     answer: "Web sitesini inceledikten sonra satın alma kararı verirsiniz. Ödeme tamamlandığında web siteniz yayına alınır."
+  },
+  {
+    id: 8,
+    question: "Alan adı (domain) dahil mi?",
+    answer: "Evet, pakete alan adı tescili 1 yıl dahildir. İstediğiniz domain müsait olduğunda tarafımızca tescil edilir ve web sitenize bağlanır."
+  },
+  {
+    id: 9,
+    question: "Hosting ve bakım ücreti var mı?",
+    answer: "İlk yıl hosting dahildir. İkinci yıldan itibaren yıllık hosting ve bakım bedeli 2.500 TL'dir. Bu bedel, güvenlik güncellemeleri, yedekleme ve teknik desteği kapsar."
+  },
+  {
+    id: 10,
+    question: "Mobil cihazlarda düzgün görünüyor mu?",
+    answer: "Evet. Tüm web sitelerimiz responsive (mobil uyumlu) olarak tasarlanır. Telefon, tablet ve masaüstü cihazlarda mükemmel görünüm sağlanır."
+  },
+  {
+    id: 11,
+    question: "SEO (Arama Motoru Optimizasyonu) yapılıyor mu?",
+    answer: "Evet. Tüm sitelerimiz SEO uyumlu yapıda hazırlanır. Meta etiketler, hız optimizasyonları ve Google Search Console entegrasyonu dahildir."
+  },
+  {
+    id: 12,
+    question: "Ne kadar sürede teslim alırım?",
+    answer: "İlk önizleme için en kısa sürede hazırız. Revizeler dahil toplam süre, taleplerinize bağlı olarak değişebilir."
   }
 ];
 
@@ -84,7 +109,9 @@ export function apiUrl(path: string) {
   return `${base}/${path}`;
 }
 
-export const WHATSAPP_NUMBER = "905517038599";
-export const WHATSAPP_MESSAGE = "Merhaba, Prosektorweb üzerinden ulaşıyorum. OSGB'miz için dijital çözümler hakkında bilgi almak istiyorum.";
-export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 export const DASHBOARD_URL = "https://panel.prosektorweb.com";
+
+export const PHONE_NUMBER = "+90 (545) 788 36 60";
+export const PHONE_LINK = "tel:+905457883660";
+export const WHATSAPP_LINK = "https://wa.me/905457883660";
+export const INSTAGRAM_LINK = "https://www.instagram.com/prosektorweb?igsh=MTY0cHVnN2JscDc3NQ==";

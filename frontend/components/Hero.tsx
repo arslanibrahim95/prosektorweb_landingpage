@@ -39,14 +39,19 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             {isSessionActive ? (
               <>Merhaba, <br /><span className="shimmer-text">{companyName}</span> için bir web sitesi hazırladık.</>
             ) : (
-              <>Önce <span className="shimmer-text">Gör</span>,<br /> Sonra Satın Al.</>
+              <><span className="shimmer-text">OSGB Web Sitesi</span><br />Önce Gör, Sonra Öde.</>
             )}
           </h1>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed fade-in-up stagger-2">
-            Sürprizlere yer yok. Önce ödeme yapıp sonuç beklediğiniz geleneksel ajans modelini yıktık. OSGB'nize özel, bizzat inceleyebileceğiniz hazır web sitenizi 48 saatte hazırlıyoruz.
-          </p>
+          <div className="space-y-4 fade-in-up stagger-2">
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+              Sürprizlere yer yok. Önce ödeme yapıp sonuç beklediğiniz geleneksel ajans modelini yıktık. OSGB'nize özel, bizzat inceleyebileceğiniz hazır web sitenizi en kısa sürede hazırlıyoruz.
+            </p>
+            <p className="text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed">
+              <strong className="text-white">İş Sağlığı ve Güvenliği</strong> sektörüne odaklanan tek web tasarım platformu. Mevzuat uyumlu içerik, SEO optimizasyonu, mobil uyumluluk ve profesyonel görünüm - tek pakette, şeffaf fiyatla.
+            </p>
+          </div>
 
           {/* CTA Section */}
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center md:justify-start fade-in-up stagger-3">
@@ -131,7 +136,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             <div className="absolute -top-4 -right-4 glass p-2 rounded-lg shadow-xl" style={{ animation: 'float 4s ease-in-out infinite', animationDelay: '1s' }}>
               <div className="flex items-center gap-2 text-xs">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-gray-300 font-medium">48 Saatte Teslim</span>
+                <span className="text-gray-300 font-medium">Hızlı Teslimat</span>
               </div>
             </div>
           </div>

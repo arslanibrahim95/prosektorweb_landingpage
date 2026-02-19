@@ -24,6 +24,7 @@ create table if not exists public.contact_messages (
   name text not null,
   phone text not null,
   email text not null,
+  company text,
   message text not null,
   kvkk boolean not null,
   page_url text,

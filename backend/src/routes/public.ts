@@ -91,6 +91,7 @@ router.post('/contact', async (req, res, next) => {
       name: input.name,
       phone: input.phone,
       email: input.email,
+      company: input.company,
       message: input.message,
       kvkk: input.kvkk,
       page_url: input.pageUrl,
@@ -105,6 +106,7 @@ router.post('/contact', async (req, res, next) => {
       const msgLines = [
         'PSW: Yeni iletisim mesaji',
         `Ad: ${input.name}`,
+        input.company ? `Firma: ${input.company}` : null,
         `Tel: ${input.phone}`,
         `E-posta: ${input.email}`,
         `Mesaj: ${truncate(input.message, 600)}`,

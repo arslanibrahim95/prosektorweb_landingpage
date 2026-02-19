@@ -5,13 +5,14 @@ import { MOCK_CODES, PROCESS_STEPS, FAQ_DATA, apiUrl } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
+import Testimonials from './components/Testimonials';
 import ProcessFlow from './components/ProcessFlow';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import PreviewBar from './components/PreviewBar';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
+import PhoneInput from './components/PhoneInput';
 
 // Lazy load modal components
 const CookieBanner = lazy(() => import('./components/CookieBanner'));
@@ -123,9 +124,10 @@ const App: React.FC = () => {
         )}
 
         <Features />
+        <Testimonials />
         <ProcessFlow steps={PROCESS_STEPS} />
         <Pricing onPreviewClick={() => setCurrentStep('INFO')} />
-        <FAQ items={FAQ_DATA} onContactClick={() => setCurrentStep('CONTACT_FORM')} />
+        <FAQ items={FAQ_DATA} />
         <ContactSection />
       </main>
 
@@ -174,7 +176,6 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <FloatingWhatsApp />
       <Suspense fallback={null}>
         <CookieBanner />
       </Suspense>
@@ -236,10 +237,14 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
             <label htmlFor="contact-name" className="form-label">Adınız Soyadınız</label>
             <input id="contact-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white text-black" />
           </div>
-          <div className="space-y-2">
-            <label htmlFor="contact-phone" className="form-label">Telefon Numaranız</label>
-            <input id="contact-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white text-black" />
-          </div>
+          <PhoneInput
+            id="contact-phone"
+            value={formData.phone}
+            onChange={phone => setFormData({ ...formData, phone })}
+            className="form-input bg-white text-black"
+            required
+            label="Telefon Numaranız"
+          />
           <div className="space-y-2">
             <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz</label>
             <input id="contact-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white text-black" />
@@ -312,8 +317,7 @@ const InfoScreen: React.FC<{ onNext: () => void, onRequestCode: () => void }> = 
       Önizleme alanı yalnızca adına özel çalışma yapılan OSGB’lere açılır.
     </div>
     <div className="space-y-4 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
-      <p>Eğer firmanız için bir web sitesi hazırlandıysa,</p>
-      <p>önizleme erişim kodu size WhatsApp veya e-posta ile gönderilmiştir.</p>
+      <p>önizleme erişim kodu size e-posta veya mesaj yoluyla gönderilmiştir.</p>
       <p>Kodunuzu girerek, OSGB’nize özel hazırlanan web sitesini herhangi bir ücret ödemeden inceleyebilir ve kararınızı verebilirsiniz.</p>
     </div>
     <p className="text-gray-400 text-lg">Önizleme erişimi 7 gün boyunca aktiftir.</p>
@@ -395,11 +399,15 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
           <input id="lead-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB'ler için ek doğrulama yapılabilir.)</p>
         </div>
-        <div className="space-y-2">
-          <label htmlFor="lead-phone" className="form-label">Cep Telefonu:</label>
-          <input id="lead-phone" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" autoComplete="tel" inputMode="tel" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
-          <p className="text-gray-400 text-sm italic">(Önizleme kodu WhatsApp üzerinden gönderilecektir.)</p>
-        </div>
+          <PhoneInput
+            id="lead-phone"
+            value={formData.phone}
+            onChange={phone => setFormData({ ...formData, phone })}
+            className="form-input bg-white/5 border border-white/10 text-white rounded-xl"
+            required
+            label="Cep Telefonu:"
+          />
+          <p className="text-gray-400 text-sm italic -mt-4">(Önizleme kodu SMS veya e-posta üzerinden gönderilecektir.)</p>
 
         <div className="flex items-center gap-3 py-4 group cursor-pointer">
           <input
@@ -444,10 +452,8 @@ const LeadSuccessScreen: React.FC<{ onFinish: () => void }> = ({ onFinish }) => 
     <div className="space-y-8 text-2xl font-bold leading-relaxed">
       <p>OSGB’niz için web sitesi önizleme talebiniz başarıyla alındı.</p>
       <p>Bilgileriniz kısa süre içinde kontrol edilecektir.</p>
-      <div className="space-y-2">
         <p>Uygunluk durumuna göre,</p>
-        <p className="text-white">önizleme erişim kodunuz WhatsApp veya e-posta yoluyla tarafınıza iletilecektir.</p>
-      </div>
+        <p className="text-white">önizleme erişim kodunuz mesaj veya e-posta yoluyla tarafınıza iletilecektir.</p>
     </div>
 
     <div className="pt-20">
@@ -555,7 +561,7 @@ const ReviseScreen: React.FC<{ onNext: () => void }> = ({ onNext }) => (
     <div className="space-y-8">
       <h2 className="text-4xl md:text-5xl font-extrabold">Düzenleme (Revize)</h2>
       <p className="text-2xl font-bold leading-relaxed max-w-2xl mx-auto">
-        İnceleme süresi boyunca düzenleme taleplerinizi WhatsApp üzerinden iletebilirsiniz.
+        İnceleme süresi boyunca düzenleme taleplerinizi iletişim kanallarımız üzerinden iletebilirsiniz.
       </p>
     </div>
     <div className="text-gray-400 text-xl max-w-xl mx-auto leading-relaxed">

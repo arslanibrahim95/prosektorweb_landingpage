@@ -4,10 +4,9 @@ import { FAQItem } from '../types';
 
 interface FAQProps {
   items: FAQItem[];
-  onContactClick: () => void;
 }
 
-const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
+const FAQ: React.FC<FAQProps> = ({ items }) => {
   const [openId, setOpenId] = useState<number | null>(1);
 
   return (
@@ -82,24 +81,6 @@ const FAQ: React.FC<FAQProps> = ({ items, onContactClick }) => {
               </div>
             );
           })}
-        </div>
-
-        {/* Contact CTA */}
-        <div className="mt-12 text-center">
-          <button
-            onClick={onContactClick}
-            className="group px-8 py-4 glass rounded-2xl font-bold transition-all hover:bg-white/10 flex items-center gap-3 mx-auto"
-          >
-            <span>Sorunuz mu var?</span>
-            <svg
-              className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

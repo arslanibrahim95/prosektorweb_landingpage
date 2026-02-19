@@ -24,7 +24,7 @@ const Features: React.FC = () => {
     },
     {
       title: "Hız ve Verimlilik",
-      desc: "Zamanınıza saygı duyuyoruz. Bitmek bilmeyen revizelerle vakit kaybetmeyin. 48 saat içinde yayına hazır bir otorite alanı sunuyoruz.",
+      desc: "Zamanınıza saygı duyuyoruz. Bitmek bilmeyen revizelerle vakit kaybetmeyin. En kısa sürede yayına hazır bir otorite alanı sunuyoruz.",
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />

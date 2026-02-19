@@ -163,6 +163,7 @@ export async function insertContactMessage(row: {
   name: string;
   phone: string;
   email: string;
+  company?: string;
   message: string;
   kvkk: boolean;
   page_url?: string;
@@ -186,14 +187,15 @@ export async function insertContactMessage(row: {
 
   const res = await getPool().query(
     `insert into public.contact_messages
-      (name, phone, email, message, kvkk, page_url, ip, user_agent, notify_status)
+      (name, phone, email, company, message, kvkk, page_url, ip, user_agent, notify_status)
      values
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
      returning id, created_at`,
     [
       row.name,
       row.phone,
       row.email,
+      row.company ?? null,
       row.message,
       row.kvkk,
       row.page_url ?? null,
