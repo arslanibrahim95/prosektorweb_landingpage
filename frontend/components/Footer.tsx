@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import { LegalModalType } from './GlobalLegalModals';
 import { DASHBOARD_URL, WHATSAPP_LINK } from '../constants';
 import { openExternalByDevice } from '../utils/navigation';
@@ -257,4 +257,4 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
   );
 };
 
-export default Footer;
+export default memo(Footer);

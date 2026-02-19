@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { ProcessStep } from '../types';
 
 interface ProcessFlowProps {
@@ -79,4 +79,4 @@ const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
   );
 };
 
-export default ProcessFlow;
+export default memo(ProcessFlow);
