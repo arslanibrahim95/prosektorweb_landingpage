@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 
 import statusRouter from './routes/status';
 import publicRouter from './routes/public';
+import { securityHeaders } from './middleware/securityHeaders';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ export const app = express();
 
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
+
+app.use(securityHeaders);
 
 app.use(
   cors({
