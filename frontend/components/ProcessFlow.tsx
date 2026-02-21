@@ -79,4 +79,4 @@ const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
   );
 };
 
-export default ProcessFlow;
+export default React.memo(ProcessFlow);

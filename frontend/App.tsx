@@ -66,11 +66,11 @@ const App: React.FC = () => {
     return false;
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setSession(null);
     setCurrentStep('IDLE');
     localStorage.removeItem('psw_session');
-  };
+  }, []);
 
   // iOS-safe scroll lock for overlay
   useEffect(() => {
@@ -102,17 +102,26 @@ const App: React.FC = () => {
     return () => document.removeEventListener('keydown', handleOverlayEscape);
   }, [handleOverlayEscape]);
 
+  // Memoized handlers to prevent unnecessary re-renders of child components
+  const handleLoginClick = useCallback(() => setCurrentStep('INFO'), []);
+
+  const handleCheckCode = useCallback(() => {
+    if (isArchived) setCurrentStep('EXPIRED');
+    else if (session) setCurrentStep('WELCOME');
+    else setCurrentStep('INFO');
+  }, [isArchived, session]);
+
+  const handlePreviewClick = useCallback(() => setCurrentStep('INFO'), []);
+
+  const handleContactClick = useCallback(() => setCurrentStep('CONTACT_FORM'), []);
+
   return (
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
-      <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
+      <Navbar onLoginClick={handleLoginClick} isSessionActive={!!session} onLogout={logout} />
 
       <main className="pt-16 md:pt-20">
         <Hero
-          onCheckCode={() => {
-            if (isArchived) setCurrentStep('EXPIRED');
-            else if (session) setCurrentStep('WELCOME');
-            else setCurrentStep('INFO');
-          }}
+          onCheckCode={handleCheckCode}
           isSessionActive={!!session}
           companyName={session?.companyName}
         />
@@ -126,13 +135,13 @@ const App: React.FC = () => {
         <Features />
         <Testimonials />
         <ProcessFlow steps={PROCESS_STEPS} />
-        <Pricing onPreviewClick={() => setCurrentStep('INFO')} />
+        <Pricing onPreviewClick={handlePreviewClick} />
         <FAQ items={FAQ_DATA} />
         <ContactSection />
       </main>
 
       <Footer
-        onContactClick={() => setCurrentStep('CONTACT_FORM')}
+        onContactClick={handleContactClick}
         onOpenLegalModal={setActiveLegalModal}
       />
 

@@ -128,4 +128,4 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   );
 };
 
-export default Pricing;
+export default React.memo(Pricing);

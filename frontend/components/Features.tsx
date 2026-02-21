@@ -89,4 +89,4 @@ const Features: React.FC = () => {
   );
 };
 
-export default Features;
+export default React.memo(Features);

@@ -261,4 +261,4 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
     );
 };
 
-export default ContactSection;
+export default React.memo(ContactSection);
