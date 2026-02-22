@@ -50,7 +50,7 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const handleVerifyCode = (code: string, name: string) => {
+  const handleVerifyCode = useCallback((code: string, name: string) => {
     const company = MOCK_CODES[code.toUpperCase()];
     if (company) {
       const newSession: PreviewSession = {
@@ -64,13 +64,25 @@ const App: React.FC = () => {
       return true;
     }
     return false;
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setSession(null);
     setCurrentStep('IDLE');
     localStorage.removeItem('psw_session');
-  };
+  }, []);
+
+  const handleLoginClick = useCallback(() => setCurrentStep('INFO'), []);
+
+  const handleHeroCheckCode = useCallback(() => {
+    if (isArchived) setCurrentStep('EXPIRED');
+    else if (session) setCurrentStep('WELCOME');
+    else setCurrentStep('INFO');
+  }, [isArchived, session]);
+
+  const handlePricingPreviewClick = useCallback(() => setCurrentStep('INFO'), []);
+
+  const handleContactClick = useCallback(() => setCurrentStep('CONTACT_FORM'), []);
 
   // iOS-safe scroll lock for overlay
   useEffect(() => {
@@ -104,15 +116,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
-      <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
+      <Navbar onLoginClick={handleLoginClick} isSessionActive={!!session} onLogout={logout} />
 
       <main className="pt-16 md:pt-20">
         <Hero
-          onCheckCode={() => {
-            if (isArchived) setCurrentStep('EXPIRED');
-            else if (session) setCurrentStep('WELCOME');
-            else setCurrentStep('INFO');
-          }}
+          onCheckCode={handleHeroCheckCode}
           isSessionActive={!!session}
           companyName={session?.companyName}
         />
@@ -126,13 +134,13 @@ const App: React.FC = () => {
         <Features />
         <Testimonials />
         <ProcessFlow steps={PROCESS_STEPS} />
-        <Pricing onPreviewClick={() => setCurrentStep('INFO')} />
+        <Pricing onPreviewClick={handlePricingPreviewClick} />
         <FAQ items={FAQ_DATA} />
         <ContactSection />
       </main>
 
       <Footer
-        onContactClick={() => setCurrentStep('CONTACT_FORM')}
+        onContactClick={handleContactClick}
         onOpenLegalModal={setActiveLegalModal}
       />
 

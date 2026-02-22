@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 
 interface PricingProps {
   onPreviewClick: () => void;
@@ -128,4 +128,4 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   );
 };
 
-export default Pricing;
+export default memo(Pricing);

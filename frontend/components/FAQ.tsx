@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { FAQItem } from '../types';
 
 interface FAQProps {
@@ -87,4 +87,4 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
   );
 };
 
-export default FAQ;
+export default memo(FAQ);

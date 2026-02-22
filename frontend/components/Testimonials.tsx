@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 
 const Testimonials: React.FC = () => {
   const testimonials = [
@@ -103,4 +103,4 @@ const Testimonials: React.FC = () => {
   );
 };
 
-export default Testimonials;
+export default memo(Testimonials);

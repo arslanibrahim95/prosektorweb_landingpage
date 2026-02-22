@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { DASHBOARD_URL } from '../constants';
 import { openExternalByDevice } from '../utils/navigation';
 
@@ -161,4 +161,4 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   );
 };
 
-export default Navbar;
+export default memo(Navbar);
