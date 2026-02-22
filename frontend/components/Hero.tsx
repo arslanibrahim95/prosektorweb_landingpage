@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 
 interface HeroProps {
   onCheckCode: () => void;
@@ -146,4 +146,4 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
   );
 };
 
-export default Hero;
+export default memo(Hero);
