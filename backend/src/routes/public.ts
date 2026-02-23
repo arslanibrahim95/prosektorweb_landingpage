@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { leadSchema, contactSchema } from '../validation/publicSchemas';
+import { leadSchema, contactSchema, verifyCodeSchema } from '../validation/publicSchemas';
+import { ACCESS_CODES } from '../constants';
 import {
   insertLead,
   insertContactMessage,
@@ -75,6 +76,21 @@ router.post('/leads', async (req, res, next) => {
         }
       }
     })();
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/verify-code', (req, res, next) => {
+  try {
+    const input = verifyCodeSchema.parse(req.body);
+    const company = ACCESS_CODES[input.code.toUpperCase()];
+
+    if (company) {
+      res.json({ valid: true, company });
+    } else {
+      res.status(401).json({ valid: false, error: 'Invalid code' });
+    }
   } catch (err) {
     next(err);
   }
