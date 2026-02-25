@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 
 import statusRouter from './routes/status';
 import publicRouter from './routes/public';
+import { securityHeaders } from './middleware/securityHeaders';
 
 dotenv.config();
 
@@ -39,6 +40,8 @@ app.use(
     methods: ['GET', 'POST', 'OPTIONS'],
   }),
 );
+
+app.use(securityHeaders);
 
 app.use(express.json({ limit: '256kb' }));
 
