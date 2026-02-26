@@ -9,18 +9,31 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
+const SECTIONS = ['features', 'process', 'pricing', 'faq', 'contact'];
+
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
+      for (const section of SECTIONS) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -32,8 +45,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const navLinks = [
