@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { ZodError } from 'zod';
 
+import { securityHeaders } from './middleware/securityHeaders';
 import statusRouter from './routes/status';
 import publicRouter from './routes/public';
 
@@ -39,6 +40,8 @@ app.use(
     methods: ['GET', 'POST', 'OPTIONS'],
   }),
 );
+
+app.use(securityHeaders);
 
 app.use(express.json({ limit: '256kb' }));
 
