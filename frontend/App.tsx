@@ -104,9 +104,16 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-psw-dark text-white selection:bg-[#FF0080] selection:text-white">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-white focus:text-black focus:font-bold focus:rounded-lg focus:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-500"
+      >
+        İçeriğe Atla
+      </a>
+
       <Navbar onLoginClick={() => setCurrentStep('INFO')} isSessionActive={!!session} onLogout={logout} />
 
-      <main className="pt-16 md:pt-20">
+      <main id="main-content" tabIndex={-1} className="pt-16 md:pt-20 focus:outline-none">
         <Hero
           onCheckCode={() => {
             if (isArchived) setCurrentStep('EXPIRED');
