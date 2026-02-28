@@ -1,0 +1,3 @@
+## 2026-02-28 - Overlay Action Buttons
+**Learning:** In the multi-step overlay screens (WelcomeScreen, MockupScreen), major interactions were being built with styled `<div>` elements using `onClick`. This makes them invisible to keyboard navigation (Tab targeting) and screen readers, leading to poor a11y for critical flows like "Preview Mockup" or "Go Live".
+**Action:** Always use semantic `<button type="button">` for non-navigation interactive elements. Add `focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[color]` utilities to ensure the keyboard focus state is clear and matches the design language.
