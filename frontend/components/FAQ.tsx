@@ -53,6 +53,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                       : 'bg-white/5 group-hover:bg-white/10'
                     }`}>
                     <svg
+                      aria-hidden="true"
                       className={`w-4 h-4 transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-300'
                         }`}
                       fill="none"
