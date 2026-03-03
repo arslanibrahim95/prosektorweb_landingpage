@@ -49,7 +49,15 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 safe-top ${isScrolled
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-orange-500 focus:text-white focus:font-bold focus:rounded-lg focus:outline-none focus:ring-4 focus:ring-orange-500/50"
+      >
+        İçeriğe Atla
+      </a>
+
+      <nav className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 safe-top ${isScrolled
         ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
         : 'bg-[#121218]/80 backdrop-blur-md border-b border-white/5'
       }`}>
@@ -158,6 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
         </div>
       </div>
     </nav>
+    </>
   );
 };
 
