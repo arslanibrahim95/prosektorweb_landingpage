@@ -1,0 +1,4 @@
+## 2024-05-18 - [CRITICAL] Fix API Key exposure in Vite configuration
+**Vulnerability:** The `define` block in `vite.config.ts` was used to inject `GEMINI_API_KEY` directly into the client-side code by replacing `process.env.API_KEY` and `process.env.GEMINI_API_KEY` with the actual string values.
+**Learning:** This exposes backend secrets (such as API keys) directly in the frontend build artifacts. Any user inspecting the client-side bundle or using the DevTools could extract these sensitive credentials.
+**Prevention:** Never use the `define` directive in Vite (or similar build tools) to inject backend secrets or API keys that must remain confidential. Secrets must only be accessed and used securely on the backend server, and the frontend should proxy requests to the backend instead of accessing third-party APIs directly.
