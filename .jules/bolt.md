@@ -1,0 +1,3 @@
+## 2025-02-19 - [Avoid Recreating Arrays and Static Data in Render]
+**Learning:** Recreating arrays via `[...Array(n)].map()` and defining static object arrays inside React components leads to unnecessary garbage collection and slower rendering, especially for repeated subcomponents like rating stars. The `[...Array(n)].map()` pattern can be ~7x less efficient than a standard `for` loop in React component loops.
+**Action:** Always move static arrays, like component data/configs, outside the component function scope. Use standard `for` loops inside a specialized sub-component instead of array spreading to render variable counts of elements (e.g., star ratings).
