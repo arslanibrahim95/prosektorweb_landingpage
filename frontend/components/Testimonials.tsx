@@ -1,31 +1,53 @@
 
 import React from 'react';
 
-const Testimonials: React.FC = () => {
-  const testimonials = [
-    {
-      quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
-      author: "Ahmet Y.",
-      company: "Delta OSGB",
-      role: "Genel Müdür",
-      rating: 5
-    },
-    {
-      quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
-      author: "Fatma K.",
-      company: "Alfa Ortak Sağlık Birimi",
-      role: "İşletme Sahibi",
-      rating: 5
-    },
-    {
-      quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
-      author: "Mehmet S.",
-      company: "Güven OSGB",
-      role: "Kurucu Ortak",
-      rating: 5
-    }
-  ];
+// Static array extracted to prevent recreation on every render
+const testimonials = [
+  {
+    quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
+    author: "Ahmet Y.",
+    company: "Delta OSGB",
+    role: "Genel Müdür",
+    rating: 5
+  },
+  {
+    quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
+    author: "Fatma K.",
+    company: "Alfa Ortak Sağlık Birimi",
+    role: "İşletme Sahibi",
+    rating: 5
+  },
+  {
+    quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
+    author: "Mehmet S.",
+    company: "Güven OSGB",
+    role: "Kurucu Ortak",
+    rating: 5
+  }
+];
 
+// Static stats array extracted to prevent recreation on every render
+const stats = [
+  { value: "Hızlı", suffix: "", label: "Teslimat" },
+  { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
+  { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
+  { value: "3", suffix: "", label: "Revize Hakkı" }
+];
+
+// Extracted Subcomponent to avoid recreating array using [...Array(n)].map pattern inside render loops
+const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
+  const stars = [];
+  for (let i = 0; i < rating; i++) {
+    stars.push(
+      <svg key={i} className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    );
+  }
+  return <div className="flex gap-1 mb-6">{stars}</div>;
+};
+
+const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -54,13 +76,7 @@ const Testimonials: React.FC = () => {
               <div className="absolute top-6 right-6 text-orange-500/20 text-6xl font-serif leading-none">"</div>
 
               {/* Rating Stars */}
-              <div className="flex gap-1 mb-6">
-                {[...Array(item.rating)].map((_, starIndex) => (
-                  <svg key={starIndex} className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
+              <StarRating rating={item.rating} />
 
               {/* Quote */}
               <p className="text-gray-300 text-base leading-relaxed mb-8 relative z-10">
@@ -84,12 +100,7 @@ const Testimonials: React.FC = () => {
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
-          {[
-            { value: "Hızlı", suffix: "", label: "Teslimat" },
-            { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
-            { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
-            { value: "3", suffix: "", label: "Revize Hakkı" }
-          ].map((stat, i) => (
+          {stats.map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-4xl md:text-5xl font-montserrat font-black text-white mb-2">
                 {stat.value}<span className="text-orange-500">{stat.suffix}</span>
