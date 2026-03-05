@@ -25,7 +25,7 @@ async function main() {
 
   const client = new Client({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: { rejectUnauthorized: true },
   });
 
   await client.connect();

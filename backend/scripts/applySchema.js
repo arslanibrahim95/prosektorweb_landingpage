@@ -35,7 +35,7 @@ function main() {
         const sql = node_fs_1.default.readFileSync(sqlPath, 'utf8');
         const client = new Client({
             connectionString: databaseUrl,
-            ssl: { rejectUnauthorized: false },
+            ssl: { rejectUnauthorized: true },
         });
         yield client.connect();
         try {
