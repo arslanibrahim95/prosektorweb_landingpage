@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { ZodError } from 'zod';
 
@@ -23,6 +24,8 @@ export const app = express();
 
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
+
+app.use(helmet());
 
 app.use(
   cors({
