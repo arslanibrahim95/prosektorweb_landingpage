@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Features: React.FC = () => {
+const Features: React.FC = React.memo(() => {
   const data = [
     {
       title: "Sektörel Uzmanlık",
@@ -87,6 +87,6 @@ const Features: React.FC = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Features;

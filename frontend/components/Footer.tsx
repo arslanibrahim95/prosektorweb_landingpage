@@ -270,4 +270,4 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

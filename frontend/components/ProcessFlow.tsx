@@ -6,7 +6,7 @@ interface ProcessFlowProps {
   steps: ProcessStep[];
 }
 
-const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
+const ProcessFlow: React.FC<ProcessFlowProps> = React.memo(({ steps }) => {
   return (
     <section id="process" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
@@ -77,6 +77,6 @@ const ProcessFlow: React.FC<ProcessFlowProps> = ({ steps }) => {
       </div>
     </section>
   );
-};
+});
 
 export default ProcessFlow;

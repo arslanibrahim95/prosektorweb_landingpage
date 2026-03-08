@@ -5,7 +5,7 @@ interface PricingProps {
   onPreviewClick: () => void;
 }
 
-const PricingParticles: React.FC = () => {
+const PricingParticles: React.FC = React.memo(() => {
   const particles = useMemo(() =>
     Array.from({ length: 8 }).map((_, i) => ({
       left: `${(i * 12.5) + Math.random() * 10}%`,
@@ -31,9 +31,9 @@ const PricingParticles: React.FC = () => {
       ))}
     </div>
   );
-};
+});
 
-const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
+const Pricing: React.FC<PricingProps> = React.memo(({ onPreviewClick }) => {
   const features = [
     "Profesyonel OSGB Web Sitesi",
     "OSGB Süreç Yönetim Paneli",
@@ -126,6 +126,6 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
       </div>
     </section>
   );
-};
+});
 
 export default Pricing;
