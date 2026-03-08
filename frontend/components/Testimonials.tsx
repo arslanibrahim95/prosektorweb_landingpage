@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Testimonials: React.FC = () => {
+const Testimonials: React.FC = React.memo(() => {
   const testimonials = [
     {
       quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
@@ -101,6 +101,6 @@ const Testimonials: React.FC = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Testimonials;

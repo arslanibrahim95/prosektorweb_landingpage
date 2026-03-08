@@ -161,4 +161,4 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

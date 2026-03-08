@@ -1,0 +1,3 @@
+## 2024-05-14 - React.memo Optimization
+**Learning:** Adding React.memo to frequently rendered stateless components can significantly improve performance by avoiding unnecessary re-renders. I discovered that many major functional components in the `frontend/` directory (Navbar, Hero, Features, Testimonials, ProcessFlow, Pricing, FAQ) are currently not memoized, but `frontend/App.tsx` re-renders and these are large stateless blocks or blocks that take standard props.
+**Action:** Wrap these primary components in `React.memo` and ensure the event handlers passed from `App.tsx` are wrapped in `useCallback` to prevent unnecessary re-renders of the large landing page tree when `currentStep`, `session`, or `isArchived` states change.

@@ -6,7 +6,7 @@ interface FAQProps {
   items: FAQItem[];
 }
 
-const FAQ: React.FC<FAQProps> = ({ items }) => {
+const FAQ: React.FC<FAQProps> = React.memo(({ items }) => {
   const [openId, setOpenId] = useState<number | null>(1);
 
   return (
@@ -85,6 +85,6 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
       </div>
     </section>
   );
-};
+});
 
 export default FAQ;
