@@ -480,14 +480,14 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
       <div className="space-y-8 max-w-lg mx-auto">
         <div className="space-y-2">
           <label htmlFor="login-name" className="form-label">OSGB Adı</label>
-          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" aria-invalid={error} aria-describedby={error ? "login-error" : undefined} className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <div className="space-y-2">
           <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
-          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" aria-invalid={error} aria-describedby={error ? "login-error" : undefined} className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
+        {error && <p id="login-error" role="alert" className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
