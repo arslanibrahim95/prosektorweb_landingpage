@@ -15,24 +15,37 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    // ⚡ Bolt Optimization: Throttling high-frequency scroll events
+    // Prevent main-thread blocking and layout thrashing caused by reading
+    // DOM layout (getBoundingClientRect) and updating React state synchronously.
+    let ticking = false;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        // requestAnimationFrame aligns state updates with the browser's paint cycle
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false; // Reset lock after frame completion
+        });
+        ticking = true; // Lock the handler until the next frame
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Adding passive: true prevents the listener from blocking scrolling performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
