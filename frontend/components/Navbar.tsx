@@ -56,15 +56,19 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center space-x-3 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-lg p-1 -ml-1 transition-opacity hover:opacity-90"
+            aria-label="Sayfanın başına dön"
+          >
             <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
             <div className="hidden sm:flex items-center">
               <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
-              <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
+              <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-white transition-colors">
                 Prosektorweb
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
