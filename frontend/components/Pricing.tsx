@@ -95,7 +95,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
                     className={`flex items-center gap-3 fade-in-up stagger-${i + 1}`}
                   >
                     <div className="w-6 h-6 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 text-white" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -111,7 +111,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Web Sitemi İncele
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
