@@ -1,6 +1,8 @@
 import { Router } from 'express';
+import { z } from 'zod';
 import rateLimit from 'express-rate-limit';
 import { leadSchema, contactSchema } from '../validation/publicSchemas';
+import { PREVIEW_ACCESS_CODES } from '../constants';
 import {
   insertLead,
   insertContactMessage,
@@ -29,6 +31,20 @@ const limiter = rateLimit({
 });
 
 router.use(limiter);
+
+router.post('/verify-code', (req, res, next) => {
+  try {
+    const { code } = z.object({ code: z.string().trim() }).parse(req.body);
+
+    const companyName = PREVIEW_ACCESS_CODES[code.toUpperCase()];
+    if (companyName) {
+      return res.json({ valid: true, companyName });
+    }
+    return res.status(404).json({ valid: false, error: 'invalid_code' });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post('/leads', async (req, res, next) => {
   try {
