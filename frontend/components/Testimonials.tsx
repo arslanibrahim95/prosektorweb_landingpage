@@ -1,31 +1,42 @@
 
 import React from 'react';
 
-const Testimonials: React.FC = () => {
-  const testimonials = [
-    {
-      quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
-      author: "Ahmet Y.",
-      company: "Delta OSGB",
-      role: "Genel Müdür",
-      rating: 5
-    },
-    {
-      quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
-      author: "Fatma K.",
-      company: "Alfa Ortak Sağlık Birimi",
-      role: "İşletme Sahibi",
-      rating: 5
-    },
-    {
-      quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
-      author: "Mehmet S.",
-      company: "Güven OSGB",
-      role: "Kurucu Ortak",
-      rating: 5
-    }
-  ];
+// ⚡ Bolt Performance Optimization:
+// Statically defined arrays outside the React component scope.
+// By avoiding recreation inside the function body, memory churn is reduced
+// and re-renders are optimized since object identities remain stable.
+const TESTIMONIALS = [
+  {
+    quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
+    author: "Ahmet Y.",
+    company: "Delta OSGB",
+    role: "Genel Müdür",
+    rating: 5
+  },
+  {
+    quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
+    author: "Fatma K.",
+    company: "Alfa Ortak Sağlık Birimi",
+    role: "İşletme Sahibi",
+    rating: 5
+  },
+  {
+    quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
+    author: "Mehmet S.",
+    company: "Güven OSGB",
+    role: "Kurucu Ortak",
+    rating: 5
+  }
+];
 
+const STATS = [
+  { value: "Hızlı", suffix: "", label: "Teslimat" },
+  { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
+  { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
+  { value: "3", suffix: "", label: "Revize Hakkı" }
+];
+
+const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -45,7 +56,7 @@ const Testimonials: React.FC = () => {
 
         {/* Testimonial Cards */}
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((item, i) => (
+          {TESTIMONIALS.map((item, i) => (
             <div
               key={i}
               className={`group relative p-8 rounded-3xl glass glass-hover transition-all duration-500 fade-in-up stagger-${i + 1}`}
@@ -84,12 +95,7 @@ const Testimonials: React.FC = () => {
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
-          {[
-            { value: "Hızlı", suffix: "", label: "Teslimat" },
-            { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
-            { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
-            { value: "3", suffix: "", label: "Revize Hakkı" }
-          ].map((stat, i) => (
+          {STATS.map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-4xl md:text-5xl font-montserrat font-black text-white mb-2">
                 {stat.value}<span className="text-orange-500">{stat.suffix}</span>
