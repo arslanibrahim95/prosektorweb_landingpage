@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { DASHBOARD_URL } from '../constants';
 import { openExternalByDevice } from '../utils/navigation';
@@ -9,40 +8,57 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
+// Move static data outside component to avoid recreation
+const SECTIONS = ['features', 'process', 'pricing', 'faq', 'contact'];
+
+const NAV_LINKS = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
+    let animationFrameId: number;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        animationFrameId = window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          for (const section of SECTIONS) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   const handleDashboardClick = () => {
     openExternalByDevice(DASHBOARD_URL);
@@ -57,18 +73,24 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3 group cursor-pointer">
-            <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
-            <div className="hidden sm:flex items-center">
-              <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
-              <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
-                Prosektorweb
-              </span>
-            </div>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center space-x-3 bg-transparent border-none p-0 cursor-pointer text-left"
+              aria-label="Sayfanın başına dön"
+            >
+              <span className="text-2xl font-montserrat font-black shimmer-text tracking-tight">PSW</span>
+              <div className="hidden sm:flex items-center">
+                <div className="w-px h-6 bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-3"></div>
+                <span className="text-xs text-gray-300 font-semibold uppercase tracking-widest group-hover:text-gray-300 transition-colors">
+                  Prosektorweb
+                </span>
+              </div>
+            </button>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -130,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
         <div className="bg-[#1a1a1f]/95 backdrop-blur-xl border-b border-white/5 py-4 px-4 space-y-2">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}
