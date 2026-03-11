@@ -61,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             >
               <span className="flex items-center justify-center gap-2 relative z-10">
                 {isSessionActive ? 'Önizlemeye Dön' : 'Web Sitemi İncele'}
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
@@ -75,7 +75,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 pt-8 fade-in-up stagger-4">
             <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
-                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -83,7 +83,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             </div>
             <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
-                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -91,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
             </div>
             <div className="flex items-center gap-2 text-gray-300 text-sm">
               <div className="w-8 h-8 rounded-lg icon-container flex items-center justify-center">
-                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
