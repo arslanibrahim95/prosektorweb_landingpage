@@ -33,15 +33,16 @@ const PricingParticles: React.FC = () => {
   );
 };
 
-const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
-  const features = [
-    "Profesyonel OSGB Web Sitesi",
-    "OSGB Süreç Yönetim Paneli",
-    "SEO ve Performans Optimizasyonu",
-    "Mobil Uyumlu Mimari",
-    "Hızlı Teslimat Garantisi"
-  ];
+// ⚡ Bolt: Move static features array outside component to prevent re-allocation on each render cycle
+const features = [
+  "Profesyonel OSGB Web Sitesi",
+  "OSGB Süreç Yönetim Paneli",
+  "SEO ve Performans Optimizasyonu",
+  "Mobil Uyumlu Mimari",
+  "Hızlı Teslimat Garantisi"
+];
 
+const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
       {/* Background */}
