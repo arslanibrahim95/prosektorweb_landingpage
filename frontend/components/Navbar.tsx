@@ -85,8 +85,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
             ))}
 
             <button
+              type="button"
               onClick={handleDashboardClick}
-              className="px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300"
+              className="px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#121218]"
             >
               Dashboard
             </button>
@@ -95,15 +96,17 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
 
             {isSessionActive ? (
               <button
+                type="button"
                 onClick={onLogout}
-                className="text-xs font-bold text-red-400 hover:text-red-300 border border-red-900/30 px-4 py-2 rounded-full transition-all hover:bg-red-950/30"
+                className="text-xs font-bold text-red-400 hover:text-red-300 border border-red-900/30 px-4 py-2 rounded-full transition-all hover:bg-red-950/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#121218]"
               >
                 Çıkış Yap
               </button>
             ) : (
               <button
+                type="button"
                 onClick={onLoginClick}
-                className="relative gradient-btn px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-900/30 btn-shine overflow-hidden glow-btn"
+                className="relative gradient-btn px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-900/30 btn-shine overflow-hidden glow-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#121218]"
               >
                 <span className="relative z-10">Web Sitemi Gör</span>
               </button>
@@ -113,8 +116,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
+              className="text-gray-300 hover:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#121218]"
               aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
               aria-expanded={isMobileMenuOpen}
             >
@@ -135,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
               key={link.name}
               href={link.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`block text-base font-medium py-2 px-4 rounded-lg transition-colors ${activeSection === link.id
+              className={`block text-base font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 ${activeSection === link.id
                   ? 'text-white bg-white/5'
                   : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`}
@@ -144,14 +148,16 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
             </a>
           ))}
           <button
+            type="button"
             onClick={() => { handleDashboardClick(); setIsMobileMenuOpen(false); }}
-            className="w-full text-left text-base font-medium py-2 px-4 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="w-full text-left text-base font-medium py-2 px-4 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
             Dashboard
           </button>
           <button
+            type="button"
             onClick={() => { onLoginClick(); setIsMobileMenuOpen(false); }}
-            className="w-full gradient-btn px-6 py-3 rounded-xl font-bold text-sm mt-4"
+            className="w-full gradient-btn px-6 py-3 rounded-xl font-bold text-sm mt-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1f]"
           >
             {isSessionActive ? 'Önizleme Aktif' : 'Web Sitemi Gör'}
           </button>
