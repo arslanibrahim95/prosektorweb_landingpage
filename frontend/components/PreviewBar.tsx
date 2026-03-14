@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 interface PreviewBarProps {
   companyName: string;
   expiryDate: number;
+  onGoLive: () => void;
 }
 
-const PreviewBar: React.FC<PreviewBarProps> = ({ companyName, expiryDate }) => {
+const PreviewBar: React.FC<PreviewBarProps> = ({ companyName, expiryDate, onGoLive }) => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 0,
     minutes: 0,
@@ -52,7 +53,10 @@ const PreviewBar: React.FC<PreviewBarProps> = ({ companyName, expiryDate }) => {
               </div>
             </div>
 
-            <button className="px-8 py-3 bg-white text-black font-black rounded-xl hover:scale-105 transition-all text-sm shadow-xl">
+            <button
+              onClick={onGoLive}
+              className="px-8 py-3 bg-white text-black font-black rounded-xl hover:scale-105 transition-all text-sm shadow-xl"
+            >
               Bu Tasarımı Yayına Al
             </button>
           </div>
