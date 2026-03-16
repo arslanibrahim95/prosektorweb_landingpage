@@ -428,9 +428,17 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`gradient-btn px-20 py-5 rounded-full text-2xl font-black shadow-2xl transition-all text-white ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
+          className={`gradient-btn px-20 py-5 rounded-full text-2xl font-black shadow-2xl transition-all flex items-center justify-center gap-3 text-white ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
         >
-          {isSubmitting ? 'Gönderiliyor...' : 'Önizleme Talebi Bırak'}
+          {isSubmitting ? (
+            <>
+              <svg className="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24" role="status" aria-label="Yükleniyor">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Gönderiliyor...
+            </>
+          ) : 'Önizleme Talebi Bırak'}
         </button>
         {submitError && (
           <p className="text-red-400 font-bold text-center">{submitError}</p>
@@ -521,16 +529,16 @@ const WelcomeScreen: React.FC<{ companyName: string, onPreview: () => void, expi
       <h2 className="text-4xl md:text-5xl font-extrabold">Hoş geldiniz, [{companyName}]</h2>
       <p className="text-2xl font-medium">Sizin için hazırlanan tam kapsamlı web sitesi hazır.</p>
 
-      <div className="relative inline-block group cursor-pointer" onClick={onPreview}>
+      <button className="relative inline-block group cursor-pointer border-none bg-transparent" onClick={onPreview} aria-label="Web Sitemi Önizle">
         <div className="gradient-btn px-20 py-10 rounded-[3rem] text-5xl font-black shadow-[0_0_50px_rgba(255,140,0,0.3)] group-hover:scale-105 transition-all text-white">
           Web <br /> Sitemi <br /> Önizle
         </div>
-        <div className="absolute -bottom-8 -right-8 w-16 h-16 animate-bounce">
+        <div className="absolute -bottom-8 -right-8 w-16 h-16 animate-bounce" aria-hidden="true">
           <svg className="w-full h-full text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
           </svg>
         </div>
-      </div>
+      </button>
 
       <div className="space-y-4 pt-10">
         <div className="text-4xl md:text-7xl font-mono font-black text-white tracking-widest">{timeLeft}</div>
@@ -546,11 +554,11 @@ const MockupScreen: React.FC<{ onNext: () => void, companyName: string }> = ({ o
       <div className="bg-white px-12 py-6 rounded-full flex items-center gap-4 text-xl md:text-3xl font-medium shadow-lg max-w-2xl w-full border-r-8 border-gray-200">
         <span className="text-gray-400">www.</span>
         <span>{companyName.toLowerCase().replace(/\s/g, '')}osgb.com</span>
-        <span className="ml-auto text-gray-300">🔍</span>
+        <span className="ml-auto text-gray-300" aria-hidden="true">🔍</span>
       </div>
-      <div onClick={onNext} className="absolute bottom-0 left-0 w-full gradient-btn py-6 text-2xl md:text-4xl font-black text-white cursor-pointer hover:h-24 transition-all flex items-center justify-center">
+      <button onClick={onNext} className="absolute bottom-0 left-0 w-full border-none bg-transparent gradient-btn py-6 text-2xl md:text-4xl font-black text-white cursor-pointer hover:h-24 transition-all flex items-center justify-center">
         Bu tasarımı yayına al
-      </div>
+      </button>
     </div>
     <p className="text-gray-400 text-xl font-bold">Sitenizin bitmiş halini bizzat deneyimleyin.</p>
   </div>
