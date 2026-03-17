@@ -1,0 +1,4 @@
+## 2024-05-24 - Postgres Man-in-the-Middle Risk Mitigation
+**Vulnerability:** PostgreSQL connections (managed via the 'pg' library) lacked explicit TLS certificate validation. The `ssl` configuration was hardcoded to `{ rejectUnauthorized: false }`.
+**Learning:** This exposes the application to Man-in-the-Middle (MitM) attacks where an attacker could intercept or modify database traffic. This was present in both `src/services/supabase.ts` and `scripts/applySchema.ts`.
+**Prevention:** Explicitly enable TLS certificate validation by setting `ssl: { rejectUnauthorized: true }` in the configuration object. To support custom CA certificates (such as those required by Supabase or specific cloud providers), implement a helper function that reads the `DB_SSL_CA` environment variable, which can either provide a raw PEM certificate string or a file path to the CA.

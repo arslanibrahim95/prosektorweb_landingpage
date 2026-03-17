@@ -14,6 +14,16 @@ function getEnv(name: string) {
   return v;
 }
 
+
+function getSslConfig() {
+  const ca = process.env.DB_SSL_CA?.trim();
+  if (!ca) return { rejectUnauthorized: true };
+  return {
+    rejectUnauthorized: true,
+    ca: ca.startsWith('-----BEGIN') ? ca : fs.readFileSync(ca, 'utf8')
+  };
+}
+
 async function main() {
   let databaseUrl = getEnv('DATABASE_URL').trim();
   // Users sometimes paste Supabase's placeholder format like:
@@ -25,7 +35,7 @@ async function main() {
 
   const client = new Client({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: getSslConfig(),
   });
 
   await client.connect();

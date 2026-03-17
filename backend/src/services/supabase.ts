@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import pg from 'pg';
+import fs from 'node:fs';
 
 type StoreMode = 'supabase' | 'postgres';
 
@@ -71,6 +72,16 @@ function getSupabase(): SupabaseClient {
   return _supabase;
 }
 
+
+function getSslConfig() {
+  const ca = process.env.DB_SSL_CA?.trim();
+  if (!ca) return { rejectUnauthorized: true };
+  return {
+    rejectUnauthorized: true,
+    ca: ca.startsWith('-----BEGIN') ? ca : fs.readFileSync(ca, 'utf8')
+  };
+}
+
 function getPool(): pg.Pool {
   if (_pool) return _pool;
 
@@ -79,7 +90,7 @@ function getPool(): pg.Pool {
 
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: getSslConfig(),
     max: 5,
   });
 
