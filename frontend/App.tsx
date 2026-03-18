@@ -179,7 +179,7 @@ const App: React.FC = () => {
       <Suspense fallback={null}>
         <CookieBanner />
       </Suspense>
-      {session && currentStep === 'IDLE' && <PreviewBar companyName={session.companyName} expiryDate={session.expiryDate} />}
+      {session && currentStep === 'IDLE' && <PreviewBar companyName={session.companyName} expiryDate={session.expiryDate} onCheckout={() => setCurrentStep('PAYMENT')} />}
       <Suspense fallback={null}>
         <GlobalLegalModals activeModal={activeLegalModal} onClose={() => setActiveLegalModal(null)} />
       </Suspense>
