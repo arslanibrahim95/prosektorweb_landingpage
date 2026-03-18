@@ -1,0 +1,4 @@
+
+## 2024-05-19 - Throttling Scroll Listeners and Array Recreation
+**Learning:** Recreating static arrays like `['features', 'process', 'pricing', 'faq', 'contact']` inside a high-frequency event listener (like `scroll`) causes unnecessary garbage collection overhead and layout thrashing, which leads to jank. `scroll` events can fire at a very high rate, far faster than the display can refresh.
+**Action:** Extract static arrays outside of `scroll` (or `resize`, `mousemove`) event handlers. Always wrap high-frequency DOM reads and state updates (like checking `scrollY` or `getBoundingClientRect()`) in `requestAnimationFrame` with a ticking flag to decouple event firing from frame rendering. Additionally, use `{ passive: true }` when adding the event listener so the browser knows not to wait for `preventDefault()`, improving scrolling performance.
