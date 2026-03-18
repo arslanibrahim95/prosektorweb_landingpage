@@ -79,7 +79,7 @@ function getPool(): pg.Pool {
 
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: { rejectUnauthorized: true },
     max: 5,
   });
 
