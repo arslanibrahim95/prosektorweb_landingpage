@@ -39,7 +39,7 @@ const CookieBanner: React.FC = () => {
                         Size özel hazırlanan web sitesi önizlemesini sunabilmek ve 7 günlük (168 saat) teknik süreci yönetebilmek için zorunlu çerezler kullanıyoruz. Platformu kullanmaya devam ederek bu teknik çerezlere onay vermiş sayılırsınız.{' '}
                         <button
                             onClick={() => setShowPolicyModal(true)}
-                            className="text-blue-400 hover:text-blue-300 underline font-bold cursor-pointer bg-transparent border-none p-0 inline"
+                            className="text-blue-400 hover:text-blue-300 underline font-bold cursor-pointer bg-transparent border-none p-0 inline focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded"
                         >
                             [Çerez Politikası’nı İncele]
                         </button>
