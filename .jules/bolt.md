@@ -1,0 +1,3 @@
+## 2024-03-19 - Optimize Scroll Listener in Navbar
+**Learning:** Frequent DOM queries (`document.getElementById`) inside a scroll event listener cause performance bottlenecks due to excessive layout thrashing and main-thread blocking, particularly on mobile devices. However, caching DOM nodes in a React `useEffect` closure is dangerous and can lead to bugs (e.g., caching `null` if the element hasn't mounted yet or memory leaks/detached nodes in SPAs). The actual cost of DOM queries is very low; the bottleneck is `getBoundingClientRect()`.
+**Action:** Use `requestAnimationFrame` for throttling and apply `{ passive: true }` to the event listener to improve scroll performance. Avoid caching DOM nodes in closures to prevent unexpected bugs.
