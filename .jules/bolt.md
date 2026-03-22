@@ -1,0 +1,3 @@
+## 2026-03-22 - Optimize Scroll Event Listeners with requestAnimationFrame
+**Learning:** Frequent DOM reads like `getBoundingClientRect()` inside synchronous scroll event listeners block the main thread and cause layout thrashing, resulting in scroll jank. Caching DOM nodes in a React `useEffect` closure is avoided to prevent bugs, as the true bottleneck is `getBoundingClientRect()`, not `document.getElementById()`.
+**Action:** Throttle high-frequency events (scroll, resize) using a `ticking` flag and `window.requestAnimationFrame`. Always add `{ passive: true }` to scroll/touch/wheel listeners to unblock the browser compositor.
