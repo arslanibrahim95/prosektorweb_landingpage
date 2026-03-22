@@ -1,0 +1,4 @@
+## 2024-03-22 - [Prevented Postgres MitM Attack in Supabase Service]
+**Vulnerability:** PostgreSQL connection pool was configured with `ssl: { rejectUnauthorized: false }`, which disables SSL certificate verification and leaves the database connection vulnerable to Man-in-the-Middle (MitM) attacks.
+**Learning:** This existed likely because developers often disable strict SSL checks in development environments to bypass self-signed certificate issues and accidentally deploy it to production.
+**Prevention:** Enforce `ssl: { rejectUnauthorized: true }` globally for production connections and provide an environment variable (like `DB_SSL_CA`) to allow injecting custom Certificate Authority (CA) files or raw PEM strings, ensuring strict verification is maintained even when using self-signed certificates or private CAs.
