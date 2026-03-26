@@ -1,4 +1,5 @@
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { ZodError } from 'zod';
@@ -21,6 +22,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export const app = express();
 
+app.use(helmet());
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
