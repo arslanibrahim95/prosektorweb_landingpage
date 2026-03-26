@@ -1,31 +1,32 @@
 
 import React from 'react';
 
-const Testimonials: React.FC = () => {
-  const testimonials = [
-    {
-      quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
-      author: "Ahmet Y.",
-      company: "Delta OSGB",
-      role: "Genel Müdür",
-      rating: 5
-    },
-    {
-      quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
-      author: "Fatma K.",
-      company: "Alfa Ortak Sağlık Birimi",
-      role: "İşletme Sahibi",
-      rating: 5
-    },
-    {
-      quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
-      author: "Mehmet S.",
-      company: "Güven OSGB",
-      role: "Kurucu Ortak",
-      rating: 5
-    }
-  ];
+// ⚡ Bolt: Extract static data from React components to prevent unnecessary allocations on every render
+const testimonials = [
+  {
+    quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
+    author: "Ahmet Y.",
+    company: "Delta OSGB",
+    role: "Genel Müdür",
+    rating: 5
+  },
+  {
+    quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
+    author: "Fatma K.",
+    company: "Alfa Ortak Sağlık Birimi",
+    role: "İşletme Sahibi",
+    rating: 5
+  },
+  {
+    quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
+    author: "Mehmet S.",
+    company: "Güven OSGB",
+    role: "Kurucu Ortak",
+    rating: 5
+  }
+];
 
+const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background */}
