@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import dotenv from 'dotenv';
 import { ZodError } from 'zod';
 
@@ -20,6 +21,9 @@ const allowedOrigins = parseEnvList(process.env.CORS_ORIGINS);
 const isProd = process.env.NODE_ENV === 'production';
 
 export const app = express();
+
+// 🛡️ Sentinel: Add helmet for standard security headers
+app.use(helmet());
 
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
