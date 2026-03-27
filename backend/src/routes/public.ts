@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { leadSchema, contactSchema } from '../validation/publicSchemas';
+import { leadSchema, contactSchema, verifyCodeSchema } from '../validation/publicSchemas';
+import { ACCESS_CODES } from '../constants';
 import {
   insertLead,
   insertContactMessage,
@@ -29,6 +30,22 @@ const limiter = rateLimit({
 });
 
 router.use(limiter);
+
+router.post('/verify-code', (req, res, next) => {
+  try {
+    const { code } = verifyCodeSchema.parse(req.body);
+    const companyName = ACCESS_CODES[code.toUpperCase()];
+
+    if (companyName) {
+      res.json({ success: true, companyName });
+      return;
+    }
+
+    res.status(401).json({ error: 'Invalid access code' });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post('/leads', async (req, res, next) => {
   try {
