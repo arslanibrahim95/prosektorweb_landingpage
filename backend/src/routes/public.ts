@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { leadSchema, contactSchema } from '../validation/publicSchemas';
+import { leadSchema, contactSchema, verifyCodeSchema } from '../validation/publicSchemas';
+import { MOCK_CODES } from '../constants';
 import {
   insertLead,
   insertContactMessage,
@@ -127,6 +128,23 @@ router.post('/contact', async (req, res, next) => {
         }
       }
     })();
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/verify-code', async (req, res, next) => {
+  try {
+    const input = verifyCodeSchema.parse(req.body);
+    const company = MOCK_CODES[input.code.toUpperCase()];
+
+    if (company) {
+      // Simulate slow timing to prevent timing attacks (optional but good)
+      // await new Promise((resolve) => setTimeout(resolve, 500));
+      res.status(200).json({ valid: true, company });
+    } else {
+      res.status(200).json({ valid: false });
+    }
   } catch (err) {
     next(err);
   }
