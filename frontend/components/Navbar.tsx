@@ -53,6 +53,14 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
         ? 'bg-[#121218]/98 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/10'
         : 'bg-[#121218]/80 backdrop-blur-md border-b border-white/5'
       }`}>
+      {/* Skip to Content Link */}
+      <a
+        href="#main-content"
+        className="absolute left-4 top-4 z-[100] -translate-y-[200%] focus:translate-y-0 bg-orange-500 text-white px-6 py-3 rounded-lg font-bold shadow-2xl transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-white/50"
+      >
+        İçeriğe Atla
+      </a>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
