@@ -1,0 +1,3 @@
+## 2024-03-29 - Improve screen reader accessibility for star ratings
+**Learning:** Repetitive decorative SVGs (like rating stars) can cause screen readers to announce "graphic" multiple times without context, creating a poor experience.
+**Action:** Group related decorative SVGs inside a container with `role="img"` and a descriptive `aria-label` (localized, e.g., "5 yıldız"). Add `aria-hidden="true"` to the individual SVGs to hide them from sequential readouts.
