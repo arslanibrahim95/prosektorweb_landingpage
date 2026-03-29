@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import pg from 'pg';
+import fs from 'fs';
 
 type StoreMode = 'supabase' | 'postgres';
 
@@ -77,9 +78,23 @@ function getPool(): pg.Pool {
   const databaseUrl = process.env.DATABASE_URL?.trim();
   if (!databaseUrl) throw new Error('Missing DATABASE_URL');
 
+  let ca: string | undefined;
+  const sslCa = process.env.DB_SSL_CA?.trim();
+  if (sslCa) {
+    if (sslCa.startsWith('-----BEGIN CERTIFICATE-----')) {
+      ca = sslCa;
+    } else {
+      ca = fs.readFileSync(sslCa, 'utf8');
+    }
+  }
+
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    // 🛡️ Sentinel: Enforce TLS certificate validation to prevent MitM attacks
+    ssl: {
+      rejectUnauthorized: true,
+      ca,
+    },
     max: 5,
   });
 
