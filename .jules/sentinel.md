@@ -1,0 +1,4 @@
+## 2024-05-18 - Enforce TLS certificate validation for Postgres connections
+**Vulnerability:** The backend PostgreSQL connection pool (`pg.Pool`) had `ssl: { rejectUnauthorized: false }` configured, allowing connections without verifying the server's TLS certificate.
+**Learning:** Setting `rejectUnauthorized: false` disables TLS certificate verification entirely, making the database connection vulnerable to Man-in-the-Middle (MitM) attacks, potentially exposing sensitive data like credentials and records in transit.
+**Prevention:** Always enforce TLS certificate validation (`rejectUnauthorized: true`) in production environments for database connections and provide the appropriate Certificate Authority (CA) bundle if needed.
