@@ -1,0 +1,4 @@
+## 2025-05-18 - Fix MitM vulnerability in Postgres connection
+**Vulnerability:** PostgreSQL connections using the `pg` library were configured with `ssl: { rejectUnauthorized: false }`, which disables TLS certificate validation and exposes the connection to Man-in-the-Middle (MitM) attacks.
+**Learning:** By disabling `rejectUnauthorized`, the connection relies entirely on trust, exposing it to potential interception. The `pg.PoolConfig['ssl']` object should enforce `rejectUnauthorized: true` and correctly configure custom Certificate Authorities (CA) if provided.
+**Prevention:** Enforce `ssl: { rejectUnauthorized: true }` in `pg` pool configurations and handle custom CA strings (e.g., from `DB_SSL_CA` environment variables, handling both raw PEMs and file paths) securely without bypassing certificate checks.
