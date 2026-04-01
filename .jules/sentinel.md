@@ -1,0 +1,4 @@
+## 2025-02-12 - PostgreSQL TLS Connection Validation
+**Vulnerability:** PostgreSQL connections were skipping TLS certificate validation (`rejectUnauthorized: false`), exposing the database to Man-in-the-Middle (MitM) attacks.
+**Learning:** Default examples or temporary development configurations often disable TLS verification to avoid custom CA setup issues, but these frequently leak into production environments. The `pg` library requires explicit configuration to properly validate certificates, and custom CAs require manual parsing via `fs` or raw PEM strings.
+**Prevention:** Always set `rejectUnauthorized: true` in production database connections. Provide configuration options (like `DB_SSL_CA`) to inject custom Certificate Authorities rather than disabling validation outright. Use `pg.PoolConfig['ssl']` for proper typing.
