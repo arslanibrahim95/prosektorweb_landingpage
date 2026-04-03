@@ -1,0 +1,3 @@
+## 2025-02-23 - Extracting static configuration from components
+**Learning:** Placing logically stable or static data (like UI feature lists or background particle configurations) inside React components or wrapping them in `useMemo` incurs hook overhead and causes unnecessary allocations during every render cycle.
+**Action:** Move static data arrays and configurations outside of component definitions into module-level constants to eliminate overhead and prevent redundant allocations.
