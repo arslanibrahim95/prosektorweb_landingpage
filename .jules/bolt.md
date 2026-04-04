@@ -1,0 +1,3 @@
+## 2025-04-04 - Optimize Static Arrays in React Components
+**Learning:** Hardcoded arrays mapped inside functional components in React (such as `data` in `Features.tsx`, `testimonials` in `Testimonials.tsx` and `features` in `Pricing.tsx`) are recreated on every render. Wrapping them in `useMemo` introduces unnecessary overhead since these variables are entirely static and don't depend on React state or props.
+**Action:** Always move fully static configuration arrays and constant data structures to the module level (outside the component function) rather than keeping them inside the render function or wrapping them with `useMemo`.
