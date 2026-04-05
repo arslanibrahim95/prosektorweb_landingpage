@@ -1,0 +1,4 @@
+## 2025-02-14 - Postgres SSL Configuration MitM Vulnerability
+**Vulnerability:** The PostgreSQL connection pool (`pg`) in `backend/src/services/supabase.ts` was configured with `ssl: { rejectUnauthorized: false }`, which disables certificate validation and leaves the application vulnerable to Man-in-the-Middle (MitM) attacks.
+**Learning:** Hardcoding `rejectUnauthorized: false` to bypass local or self-signed certificate errors in development is dangerous if it propagates to production. Secure configurations must support dynamic CA injection to validate certificates properly.
+**Prevention:** Always enforce `rejectUnauthorized: true` for database connections and provide mechanisms to dynamically load custom Certificate Authorities (e.g., via `process.env.DB_SSL_CA` supporting both PEM strings and file paths) for flexible yet secure deployments.
