@@ -1,20 +1,19 @@
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 interface PricingProps {
   onPreviewClick: () => void;
 }
 
-const PricingParticles: React.FC = () => {
-  const particles = useMemo(() =>
-    Array.from({ length: 8 }).map((_, i) => ({
-      left: `${(i * 12.5) + Math.random() * 10}%`,
-      top: `${(i * 12) + Math.random() * 10}%`,
-      duration: `${3 + (i % 3) * 1.5}s`,
-      delay: `${(i * 0.4)}s`,
-    })),
-  []);
+// ⚡ Bolt: Moved static particles array generation outside of component to eliminate useMemo overhead and prevent recalculation on unmount/remount
+const particles = Array.from({ length: 8 }).map((_, i) => ({
+  left: `${(i * 12.5) + Math.random() * 10}%`,
+  top: `${(i * 12) + Math.random() * 10}%`,
+  duration: `${3 + (i % 3) * 1.5}s`,
+  delay: `${(i * 0.4)}s`,
+}));
 
+const PricingParticles: React.FC = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
       {particles.map((p, i) => (
@@ -33,15 +32,16 @@ const PricingParticles: React.FC = () => {
   );
 };
 
-const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
-  const features = [
-    "Profesyonel OSGB Web Sitesi",
-    "OSGB Süreç Yönetim Paneli",
-    "SEO ve Performans Optimizasyonu",
-    "Mobil Uyumlu Mimari",
-    "Hızlı Teslimat Garantisi"
-  ];
+// ⚡ Bolt: Moved static features array outside of component to prevent array reallocation on every render cycle
+const features = [
+  "Profesyonel OSGB Web Sitesi",
+  "OSGB Süreç Yönetim Paneli",
+  "SEO ve Performans Optimizasyonu",
+  "Mobil Uyumlu Mimari",
+  "Hızlı Teslimat Garantisi"
+];
 
+const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
       {/* Background */}
