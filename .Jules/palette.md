@@ -1,0 +1,3 @@
+## 2024-03-24 - Grouping Iterative SVGs for Screen Readers
+**Learning:** When generating multiple decorative elements for visual metrics (like rating stars) via loops, screen readers read each icon individually which causes noise and confusion without contextual labeling.
+**Action:** Always group iterative metric SVGs inside a container element using `aria-label` and `title` to announce the total value, while using `aria-hidden="true"` on the individual generated children to silence the noise.
