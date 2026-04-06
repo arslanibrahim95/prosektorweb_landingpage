@@ -1,23 +1,30 @@
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 interface PricingProps {
   onPreviewClick: () => void;
 }
 
-const PricingParticles: React.FC = () => {
-  const particles = useMemo(() =>
-    Array.from({ length: 8 }).map((_, i) => ({
-      left: `${(i * 12.5) + Math.random() * 10}%`,
-      top: `${(i * 12) + Math.random() * 10}%`,
-      duration: `${3 + (i % 3) * 1.5}s`,
-      delay: `${(i * 0.4)}s`,
-    })),
-  []);
+// ⚡ Bolt: Move static data outside of React component definitions into module-level constants to eliminate hook overhead (useMemo) and prevent unnecessary allocations during render cycles.
+const PARTICLES = Array.from({ length: 8 }).map((_, i) => ({
+  left: `${(i * 12.5) + Math.random() * 10}%`,
+  top: `${(i * 12) + Math.random() * 10}%`,
+  duration: `${3 + (i % 3) * 1.5}s`,
+  delay: `${(i * 0.4)}s`,
+}));
 
+const FEATURES = [
+  "Profesyonel OSGB Web Sitesi",
+  "OSGB Süreç Yönetim Paneli",
+  "SEO ve Performans Optimizasyonu",
+  "Mobil Uyumlu Mimari",
+  "Hızlı Teslimat Garantisi"
+];
+
+const PricingParticles: React.FC = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
-      {particles.map((p, i) => (
+      {PARTICLES.map((p, i) => (
         <div
           key={i}
           className="absolute w-1 h-1 bg-orange-500/30 rounded-full"
@@ -34,14 +41,6 @@ const PricingParticles: React.FC = () => {
 };
 
 const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
-  const features = [
-    "Profesyonel OSGB Web Sitesi",
-    "OSGB Süreç Yönetim Paneli",
-    "SEO ve Performans Optimizasyonu",
-    "Mobil Uyumlu Mimari",
-    "Hızlı Teslimat Garantisi"
-  ];
-
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -89,7 +88,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
 
               {/* Features List */}
               <ul className="text-left space-y-4 max-w-sm mx-auto mb-10">
-                {features.map((feature, i) => (
+                {FEATURES.map((feature, i) => (
                   <li
                     key={i}
                     className={`flex items-center gap-3 fade-in-up stagger-${i + 1}`}
