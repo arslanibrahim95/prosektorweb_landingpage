@@ -1,0 +1,4 @@
+## 2024-05-30 - Fix MitM Vulnerability in Postgres Connection
+**Vulnerability:** The Postgres pool configuration was setting `ssl: { rejectUnauthorized: false }`, allowing potential Man-in-the-Middle (MitM) attacks by not validating the database server's SSL certificate.
+**Learning:** Using `rejectUnauthorized: false` for Postgres connections in production environments completely disables certificate validation, creating a critical security risk for intercepted credentials or data. The fix required a dynamic configuration supporting custom CA certificates via PEM string or file path.
+**Prevention:** Always enforce `rejectUnauthorized: true` for remote database connections and implement dynamic parsing of the Certificate Authority (CA) if custom certificates are used, utilizing `pg.PoolConfig['ssl']`.
