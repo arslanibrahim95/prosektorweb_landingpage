@@ -17,23 +17,32 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // ⚡ Bolt: Replaced expensive synchronous getBoundingClientRect calls inside scroll event with IntersectionObserver to prevent layout thrashing
+    const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-100px 0px -99% 0px' }
+    );
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const navLinks = [
