@@ -521,16 +521,20 @@ const WelcomeScreen: React.FC<{ companyName: string, onPreview: () => void, expi
       <h2 className="text-4xl md:text-5xl font-extrabold">Hoş geldiniz, [{companyName}]</h2>
       <p className="text-2xl font-medium">Sizin için hazırlanan tam kapsamlı web sitesi hazır.</p>
 
-      <div className="relative inline-block group cursor-pointer" onClick={onPreview}>
-        <div className="gradient-btn px-20 py-10 rounded-[3rem] text-5xl font-black shadow-[0_0_50px_rgba(255,140,0,0.3)] group-hover:scale-105 transition-all text-white">
+      <button
+        className="relative inline-block group cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500 rounded-[3rem]"
+        onClick={onPreview}
+        aria-label="Web Sitemi Önizle"
+      >
+        <span className="block gradient-btn px-20 py-10 rounded-[3rem] text-5xl font-black shadow-[0_0_50px_rgba(255,140,0,0.3)] group-hover:scale-105 transition-all text-white text-left">
           Web <br /> Sitemi <br /> Önizle
-        </div>
-        <div className="absolute -bottom-8 -right-8 w-16 h-16 animate-bounce">
+        </span>
+        <span className="absolute -bottom-8 -right-8 w-16 h-16 animate-bounce block">
           <svg className="w-full h-full text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
           </svg>
-        </div>
-      </div>
+        </span>
+      </button>
 
       <div className="space-y-4 pt-10">
         <div className="text-4xl md:text-7xl font-mono font-black text-white tracking-widest">{timeLeft}</div>
@@ -548,9 +552,12 @@ const MockupScreen: React.FC<{ onNext: () => void, companyName: string }> = ({ o
         <span>{companyName.toLowerCase().replace(/\s/g, '')}osgb.com</span>
         <span className="ml-auto text-gray-300">🔍</span>
       </div>
-      <div onClick={onNext} className="absolute bottom-0 left-0 w-full gradient-btn py-6 text-2xl md:text-4xl font-black text-white cursor-pointer hover:h-24 transition-all flex items-center justify-center">
+      <button
+        onClick={onNext}
+        className="absolute bottom-0 left-0 w-full gradient-btn py-6 text-2xl md:text-4xl font-black text-white cursor-pointer hover:h-24 transition-all flex items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500"
+      >
         Bu tasarımı yayına al
-      </div>
+      </button>
     </div>
     <p className="text-gray-400 text-xl font-bold">Sitenizin bitmiş halini bizzat deneyimleyin.</p>
   </div>
