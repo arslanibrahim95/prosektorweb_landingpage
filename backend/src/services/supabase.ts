@@ -77,9 +77,12 @@ function getPool(): pg.Pool {
   const databaseUrl = process.env.DATABASE_URL?.trim();
   if (!databaseUrl) throw new Error('Missing DATABASE_URL');
 
+  const isProd = process.env.NODE_ENV === 'production';
+  const sslConfig: pg.PoolConfig['ssl'] = isProd ? { rejectUnauthorized: true } : { rejectUnauthorized: false };
+
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: sslConfig,
     max: 5,
   });
 
