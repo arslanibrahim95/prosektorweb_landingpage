@@ -1,0 +1,3 @@
+## 2024-04-12 - Accessible Star Ratings
+**Learning:** Screen readers often ignore `aria-label` on plain `<div>` elements containing SVGs, leading to either unannounced star ratings or redundant announcements if the SVGs are read individually.
+**Action:** When grouping visual icons like rating stars, apply `role="img"`, a descriptive localized `aria-label` (e.g., in Turkish, "5 yıldız"), and `title` to the parent container, and add `aria-hidden="true"` to the individual child SVGs.
