@@ -1,0 +1,3 @@
+## 2025-02-28 - requestAnimationFrame for scroll events
+**Learning:** Synchronous handling of high-frequency events like `scroll` combined with DOM queries like `getBoundingClientRect` causes layout thrashing and blocks the main thread.
+**Action:** Always throttle high-frequency events using `window.requestAnimationFrame` with a boolean tracking flag (`ticking`), capture the returned frame ID, and call `window.cancelAnimationFrame(frameId)` in the `useEffect` cleanup function to prevent memory leaks and trailing execution after unmount.
