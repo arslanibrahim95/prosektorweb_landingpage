@@ -1,0 +1,4 @@
+## 2024-04-14 - Insecure Database Connection Pool SSL Setting
+**Vulnerability:** PostgreSQL connection pool was configured with `rejectUnauthorized: false` for all environments, exposing the connection to Man-in-the-Middle (MitM) attacks.
+**Learning:** Hardcoded insecure SSL settings in connection pools bypass security even when deployed to production. Conditional logic based on `NODE_ENV` must be used to enforce strict validation.
+**Prevention:** Always enforce strict SSL certificate validation (`rejectUnauthorized: true`) in production environments for database connections, and type the SSL configuration explicitly (e.g., `pg.PoolConfig['ssl']`).

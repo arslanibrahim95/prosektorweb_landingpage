@@ -79,7 +79,9 @@ function getPool(): pg.Pool {
 
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: {
+      rejectUnauthorized: process.env.NODE_ENV === 'production' ? true : false
+    } as pg.PoolConfig['ssl'],
     max: 5,
   });
 
