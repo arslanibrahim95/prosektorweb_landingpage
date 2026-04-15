@@ -198,7 +198,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className={`w-full py-4 rounded-xl text-lg font-bold transition-all flex items-center justify-center gap-3 btn-shine overflow-hidden ${isSubmitting
+                                className={`w-full py-4 rounded-xl text-lg font-bold transition-all flex items-center justify-center gap-3 btn-shine overflow-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-black ${isSubmitting
                                     ? 'bg-gray-700 text-gray-300 cursor-not-allowed'
                                     : 'gradient-btn hover:shadow-lg hover:shadow-orange-500/25 hover:scale-[1.02] glow-btn'
                                     }`}

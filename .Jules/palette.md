@@ -1,0 +1,3 @@
+## 2024-04-15 - Grouping SVG Icons for Accessibility in Turkish
+**Learning:** When displaying multiple SVG icons that represent a single value (like 5 rating stars), screen readers announce each SVG individually, which is confusing. Adding `role="img"` and `aria-label="5 yıldız"` to the container div, and `aria-hidden="true"` to the inner SVGs solves this. Furthermore, all accessibility attributes (like `aria-label`) must be localized to Turkish to ensure correct pronunciation by Turkish screen readers.
+**Action:** Always group repetitive visual icons into a single semantic element for screen readers using `role="img"` on the parent and `aria-hidden="true"` on the children, with localized Turkish text.
