@@ -114,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
+              className="text-gray-300 hover:text-white p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
               aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
               aria-expanded={isMobileMenuOpen}
             >
