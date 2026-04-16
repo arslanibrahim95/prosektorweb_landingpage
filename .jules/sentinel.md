@@ -1,0 +1,4 @@
+## 2024-04-16 - Prevent Man-in-the-Middle (MitM) Attacks in Postgres Connection
+**Vulnerability:** PostgreSQL connection pool used `rejectUnauthorized: false` for SSL unconditionally.
+**Learning:** Hardcoding `rejectUnauthorized: false` bypasses SSL certificate validation entirely, making the application susceptible to Man-in-the-Middle (MitM) attacks, particularly in production environments.
+**Prevention:** Always enforce strict SSL certificate validation (`rejectUnauthorized: true`) in production. Use conditional logic based on `NODE_ENV` to permit less strict settings only for local development.
