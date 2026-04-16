@@ -15,25 +15,43 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
+    let frameId: number;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      // ⚡ Bolt: Throttle high-frequency scroll events using requestAnimationFrame and a ticking flag to prevent main thread blocking and layout thrashing
+      if (!ticking) {
+        frameId = window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added { passive: true } to scroll event listener to enable smooth browser scrolling without waiting for JS execution
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      // ⚡ Bolt: Cancel any pending animation frame to prevent state updates after component unmount
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   const navLinks = [
