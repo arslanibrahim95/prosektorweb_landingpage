@@ -77,9 +77,11 @@ function getPool(): pg.Pool {
   const databaseUrl = process.env.DATABASE_URL?.trim();
   if (!databaseUrl) throw new Error('Missing DATABASE_URL');
 
+  // 🛡️ Sentinel: Enforce strict SSL validation in production to prevent MitM attacks
+  const isProd = process.env.NODE_ENV === 'production';
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: isProd ? { rejectUnauthorized: true } : { rejectUnauthorized: false },
     max: 5,
   });
 
