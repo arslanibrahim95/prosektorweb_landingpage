@@ -41,7 +41,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center group hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-5 text-left flex justify-between items-center group hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-orange-500"
                 >
                   <span className={`font-bold transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-200 group-hover:text-white'
                     }`}>
