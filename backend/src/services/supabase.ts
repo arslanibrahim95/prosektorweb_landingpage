@@ -79,7 +79,8 @@ function getPool(): pg.Pool {
 
   _pool = new pg.Pool({
     connectionString: databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    // 🛡️ Sentinel: Enforce strict SSL validation in production to prevent MitM attacks
+    ssl: { rejectUnauthorized: process.env.NODE_ENV === 'production' },
     max: 5,
   });
 
