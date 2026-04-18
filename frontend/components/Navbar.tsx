@@ -15,7 +15,11 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
+    // ⚡ Bolt: Use a tracking flag to throttle scroll events and prevent layout thrashing
+    let ticking = false;
+    let frameId: number;
+
+    const updateScrollState = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Detect active section
@@ -30,10 +34,26 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
           }
         }
       }
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      if (!ticking) {
+        // ⚡ Bolt: Schedule DOM reads/writes in sync with browser refresh rate
+        frameId = window.requestAnimationFrame(updateScrollState);
+        ticking = true;
+      }
+    };
+
+    // ⚡ Bolt: Add { passive: true } to tell the browser we won't preventDefault, enabling smoother scrolling
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId) {
+        // ⚡ Bolt: Prevent unmounted component state updates
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
   const navLinks = [
