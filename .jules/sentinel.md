@@ -1,0 +1,4 @@
+## 2025-03-05 - Insecure Secret Injection in Vite Config
+**Vulnerability:** The Gemini API key (`GEMINI_API_KEY`) was being injected into the client-side bundle via the Vite `define` configuration.
+**Learning:** Using Vite's `define` with sensitive environment variables like API keys directly embeds those secrets into the compiled JavaScript bundle, exposing them to anyone who inspects the client-side code.
+**Prevention:** Secrets must never be injected into client-side bundles. All sensitive API interactions must be proxied through the backend, and frontend code should only call the backend's secure endpoints.
