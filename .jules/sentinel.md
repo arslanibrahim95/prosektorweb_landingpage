@@ -1,0 +1,4 @@
+## 2024-07-24 - Client-Side Secret Exposure via Vite Config
+**Vulnerability:** The `GEMINI_API_KEY` was being injected directly into the client-side bundle using Vite's `define` configuration.
+**Learning:** Developers sometimes use `define` to easily access environment variables in the frontend, not realizing this hardcodes the secrets into the public client-side bundle, exposing them to anyone inspecting the frontend source.
+**Prevention:** Never use Vite's `define` or `import.meta.env` for sensitive keys. All interactions requiring secrets (like LLM APIs) must be proxied through a secure backend server.
