@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ onCheckCode, isSessionActive, companyName }
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center md:justify-start fade-in-up stagger-3">
             <button
               onClick={onCheckCode}
-              className="group relative w-full sm:w-auto px-10 py-5 bg-white text-black font-extrabold rounded-2xl hover:scale-105 transition-all duration-300 btn-shine overflow-hidden shadow-xl shadow-white/10"
+              className="group relative w-full sm:w-auto px-10 py-5 bg-white text-black font-extrabold rounded-2xl hover:scale-105 transition-all duration-300 btn-shine overflow-hidden shadow-xl shadow-white/10 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-orange-500"
             >
               <span className="flex items-center justify-center gap-2 relative z-10">
                 {isSessionActive ? 'Önizlemeye Dön' : 'Web Sitemi İncele'}
