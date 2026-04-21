@@ -107,7 +107,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
               {/* CTA Button */}
               <button
                 onClick={onPreviewClick}
-                className="w-full md:w-auto px-12 py-5 gradient-btn rounded-2xl font-black text-lg shadow-xl shadow-orange-900/30 hover:scale-105 transition-transform btn-shine overflow-hidden glow-btn"
+                className="w-full md:w-auto px-12 py-5 gradient-btn rounded-2xl font-black text-lg shadow-xl shadow-orange-900/30 hover:scale-105 transition-transform btn-shine overflow-hidden glow-btn focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-orange-500"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Web Sitemi İncele

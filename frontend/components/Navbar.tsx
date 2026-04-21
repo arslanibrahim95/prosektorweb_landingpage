@@ -96,14 +96,14 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
             {isSessionActive ? (
               <button
                 onClick={onLogout}
-                className="text-xs font-bold text-red-400 hover:text-red-300 border border-red-900/30 px-4 py-2 rounded-full transition-all hover:bg-red-950/30"
+                className="text-xs font-bold text-red-400 hover:text-red-300 border border-red-900/30 px-4 py-2 rounded-full transition-all hover:bg-red-950/30 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-red-400"
               >
                 Çıkış Yap
               </button>
             ) : (
               <button
                 onClick={onLoginClick}
-                className="relative gradient-btn px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-900/30 btn-shine overflow-hidden glow-btn"
+                className="relative gradient-btn px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-900/30 btn-shine overflow-hidden glow-btn focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-orange-500"
               >
                 <span className="relative z-10">Web Sitemi Gör</span>
               </button>
