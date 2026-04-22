@@ -24,6 +24,14 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+// 🛡️ Sentinel: Added security headers to prevent MIME sniffing, clickjacking, and enforce secure connections.
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
