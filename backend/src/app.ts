@@ -24,6 +24,15 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+app.use((_req, res, next) => {
+  // 🛡️ Sentinel: Add standard HTTP security headers to protect against common web vulnerabilities
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
