@@ -52,7 +52,7 @@ const PreviewBar: React.FC<PreviewBarProps> = ({ companyName, expiryDate }) => {
               </div>
             </div>
 
-            <button className="px-8 py-3 bg-white text-black font-black rounded-xl hover:scale-105 transition-all text-sm shadow-xl">
+            <button className="px-8 py-3 bg-white text-black font-black rounded-xl hover:scale-105 transition-all text-sm shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500">
               Bu Tasarımı Yayına Al
             </button>
           </div>
