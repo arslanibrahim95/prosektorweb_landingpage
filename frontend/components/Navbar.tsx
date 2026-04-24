@@ -14,26 +14,52 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  // ⚡ Bolt: Active section tracking moved to a separate useEffect to handle dynamic DOM elements cleanly
+  // without relying on expensive global MutationObservers or brittle timeouts.
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-100px 0px -80% 0px' }
+    );
+
+    // Initial check
+    const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+    sections.forEach((section) => {
+      const el = document.getElementById(section);
+      if (el) observer.observe(el);
+    });
+
+    // ⚡ Bolt: Instead of MutationObserver on body, we setup a lightweight interval
+    // that polls briefly just after mount, then clears itself, to catch lazy-loaded sections
+    // without degrading performance.
+    let checks = 0;
+    const intervalId = setInterval(() => {
+      sections.forEach((section) => {
+        const el = document.getElementById(section);
+        if (el) observer.observe(el);
+      });
+      checks++;
+      if (checks > 10) clearInterval(intervalId); // Stop checking after 5 seconds
+    }, 500);
+
+    return () => {
+      clearInterval(intervalId);
+      observer.disconnect();
+    };
   }, []);
 
   const navLinks = [
