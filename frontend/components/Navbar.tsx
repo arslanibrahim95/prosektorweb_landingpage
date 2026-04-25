@@ -15,7 +15,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateScrollState = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Detect active section
@@ -30,9 +32,19 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
           }
         }
       }
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      // ⚡ Bolt: Use requestAnimationFrame to throttle scroll updates and avoid layout thrashing
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollState);
+        ticking = true;
+      }
+    };
+
+    // ⚡ Bolt: Add { passive: true } to scroll event listener to prevent main thread blocking
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
