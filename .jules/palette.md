@@ -1,0 +1,3 @@
+## 2024-04-26 - Interactive Elements in Form Labels
+**Learning:** Found an accessibility issue where interactive links that open modals in form labels are implemented as `span` elements with `onClick` handlers. Replacing them with `<button>` elements breaks the accessible name of the wrapping `<label>` for screen readers.
+**Action:** Always retain the `<label>` wrapping to preserve the checkbox's accessible name and clickable area. Instead of `<button>`, use a `span` with `role="button"`, `tabIndex={0}`, and an `onKeyDown` handler (for Space/Enter) to make the link keyboard accessible without breaking the parent label.
