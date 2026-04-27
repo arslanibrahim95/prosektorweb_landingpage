@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true }); // ⚡ Bolt: Added { passive: true } to prevent main-thread jank during scrolling
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
