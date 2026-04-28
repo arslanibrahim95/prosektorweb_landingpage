@@ -32,7 +32,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added passive flag to scroll listener to improve scrolling performance by unblocking the main thread.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
