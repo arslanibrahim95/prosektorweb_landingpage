@@ -41,7 +41,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center group hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-5 text-left flex justify-between items-center group hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
                 >
                   <span className={`font-bold transition-colors ${isOpen ? 'text-orange-400' : 'text-gray-200 group-hover:text-white'
                     }`}>
@@ -69,6 +69,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                   id={panelId}
                   role="region"
                   aria-labelledby={buttonId}
+                  aria-hidden={!isOpen}
                   className={`overflow-hidden transition-all duration-500 ease-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                 >
