@@ -44,7 +44,13 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="terms" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowTermsModal(true); }}>
+                            <span
+                                role="button"
+                                tabIndex={0}
+                                className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded px-1 -mx-1"
+                                onClick={(e) => { e.preventDefault(); setShowTermsModal(true); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowTermsModal(true); } }}
+                            >
                                 Kullanım Koşulları ve İptal/İade Şartları
                             </span>'nı okudum, hizmetin cayma hakkı kapsamı dışında olduğunu ve 7 günlük ücretsiz inceleme süresi sonunda iptal/iade yapılamayacağını kabul ediyorum.
                         </label>
@@ -60,7 +66,13 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="sales" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowSalesModal(true); }}>
+                            <span
+                                role="button"
+                                tabIndex={0}
+                                className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded px-1 -mx-1"
+                                onClick={(e) => { e.preventDefault(); setShowSalesModal(true); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowSalesModal(true); } }}
+                            >
                                 Mesafeli Satış Sözleşmesi
                             </span>'ni okudum, ön biligilendirme formunu inceledim ve elektronik ortamda onaylıyorum.
                         </label>
@@ -76,7 +88,13 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="privacy" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowPrivacyModal(true); }}>
+                            <span
+                                role="button"
+                                tabIndex={0}
+                                className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded px-1 -mx-1"
+                                onClick={(e) => { e.preventDefault(); setShowPrivacyModal(true); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowPrivacyModal(true); } }}
+                            >
                                 Gizlilik Politikası ve KVKK Aydınlatma Metni
                             </span>'ni okudum, kişisel verilerimin işlenmesine açık rıza gösteriyorum.
                         </label>
