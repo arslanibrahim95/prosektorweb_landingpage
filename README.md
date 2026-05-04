@@ -45,4 +45,3 @@ npm run dev
 - `POST /api/public/contact` (iletisim mesaji)
 
 Not: SMS bildirimi basarisiz olursa kayit Supabase'e yine yazilir; ilgili satirda `notify_status='failed'` ve `notify_error` doldurulur.
-
