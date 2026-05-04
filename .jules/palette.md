@@ -1,0 +1,3 @@
+## 2025-05-04 - Semantic Button Replacement for Clickable Divs
+**Learning:** Found non-semantic `<div>` elements serving as primary call-to-action buttons (`onClick` handlers for "Web Sitemi Önizle" and "Bu tasarımı yayına al"). This breaks keyboard navigability (no Tab focus) and screen reader identification. Converting them to `<button>` natively fixes these a11y issues, though Tailwind's default reset means we sometimes need to explicitly restore `text-left` alignment if the original div relied on inherited alignment.
+**Action:** Consistently use `<button>` instead of `<div onClick={...}>` for all custom interactive elements, adding visual reset classes (like `text-left`) where necessary to preserve layout.
