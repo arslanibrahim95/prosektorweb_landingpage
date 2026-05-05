@@ -24,6 +24,14 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+// 🛡️ Sentinel: Add standard HTTP security headers to protect against common web vulnerabilities like clickjacking and MIME-type sniffing
+app.use((_req, res, next) => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
