@@ -1,0 +1,3 @@
+## 2024-05-05 - Keyboard Accessibility for Modal Links in Labels
+**Learning:** When text links inside form `<label>` elements are meant to trigger modals, they cannot use standard `<button>` tags because nesting buttons inside labels is invalid HTML and can cause click/focus conflicts. However, using basic `<span>` tags with `onClick` handlers fails WCAG requirements for keyboard navigability.
+**Action:** Use `<span>` tags with `role="button"`, `tabIndex={0}`, and `onKeyDown` handlers that support Space and Enter keys. Ensure `focus-visible` styling is applied for tab navigation. This preserves form label semantics while restoring full keyboard accessibility.
