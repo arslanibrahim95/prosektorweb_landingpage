@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <label>
+    <input type="checkbox" id="cb" />
+    Accept
+    <span tabIndex="0" role="button"
+      onClick="event.preventDefault(); console.log('click');"
+      onKeyDown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); event.stopPropagation(); console.log('keydown');}">
+      Terms
+    </span>
+  </label>
+</body>
+</html>
