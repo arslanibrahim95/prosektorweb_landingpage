@@ -122,7 +122,8 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
           }
         }
 
-        .gooey-footer-section a.footer-link {
+        .gooey-footer-section a.footer-link,
+        .gooey-footer-section button.footer-link {
           color: var(--text-color);
           opacity: 0.8;
           text-decoration: none;
@@ -130,9 +131,11 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
           font-weight: 400;
           transition: opacity 0.3s, transform 0.3s;
           display: block;
+          text-align: left;
         }
 
-        .gooey-footer-section a.footer-link:hover {
+        .gooey-footer-section a.footer-link:hover,
+        .gooey-footer-section button.footer-link:hover {
           opacity: 1;
           transform: translateY(-3px);
         }
@@ -206,10 +209,10 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
           {/* Yasal */}
           <div className="space-y-3">
             <h3>Yasal</h3>
-            <a href="#" onClick={(e) => { e.preventDefault(); onOpenLegalModal('TERMS'); }} className="footer-link">Kullanım Koşulları</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); onOpenLegalModal('PRIVACY'); }} className="footer-link">Gizlilik Politikası</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); onOpenLegalModal('COOKIES'); }} className="footer-link">Çerez Politikası</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); onOpenLegalModal('SALES'); }} className="footer-link">Mesafeli Satış</a>
+            <button type="button" onClick={() => onOpenLegalModal('TERMS')} className="footer-link">Kullanım Koşulları</button>
+            <button type="button" onClick={() => onOpenLegalModal('PRIVACY')} className="footer-link">Gizlilik Politikası</button>
+            <button type="button" onClick={() => onOpenLegalModal('COOKIES')} className="footer-link">Çerez Politikası</button>
+            <button type="button" onClick={() => onOpenLegalModal('SALES')} className="footer-link">Mesafeli Satış</button>
           </div>
 
           {/* İletişim */}
@@ -227,12 +230,12 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onOpenLegalModal }) => 
               </svg>
               hello@prosektorweb.com
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); onContactClick(); }} className="footer-link flex items-center gap-2">
+            <button type="button" onClick={() => onContactClick()} className="footer-link flex items-center gap-2">
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
               İletişim Formu
-            </a>
+            </button>
             <div className="flex items-center gap-2 text-sm opacity-80 pt-2" style={{ color: 'var(--text-color)' }}>
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
