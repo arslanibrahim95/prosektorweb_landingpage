@@ -1,0 +1,3 @@
+## 2025-05-07 - React Scroll Event Listeners Without Passive Option causing Main-Thread Jank
+**Learning:** Legacy web APIs and default event listeners (like scroll/touch) without the { passive: true } option can block scrolling actions while the browser waits for the JavaScript main thread to execute the listener and confirm no preventDefault is called. Additionally, storing static data such as arrays of links directly inside heavily re-rendered functional components triggers redundant memory allocations on each render.
+**Action:** Extract static variables outside of React components when possible. When registering scroll or touch listeners that don't need to prevent default behaviors, explicitly use { passive: true } to prevent main-thread UI jank.
