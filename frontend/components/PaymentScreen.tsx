@@ -44,9 +44,9 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="terms" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowTermsModal(true); }}>
+                            <button type="button" className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded" onClick={(e) => { e.preventDefault(); setShowTermsModal(true); }}>
                                 Kullanım Koşulları ve İptal/İade Şartları
-                            </span>'nı okudum, hizmetin cayma hakkı kapsamı dışında olduğunu ve 7 günlük ücretsiz inceleme süresi sonunda iptal/iade yapılamayacağını kabul ediyorum.
+                            </button>'nı okudum, hizmetin cayma hakkı kapsamı dışında olduğunu ve 7 günlük ücretsiz inceleme süresi sonunda iptal/iade yapılamayacağını kabul ediyorum.
                         </label>
                     </div>
 
@@ -60,9 +60,9 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="sales" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowSalesModal(true); }}>
+                            <button type="button" className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded" onClick={(e) => { e.preventDefault(); setShowSalesModal(true); }}>
                                 Mesafeli Satış Sözleşmesi
-                            </span>'ni okudum, ön biligilendirme formunu inceledim ve elektronik ortamda onaylıyorum.
+                            </button>'ni okudum, ön biligilendirme formunu inceledim ve elektronik ortamda onaylıyorum.
                         </label>
                     </div>
 
@@ -76,9 +76,9 @@ const PaymentScreen: React.FC = () => {
                             className="form-checkbox mt-1"
                         />
                         <label htmlFor="privacy" className="text-sm text-gray-300 cursor-pointer select-none">
-                            <span className="font-bold text-white hover:underline" onClick={(e) => { e.preventDefault(); setShowPrivacyModal(true); }}>
+                            <button type="button" className="font-bold text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded" onClick={(e) => { e.preventDefault(); setShowPrivacyModal(true); }}>
                                 Gizlilik Politikası ve KVKK Aydınlatma Metni
-                            </span>'ni okudum, kişisel verilerimin işlenmesine açık rıza gösteriyorum.
+                            </button>'ni okudum, kişisel verilerimin işlenmesine açık rıza gösteriyorum.
                         </label>
                     </div>
                 </div>
