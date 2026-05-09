@@ -3,6 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { DASHBOARD_URL } from '../constants';
 import { openExternalByDevice } from '../utils/navigation';
 
+// ⚡ Bolt: Define static arrays outside component to prevent reallocation on every render
+const NAV_LINKS = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
+const SECTIONS = ['features', 'process', 'pricing', 'faq', 'contact'];
+
 interface NavbarProps {
   onLoginClick: () => void;
   isSessionActive: boolean;
@@ -19,8 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       setIsScrolled(window.scrollY > 50);
 
       // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
+      for (const section of SECTIONS) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -32,17 +42,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added { passive: true } to prevent main-thread jank during scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   const handleDashboardClick = () => {
     openExternalByDevice(DASHBOARD_URL);
@@ -68,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -130,7 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
         <div className="bg-[#1a1a1f]/95 backdrop-blur-xl border-b border-white/5 py-4 px-4 space-y-2">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}
