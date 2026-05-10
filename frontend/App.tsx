@@ -387,16 +387,16 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
 
       <div className="space-y-6">
         <div className="space-y-2">
-          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı:</label>
-          <input id="lead-company" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı: <span className="text-orange-500">*</span></label>
+          <input id="lead-company" required aria-required="true" value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı:</label>
-          <input id="lead-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı: <span className="text-orange-500">*</span></label>
+          <input id="lead-name" required aria-required="true" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-email" className="form-label">E-posta Adresi:</label>
-          <input id="lead-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-email" className="form-label">E-posta Adresi: <span className="text-orange-500">*</span></label>
+          <input id="lead-email" required aria-required="true" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB'ler için ek doğrulama yapılabilir.)</p>
         </div>
           <PhoneInput
@@ -417,24 +417,38 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
             onChange={e => setFormData({ ...formData, agreed: e.target.checked })}
             className="form-checkbox"
             required
+            aria-required="true"
           />
           <label htmlFor="auth-check" className="text-sm font-bold cursor-pointer group-hover:text-white transition-colors">
-            OSGB adına web sitesi önizleme talebinde bulunmaya yetkiliyim.
+            OSGB adına web sitesi önizleme talebinde bulunmaya yetkiliyim. <span className="text-orange-500">*</span>
           </label>
         </div>
       </div>
 
       <div className="flex flex-col items-center gap-6 pt-4">
+        {submitError && (
+          <div role="alert" className="w-full max-w-md flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400">
+            <svg className="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="font-bold text-sm">{submitError}</p>
+          </div>
+        )}
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`gradient-btn px-20 py-5 rounded-full text-2xl font-black shadow-2xl transition-all text-white ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
+          className={`gradient-btn px-20 py-5 flex items-center justify-center gap-3 rounded-full text-2xl font-black shadow-2xl transition-all text-white ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105 glow-btn'}`}
         >
-          {isSubmitting ? 'Gönderiliyor...' : 'Önizleme Talebi Bırak'}
+          {isSubmitting ? (
+            <>
+              <svg className="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24" role="status" aria-label="Yükleniyor">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              Gönderiliyor...
+            </>
+          ) : 'Önizleme Talebi Bırak'}
         </button>
-        {submitError && (
-          <p className="text-red-400 font-bold text-center">{submitError}</p>
-        )}
         <p className="text-gray-400 text-lg text-center font-bold uppercase tracking-widest">Önizleme erişimi uygunluk kontrolü sonrası oluşturulur.</p>
       </div>
     </form>
@@ -478,16 +492,26 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
     <form onSubmit={submit} className="space-y-12 animate-in fade-in slide-in-from-bottom duration-500">
       <h2 className="text-4xl md:text-5xl font-extrabold">Giriş Yap</h2>
       <div className="space-y-8 max-w-lg mx-auto">
+        {error && (
+          <div role="alert" className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 animate-in fade-in slide-in-from-top-2">
+            <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <h3 className="font-bold text-lg mb-1 text-red-300">Giriş Başarısız</h3>
+              <p className="text-sm leading-relaxed">OSGB adı veya önizleme kodunuz hatalı. Lütfen bilgilerinizi kontrol edip tekrar deneyin.</p>
+            </div>
+          </div>
+        )}
         <div className="space-y-2">
-          <label htmlFor="login-name" className="form-label">OSGB Adı</label>
-          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-name" className="form-label">OSGB Adı <span className="text-orange-500">*</span></label>
+          <input id="login-name" required aria-required="true" aria-invalid={error} value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className={`form-input bg-white/5 text-white text-center rounded-xl transition-colors ${error ? 'border-red-500/50 focus:border-red-500' : 'border-white/10'}`} />
         </div>
         <div className="space-y-2">
-          <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
-          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-code" className="form-label">Önizleme Kodu <span className="text-orange-500">*</span></label>
+          <input id="login-code" required aria-required="true" aria-invalid={error} value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className={`form-input bg-white/5 text-white text-center rounded-xl transition-colors ${error ? 'border-red-500/50 focus:border-red-500' : 'border-white/10'}`} />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
