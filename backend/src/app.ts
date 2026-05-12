@@ -24,6 +24,18 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+// 🛡️ Sentinel: Adding custom middleware for essential HTTP security headers
+// to protect against common web vulnerabilities like XSS, clickjacking, and MIME-sniffing
+// without introducing external dependencies like helmet.
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.setHeader('Content-Security-Policy', "default-src 'self'");
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
