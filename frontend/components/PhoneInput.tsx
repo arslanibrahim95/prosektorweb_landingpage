@@ -17,6 +17,7 @@ interface PhoneInputProps {
   required?: boolean;
   label?: string;
   hint?: string;
+  'aria-invalid'?: boolean;
 }
 
 const PhoneInput: React.FC<PhoneInputProps> = ({
@@ -27,6 +28,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   required = false,
   label,
   hint = 'Örn: 0532 123 45 67',
+  'aria-invalid': ariaInvalid,
 }) => (
   <div className="space-y-2">
     {label && (
@@ -50,6 +52,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
         maxLength={14}
         className={`${className} pl-12`}
         aria-describedby={`${id}-hint`}
+        aria-invalid={ariaInvalid}
       />
     </div>
     <p id={`${id}-hint`} className="text-xs text-gray-500">
