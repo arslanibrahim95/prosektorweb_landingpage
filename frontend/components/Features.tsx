@@ -1,47 +1,48 @@
 
 import React from 'react';
 
-const Features: React.FC = () => {
-  const data = [
-    {
-      title: "Sektörel Uzmanlık",
-      desc: "Çünkü dilinizi konuşuyoruz. Mevzuatı, yetki belgelerini ve operasyonel süreçlerinizi biliyoruz. Sitenizi genelgeçer kurallarla değil, İSG dinamikleriyle inşa ediyoruz.",
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-      )
-    },
-    {
-      title: "Önce Görme Güvencesi",
-      desc: "Sürprizlere yer yok. Bitmiş haliyle inceleyip sadece beğendiğinizde süreci başlatırsınız. Satın almadan önce neye sahip olacağınızı net bir şekilde bilirsiniz.",
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-      )
-    },
-    {
-      title: "Hız ve Verimlilik",
-      desc: "Zamanınıza saygı duyuyoruz. Bitmek bilmeyen revizelerle vakit kaybetmeyin. En kısa sürede yayına hazır bir otorite alanı sunuyoruz.",
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      )
-    },
-    {
-      title: "Odak Noktası",
-      desc: "Tek odağımız, tek uzmanlığımız: OSGB. Biz bir genel ajans değiliz. Tüm enerjimizi sektörünüzü en iyi temsil edecek yapıya harcıyoruz.",
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    }
-  ];
+// ⚡ Bolt: Extracted static data array outside component to prevent memory allocation on every render
+const data = [
+  {
+    title: "Sektörel Uzmanlık",
+    desc: "Çünkü dilinizi konuşuyoruz. Mevzuatı, yetki belgelerini ve operasyonel süreçlerinizi biliyoruz. Sitenizi genelgeçer kurallarla değil, İSG dinamikleriyle inşa ediyoruz.",
+    icon: (
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    )
+  },
+  {
+    title: "Önce Görme Güvencesi",
+    desc: "Sürprizlere yer yok. Bitmiş haliyle inceleyip sadece beğendiğinizde süreci başlatırsınız. Satın almadan önce neye sahip olacağınızı net bir şekilde bilirsiniz.",
+    icon: (
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
+    )
+  },
+  {
+    title: "Hız ve Verimlilik",
+    desc: "Zamanınıza saygı duyuyoruz. Bitmek bilmeyen revizelerle vakit kaybetmeyin. En kısa sürede yayına hazır bir otorite alanı sunuyoruz.",
+    icon: (
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    )
+  },
+  {
+    title: "Odak Noktası",
+    desc: "Tek odağımız, tek uzmanlığımız: OSGB. Biz bir genel ajans değiliz. Tüm enerjimizi sektörünüzü en iyi temsil edecek yapıya harcıyoruz.",
+    icon: (
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    )
+  }
+];
 
+const Features: React.FC = () => {
   return (
     <section id="features" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
