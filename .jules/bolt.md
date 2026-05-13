@@ -1,0 +1,3 @@
+## 2025-05-13 - Extracted static data objects
+**Learning:** React component optimization patterns regarding static arrays mapped via map loops. Keeping them inside the component function scope can cause unneeded memory allocation per render cycle. Additionally, `window.addEventListener('scroll')` in React needs `{ passive: true }` so as not to block scrolling performance on main-thread.
+**Action:** Always move static content data arrays (e.g., links, feature details, testimonials) outside of React component scope when they don't depend on props/state, and add `{ passive: true }` to any React or Javascript manual event listeners handling user scrolls.

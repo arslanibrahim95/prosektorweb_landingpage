@@ -33,15 +33,16 @@ const PricingParticles: React.FC = () => {
   );
 };
 
-const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
-  const features = [
-    "Profesyonel OSGB Web Sitesi",
-    "OSGB Süreç Yönetim Paneli",
-    "SEO ve Performans Optimizasyonu",
-    "Mobil Uyumlu Mimari",
-    "Hızlı Teslimat Garantisi"
-  ];
+// ⚡ Bolt: Extracted static features array outside component to prevent memory allocation on every render
+const features = [
+  "Profesyonel OSGB Web Sitesi",
+  "OSGB Süreç Yönetim Paneli",
+  "SEO ve Performans Optimizasyonu",
+  "Mobil Uyumlu Mimari",
+  "Hızlı Teslimat Garantisi"
+];
 
+const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
       {/* Background */}
