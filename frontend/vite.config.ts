@@ -13,10 +13,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     plugins: [react()],
-    define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-    },
+    // 🛡️ Sentinel: Removed define block exposing GEMINI_API_KEY as it exposes secrets to the client build
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
