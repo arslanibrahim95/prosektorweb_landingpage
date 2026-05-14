@@ -1,0 +1,3 @@
+## 2025-03-09 - Accessible Form Validation in Custom Implementations
+**Learning:** Custom form implementations like `LoginScreen` often rely solely on text colors (like `text-red-500`) and visually separate paragraphs for error states. This is inaccessible for screen readers, as the input field is not programmatically associated with its error message, and required fields lack visual indicators.
+**Action:** When auditing custom forms, ensure required fields have visual indicators (`*`), bind `aria-invalid` to invalid inputs, and use `aria-describedby` linking to a `role="alert"` error message.
