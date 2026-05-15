@@ -109,6 +109,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         id="name"
                                         name="name"
                                         required
+                                        aria-invalid={!!submitError}
                                         autoComplete="name"
                                         value={formData.name}
                                         onChange={handleChange}
@@ -127,6 +128,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         id="email"
                                         name="email"
                                         required
+                                        aria-invalid={!!submitError}
                                         autoComplete="email"
                                         inputMode="email"
                                         value={formData.email}
@@ -141,6 +143,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                     value={formData.phone}
                                     onChange={phone => setFormData({ ...formData, phone })}
                                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
+                                    error={!!submitError}
                                     label="Telefon"
                                 />
 
@@ -154,6 +157,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                         id="company"
                                         name="company"
                                         autoComplete="organization"
+                                        aria-invalid={!!submitError}
                                         value={formData.company}
                                         onChange={handleChange}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all input-glow"
@@ -171,6 +175,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                     id="message"
                                     name="message"
                                     required
+                                    aria-invalid={!!submitError}
                                     rows={5}
                                     value={formData.message}
                                     onChange={handleChange}
@@ -221,7 +226,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                 )}
                             </button>
                             {submitError && (
-                                <p className="text-red-400 font-bold text-center text-sm mt-3">{submitError}</p>
+                                <p role="alert" className="text-red-400 font-bold text-center text-sm mt-3">{submitError}</p>
                             )}
                         </form>
 
