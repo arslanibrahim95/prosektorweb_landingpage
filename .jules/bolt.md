@@ -1,0 +1,3 @@
+## 2024-05-24 - Scroll Listener Layout Thrashing & Redundant Render Allocations
+**Learning:** Found an anti-pattern in `Navbar.tsx` where `getBoundingClientRect` layout queries and state updates were bound directly to unthrottled, non-passive `scroll` events, causing layout thrashing. Additionally, static arrays like `navLinks` and `sections` were defined inside the component body, triggering unnecessary memory allocation on every render.
+**Action:** Always decouple scroll event listeners using `requestAnimationFrame` to prevent main thread jank, use `{ passive: true }` to unblock scroll compositing, and extract static configuration constants outside of React component scope.
