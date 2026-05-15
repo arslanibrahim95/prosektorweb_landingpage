@@ -15,6 +15,7 @@ interface PhoneInputProps {
   onChange: (value: string) => void;
   className?: string;
   required?: boolean;
+  error?: boolean;
   label?: string;
   hint?: string;
 }
@@ -25,6 +26,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   onChange,
   className = '',
   required = false,
+  error = false,
   label,
   hint = 'Örn: 0532 123 45 67',
 }) => (
@@ -41,6 +43,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
       <input
         id={id}
         required={required}
+        aria-invalid={error}
         value={value}
         onChange={(e) => onChange(formatPhoneNumber(e.target.value))}
         type="tel"
