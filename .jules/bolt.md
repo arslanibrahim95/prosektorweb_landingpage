@@ -1,0 +1,3 @@
+## 2024-03-24 - React Passive Event Listeners
+**Learning:** React component `Navbar` uses a non-passive scroll event listener (`window.addEventListener('scroll', handleScroll);`) without passing `{ passive: true }`. This can cause main-thread jank and scrolling performance issues, as the browser waits for the JS execution. This is especially true for frequent events like scroll.
+**Action:** When registering `scroll` or touch event listeners in React or vanilla JS, always include the `{ passive: true }` option to prevent the browser from waiting for JavaScript execution before scrolling, avoiding main-thread jank.
