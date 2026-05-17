@@ -1,0 +1,3 @@
+## 2025-05-17 - Missing Required Indicators & aria-invalid attributes
+**Learning:** In React components with generic form flows, required form inputs often lack visual indicators despite utilizing the `required` HTML attribute, leading to ambiguous mandatory fields. Further, inline error states were missing `role="alert"` and `aria-invalid` bindings, decreasing screen reader compatibility.
+**Action:** When building or updating forms in the frontend, always include explicit visual `*` indicators for required fields, provide actionable inline error messages using `role="alert"`, and bind `aria-invalid` to invalid inputs to ensure accessibility.

@@ -387,15 +387,15 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
 
       <div className="space-y-6">
         <div className="space-y-2">
-          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı:</label>
+          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı: <span className="text-orange-500">*</span></label>
           <input id="lead-company" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı:</label>
+          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı: <span className="text-orange-500">*</span></label>
           <input id="lead-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-email" className="form-label">E-posta Adresi:</label>
+          <label htmlFor="lead-email" className="form-label">E-posta Adresi: <span className="text-orange-500">*</span></label>
           <input id="lead-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB'ler için ek doğrulama yapılabilir.)</p>
         </div>
@@ -479,15 +479,15 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
       <h2 className="text-4xl md:text-5xl font-extrabold">Giriş Yap</h2>
       <div className="space-y-8 max-w-lg mx-auto">
         <div className="space-y-2">
-          <label htmlFor="login-name" className="form-label">OSGB Adı</label>
-          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-name" className="form-label">OSGB Adı <span className="text-orange-500">*</span></label>
+          <input id="login-name" required aria-invalid={error} value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
-          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-code" className="form-label">Önizleme Kodu <span className="text-orange-500">*</span></label>
+          <input id="login-code" required aria-invalid={error} value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
+        {error && <p role="alert" className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
