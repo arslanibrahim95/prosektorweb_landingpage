@@ -1,0 +1,3 @@
+## 2025-02-18 - Form Accessibility Pattern
+**Learning:** Found that required form fields were lacking explicit visual indicators, and error messages lacked `role="alert"` which is critical for screen reader users to be notified dynamically when validation fails. `aria-invalid` also needs to be bound to inputs conditionally when an error state occurs.
+**Action:** When building or updating forms in the frontend, always include explicit visual `*` indicators for required fields, provide actionable inline error messages using `role="alert"`, and bind `aria-invalid` to invalid inputs to ensure accessibility.
