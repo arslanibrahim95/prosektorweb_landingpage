@@ -234,8 +234,8 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
         <div className="space-y-6">
           <div className="space-y-2">
-            <label htmlFor="contact-name" className="form-label">Adınız Soyadınız</label>
-            <input id="contact-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white text-black" />
+            <label htmlFor="contact-name" className="form-label">Adınız Soyadınız <span className="text-orange-500" aria-hidden="true">*</span></label>
+            <input id="contact-name" required aria-invalid={!!submitError} aria-describedby={submitError ? "contact-submit-error" : undefined} value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white text-black" />
           </div>
           <PhoneInput
             id="contact-phone"
@@ -246,15 +246,15 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
             label="Telefon Numaranız"
           />
           <div className="space-y-2">
-            <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz</label>
-            <input id="contact-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white text-black" />
+            <label htmlFor="contact-email" className="form-label">E-Posta Adresiniz <span className="text-orange-500" aria-hidden="true">*</span></label>
+            <input id="contact-email" required aria-invalid={!!submitError} aria-describedby={submitError ? "contact-submit-error" : undefined} value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white text-black" />
           </div>
         </div>
 
         <div className="space-y-6 flex flex-col">
           <div className="space-y-2 flex-1">
-            <label htmlFor="contact-message" className="form-label">Mesajınız</label>
-            <textarea id="contact-message" required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="form-input bg-white text-black min-h-[200px] md:h-full resize-none"></textarea>
+            <label htmlFor="contact-message" className="form-label">Mesajınız <span className="text-orange-500" aria-hidden="true">*</span></label>
+            <textarea id="contact-message" required aria-invalid={!!submitError} aria-describedby={submitError ? "contact-submit-error" : undefined} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="form-input bg-white text-black min-h-[200px] md:h-full resize-none"></textarea>
           </div>
 
           <div className="space-y-4 pt-4">
@@ -280,7 +280,7 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
               {isSubmitting ? 'GÖNDERİLİYOR...' : 'GÖNDER'} <span className="text-xl">›</span>
             </button>
             {submitError && (
-              <p className="text-red-400 font-bold text-center">{submitError}</p>
+              <p id="contact-submit-error" className="text-red-400 font-bold text-center" role="alert">{submitError}</p>
             )}
           </div>
         </div>
@@ -387,16 +387,16 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
 
       <div className="space-y-6">
         <div className="space-y-2">
-          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı:</label>
-          <input id="lead-company" required value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-company" className="form-label">OSGB Ticari Ünvanı: <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="lead-company" required aria-invalid={!!submitError} aria-describedby={submitError ? "lead-submit-error" : undefined} value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} type="text" autoComplete="organization" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı:</label>
-          <input id="lead-name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-name" className="form-label">Yetkili Adı Soyadı: <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="lead-name" required aria-invalid={!!submitError} aria-describedby={submitError ? "lead-submit-error" : undefined} value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" autoComplete="name" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="lead-email" className="form-label">E-posta Adresi:</label>
-          <input id="lead-email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
+          <label htmlFor="lead-email" className="form-label">E-posta Adresi: <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="lead-email" required aria-invalid={!!submitError} aria-describedby={submitError ? "lead-submit-error" : undefined} value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" autoComplete="email" inputMode="email" className="form-input bg-white/5 border border-white/10 text-white rounded-xl" />
           <p className="text-gray-400 text-sm italic">(Kurumsal e-postası olmayan OSGB'ler için ek doğrulama yapılabilir.)</p>
         </div>
           <PhoneInput
@@ -433,7 +433,7 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
           {isSubmitting ? 'Gönderiliyor...' : 'Önizleme Talebi Bırak'}
         </button>
         {submitError && (
-          <p className="text-red-400 font-bold text-center">{submitError}</p>
+          <p id="lead-submit-error" className="text-red-400 font-bold text-center" role="alert">{submitError}</p>
         )}
         <p className="text-gray-400 text-lg text-center font-bold uppercase tracking-widest">Önizleme erişimi uygunluk kontrolü sonrası oluşturulur.</p>
       </div>
@@ -479,15 +479,15 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
       <h2 className="text-4xl md:text-5xl font-extrabold">Giriş Yap</h2>
       <div className="space-y-8 max-w-lg mx-auto">
         <div className="space-y-2">
-          <label htmlFor="login-name" className="form-label">OSGB Adı</label>
-          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-name" className="form-label">OSGB Adı <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="login-name" required aria-invalid={error} aria-describedby={error ? "login-error" : undefined} value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <div className="space-y-2">
-          <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
-          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-code" className="form-label">Önizleme Kodu <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="login-code" required aria-invalid={error} aria-describedby={error ? "login-error" : undefined} value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
+        {error && <p id="login-error" className="text-red-500 font-bold" role="alert">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
