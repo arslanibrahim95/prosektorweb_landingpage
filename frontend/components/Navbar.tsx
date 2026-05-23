@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { DASHBOARD_URL } from '../constants';
 import { openExternalByDevice } from '../utils/navigation';
 
+// ⚡ Bolt: Moved navLinks array outside component to prevent reallocation on every render
+const navLinks = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
 interface NavbarProps {
   onLoginClick: () => void;
   isSessionActive: boolean;
@@ -32,17 +41,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added { passive: true } to prevent scroll blocking on main thread
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   const handleDashboardClick = () => {
     openExternalByDevice(DASHBOARD_URL);
