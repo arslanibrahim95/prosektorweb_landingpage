@@ -479,15 +479,15 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
       <h2 className="text-4xl md:text-5xl font-extrabold">Giriş Yap</h2>
       <div className="space-y-8 max-w-lg mx-auto">
         <div className="space-y-2">
-          <label htmlFor="login-name" className="form-label">OSGB Adı</label>
-          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-name" className="form-label">OSGB Adı <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="login-name" required value={name} onChange={e => setName(e.target.value)} type="text" autoComplete="organization" className={`form-input bg-white/5 text-white text-center rounded-xl transition-colors ${error ? 'border-red-500' : ''}`} aria-invalid={error} />
         </div>
         <div className="space-y-2">
-          <label htmlFor="login-code" className="form-label">Önizleme Kodu</label>
-          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
+          <label htmlFor="login-code" className="form-label">Önizleme Kodu <span className="text-orange-500" aria-hidden="true">*</span></label>
+          <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className={`form-input bg-white/5 text-white text-center rounded-xl transition-colors ${error ? 'border-red-500' : ''}`} aria-invalid={error} />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
+        {error && <p className="text-red-500 font-bold" role="alert">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
