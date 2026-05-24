@@ -221,7 +221,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onSubmit }) => {
                                 )}
                             </button>
                             {submitError && (
-                                <p className="text-red-400 font-bold text-center text-sm mt-3">{submitError}</p>
+                                <p role="alert" className="text-red-400 font-bold text-center text-sm mt-3">{submitError}</p>
                             )}
                         </form>
 
