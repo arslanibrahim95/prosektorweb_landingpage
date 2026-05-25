@@ -1,0 +1,3 @@
+## 2024-05-20 - Passive Event Listeners and Static Data Allocation
+**Learning:** When registering `scroll` or touch event listeners in React or vanilla JS, always include the `{ passive: true }` option to prevent the browser from waiting for JavaScript execution before scrolling, avoiding main-thread jank. Additionally, to optimize React component performance, define static data arrays or configuration objects (e.g., navigation links) as module-level constants outside the component scope to avoid redundant memory allocations and garbage collection pressure on every render cycle.
+**Action:** Ensure `passive: true` is added to scroll events and static structures like `navLinks` are declared outside React components.
