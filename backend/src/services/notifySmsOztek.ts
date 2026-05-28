@@ -26,6 +26,10 @@ function escapeXml(s: string) {
     .replace(/'/g, '&apos;');
 }
 
+import https from 'https';
+import http from 'http';
+import crypto from 'crypto';
+
 // Oztek expects 10-digit Turkish GSM numbers without leading 0 or country code.
 // Examples: 5551234567
 function normalizeTrGsm(input: string): string | null {
@@ -46,8 +50,8 @@ export async function notifyTeamSmsOztek(body: string): Promise<string> {
   const sifre = getEnv('OZTEK_PASSWORD');
   const gonderen = getEnv('OZTEK_ORIGIN');
   const tur = (process.env.OZTEK_SMS_TYPE || 'Turkce').trim() || 'Turkce';
-  // Default to HTTP because ozteksms TLS config can fail under modern OpenSSL defaults.
-  const endpoint = (process.env.OZTEK_API_URL || 'http://www.ozteksms.com/panel/smsgonder1Npost.php').trim();
+  // Use HTTPS with legacy TLS options to secure PII (phones, names)
+  const endpointStr = (process.env.OZTEK_API_URL || 'https://www.ozteksms.com/panel/smsgonder1Npost.php').trim();
 
   const toRaw = parseEnvList(process.env.OZTEK_NOTIFY_TO);
   if (toRaw.length === 0) throw new Error('Missing OZTEK_NOTIFY_TO');
@@ -75,22 +79,43 @@ export async function notifyTeamSmsOztek(body: string): Promise<string> {
 
   const params = new URLSearchParams();
   params.set('data', xml);
+  const postData = params.toString();
 
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString(),
+  const url = new URL(endpointStr);
+  const isHttps = url.protocol === 'https:';
+
+  return new Promise((resolve, reject) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData),
+      },
+      ...(isHttps ? { secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT } : {}),
+    };
+
+    const req = (isHttps ? https : http).request(url, options, (res: any) => {
+      res.setEncoding('utf8');
+      let text = '';
+      res.on('data', (chunk: any) => {
+        text += chunk;
+      });
+      res.on('error', reject);
+      res.on('end', () => {
+        text = text.trim();
+        const statusCode = res.statusCode || 200;
+        if (statusCode >= 400) {
+          return reject(new Error(`Oztek HTTP ${statusCode}: ${truncate(text, 200)}`));
+        }
+        if (!text.startsWith('1:')) {
+          return reject(new Error(`Oztek error: ${truncate(text, 500)}`));
+        }
+        resolve(text);
+      });
+    });
+
+    req.on('error', reject);
+    req.write(postData);
+    req.end();
   });
-
-  const text = (await res.text()).trim();
-  if (!res.ok) {
-    throw new Error(`Oztek HTTP ${res.status}: ${truncate(text, 200)}`);
-  }
-
-  // Success responses start with "1:"
-  if (!text.startsWith('1:')) {
-    throw new Error(`Oztek error: ${truncate(text, 500)}`);
-  }
-
-  return text;
 }
