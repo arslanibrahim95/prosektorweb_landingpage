@@ -9,6 +9,15 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
+// ⚡ Bolt: Moved static navLinks array outside component scope to avoid redundant memory allocations on every render cycle
+const navLinks = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,17 +41,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added { passive: true } to scroll event listener to prevent main-thread jank
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   const handleDashboardClick = () => {
     openExternalByDevice(DASHBOARD_URL);
