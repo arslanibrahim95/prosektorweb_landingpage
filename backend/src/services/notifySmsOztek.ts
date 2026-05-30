@@ -1,3 +1,7 @@
+import https from 'https';
+import http from 'http';
+import crypto from 'crypto';
+
 function parseEnvList(value: string | undefined): string[] {
   if (!value) return [];
   return value
@@ -46,8 +50,9 @@ export async function notifyTeamSmsOztek(body: string): Promise<string> {
   const sifre = getEnv('OZTEK_PASSWORD');
   const gonderen = getEnv('OZTEK_ORIGIN');
   const tur = (process.env.OZTEK_SMS_TYPE || 'Turkce').trim() || 'Turkce';
-  // Default to HTTP because ozteksms TLS config can fail under modern OpenSSL defaults.
-  const endpoint = (process.env.OZTEK_API_URL || 'http://www.ozteksms.com/panel/smsgonder1Npost.php').trim();
+  // 🛡️ Sentinel: Enforce HTTPS to prevent transmitting credentials in plaintext.
+  // Using SSL_OP_LEGACY_SERVER_CONNECT to support legacy TLS configurations.
+  const endpoint = (process.env.OZTEK_API_URL || 'https://www.ozteksms.com/panel/smsgonder1Npost.php').trim();
 
   const toRaw = parseEnvList(process.env.OZTEK_NOTIFY_TO);
   if (toRaw.length === 0) throw new Error('Missing OZTEK_NOTIFY_TO');
@@ -75,17 +80,40 @@ export async function notifyTeamSmsOztek(body: string): Promise<string> {
 
   const params = new URLSearchParams();
   params.set('data', xml);
+  const bodyData = params.toString();
 
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString(),
+  const text = await new Promise<string>((resolve, reject) => {
+    const url = new URL(endpoint);
+    const client = url.protocol === 'http:' ? http : https;
+    const options: https.RequestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(bodyData),
+      },
+      secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+    };
+
+    const req = client.request(url, options, (res) => {
+      res.setEncoding('utf8');
+      let data = '';
+      res.on('data', (chunk: any) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+          reject(new Error(`Oztek HTTP ${res.statusCode}: ${truncate(data.trim(), 200)}`));
+        } else {
+          resolve(data.trim());
+        }
+      });
+      res.on('error', reject);
+    });
+
+    req.on('error', reject);
+    req.write(bodyData);
+    req.end();
   });
-
-  const text = (await res.text()).trim();
-  if (!res.ok) {
-    throw new Error(`Oztek HTTP ${res.status}: ${truncate(text, 200)}`);
-  }
 
   // Success responses start with "1:"
   if (!text.startsWith('1:')) {
