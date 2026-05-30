@@ -15,25 +15,39 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    // ⚡ Bolt: Prevent array recreation on every scroll event
+    const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+    let ticking = false;
+    let rafId: number;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added passive flag to prevent scroll blocking
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const navLinks = [
