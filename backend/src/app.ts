@@ -24,6 +24,15 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+// 🛡️ Sentinel: Add security headers to protect against common web vulnerabilities
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
