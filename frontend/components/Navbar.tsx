@@ -9,40 +9,52 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
+// ⚡ Bolt: Moved navLinks array outside component to prevent unnecessary re-creations on every render
+const navLinks = [
+  { name: 'Neden Biz?', href: '#features', id: 'features' },
+  { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
+  { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
+  { name: 'SSS', href: '#faq', id: 'faq' },
+  { name: 'İletişim', href: '#contact', id: 'contact' },
+];
+
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // ⚡ Bolt: Using requestAnimationFrame prevents layout thrashing by syncing DOM reads (getBoundingClientRect)
+          // with the browser's paint cycle, significantly improving scroll performance.
+          const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // ⚡ Bolt: Added passive: true to tell the browser this listener won't call preventDefault,
+    // allowing it to scroll immediately without waiting for JS execution.
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Neden Biz?', href: '#features', id: 'features' },
-    { name: 'Nasıl Çalışırız?', href: '#process', id: 'process' },
-    { name: 'Fiyatlandırma', href: '#pricing', id: 'pricing' },
-    { name: 'SSS', href: '#faq', id: 'faq' },
-    { name: 'İletişim', href: '#contact', id: 'contact' },
-  ];
 
   const handleDashboardClick = () => {
     openExternalByDevice(DASHBOARD_URL);
