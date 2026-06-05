@@ -24,6 +24,14 @@ export const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+// 🛡️ Sentinel: Adding basic security headers to protect against common web vulnerabilities like XSS, clickjacking, and MIME-type sniffing.
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
