@@ -277,10 +277,20 @@ const ContactFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplete })
               disabled={isSubmitting}
               className={`w-full gradient-btn py-4 rounded-full text-lg font-black text-white flex items-center justify-center gap-3 transition-all shadow-2xl ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
             >
-              {isSubmitting ? 'GÖNDERİLİYOR...' : 'GÖNDER'} <span className="text-xl">›</span>
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" role="status" aria-label="Yükleniyor">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  GÖNDERİLİYOR...
+                </>
+              ) : (
+                <>GÖNDER <span className="text-xl">›</span></>
+              )}
             </button>
             {submitError && (
-              <p className="text-red-400 font-bold text-center">{submitError}</p>
+              <p className="text-red-400 font-bold text-center" role="alert">{submitError}</p>
             )}
           </div>
         </div>
@@ -428,12 +438,20 @@ const LeadRequestFormScreen: React.FC<{ onComplete: () => void }> = ({ onComplet
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`gradient-btn px-20 py-5 rounded-full text-2xl font-black shadow-2xl transition-all text-white ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
+          className={`gradient-btn px-20 py-5 rounded-full text-2xl font-black shadow-2xl transition-all text-white flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
         >
-          {isSubmitting ? 'Gönderiliyor...' : 'Önizleme Talebi Bırak'}
+          {isSubmitting ? (
+            <>
+              <svg className="animate-spin -ml-1 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" role="status" aria-label="Yükleniyor">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Gönderiliyor...
+            </>
+          ) : 'Önizleme Talebi Bırak'}
         </button>
         {submitError && (
-          <p className="text-red-400 font-bold text-center">{submitError}</p>
+          <p className="text-red-400 font-bold text-center" role="alert">{submitError}</p>
         )}
         <p className="text-gray-400 text-lg text-center font-bold uppercase tracking-widest">Önizleme erişimi uygunluk kontrolü sonrası oluşturulur.</p>
       </div>
@@ -487,7 +505,7 @@ const LoginScreen: React.FC<{ onVerify: (code: string, name: string) => boolean 
           <input id="login-code" required value={code} onChange={e => { setCode(e.target.value); setError(false); }} type="text" placeholder="XXXXXX" autoCapitalize="characters" className="form-input bg-white/5 text-white text-center rounded-xl" />
         </div>
         <p className="text-gray-400">Önizleme kodu, size WhatsApp / e-posta ile gönderilir.</p>
-        {error && <p className="text-red-500 font-bold">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
+        {error && <p className="text-red-500 font-bold" role="alert">Hatalı giriş! Lütfen bilgilerinizi kontrol edin.</p>}
         <div className="text-gray-400 text-sm space-y-2 pt-4">
           <p>Önizleme kodu ilk girişte doğrulanır. Aynı cihazdan tekrar girişte kod istenmez.</p>
           <p>Farklı cihazlarda güvenlik nedeniyle kod doğrulaması yapılır.</p>
