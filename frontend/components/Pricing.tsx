@@ -33,15 +33,16 @@ const PricingParticles: React.FC = () => {
   );
 };
 
-const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
-  const features = [
-    "Profesyonel OSGB Web Sitesi",
-    "OSGB Süreç Yönetim Paneli",
-    "SEO ve Performans Optimizasyonu",
-    "Mobil Uyumlu Mimari",
-    "Hızlı Teslimat Garantisi"
-  ];
+const PRICING_FEATURES = [
+  "Profesyonel OSGB Web Sitesi",
+  "OSGB Süreç Yönetim Paneli",
+  "SEO ve Performans Optimizasyonu",
+  "Mobil Uyumlu Mimari",
+  "Hızlı Teslimat Garantisi"
+];
 
+const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
+  // ⚡ Bolt: Moved static features array outside component to prevent recreation on every render
   return (
     <section id="pricing" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -89,7 +90,7 @@ const Pricing: React.FC<PricingProps> = ({ onPreviewClick }) => {
 
               {/* Features List */}
               <ul className="text-left space-y-4 max-w-sm mx-auto mb-10">
-                {features.map((feature, i) => (
+                {PRICING_FEATURES.map((feature, i) => (
                   <li
                     key={i}
                     className={`flex items-center gap-3 fade-in-up stagger-${i + 1}`}

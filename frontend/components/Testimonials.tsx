@@ -1,31 +1,32 @@
 
 import React from 'react';
 
-const Testimonials: React.FC = () => {
-  const testimonials = [
-    {
-      quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
-      author: "Ahmet Y.",
-      company: "Delta OSGB",
-      role: "Genel Müdür",
-      rating: 5
-    },
-    {
-      quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
-      author: "Fatma K.",
-      company: "Alfa Ortak Sağlık Birimi",
-      role: "İşletme Sahibi",
-      rating: 5
-    },
-    {
-      quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
-      author: "Mehmet S.",
-      company: "Güven OSGB",
-      role: "Kurucu Ortak",
-      rating: 5
-    }
-  ];
+const TESTIMONIALS_DATA = [
+  {
+    quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
+    author: "Ahmet Y.",
+    company: "Delta OSGB",
+    role: "Genel Müdür",
+    rating: 5
+  },
+  {
+    quote: "En kısa sürede hazır web sitesi aldık. OSGB sektörüne özel içerikler gerçekten profesyonel hazırlanmış.",
+    author: "Fatma K.",
+    company: "Alfa Ortak Sağlık Birimi",
+    role: "İşletme Sahibi",
+    rating: 5
+  },
+  {
+    quote: "Mevzuat uyumlu içerik ve SEO çalışması sayesinde Google'da hemen öne çıkmaya başladık. Teşekkürler Prosektorweb!",
+    author: "Mehmet S.",
+    company: "Güven OSGB",
+    role: "Kurucu Ortak",
+    rating: 5
+  }
+];
 
+const Testimonials: React.FC = () => {
+  // ⚡ Bolt: Moved static testimonials array outside component to prevent recreation on every render
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -45,7 +46,7 @@ const Testimonials: React.FC = () => {
 
         {/* Testimonial Cards */}
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((item, i) => (
+          {TESTIMONIALS_DATA.map((item, i) => (
             <div
               key={i}
               className={`group relative p-8 rounded-3xl glass glass-hover transition-all duration-500 fade-in-up stagger-${i + 1}`}
