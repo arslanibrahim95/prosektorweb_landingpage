@@ -1,0 +1,4 @@
+## 2024-06-10 - Exposed API Key in Vite Config
+**Vulnerability:** Gemini API keys were hardcoded into the frontend build via Vite's `define` configuration, exposing secrets to the browser.
+**Learning:** Using Vite's `define` with environment variables injects them statically into the frontend bundle. Even if codebase searches don't show direct usage of the key, removing the `define` block without providing a backend proxy alternative can break functionality if it's evaluated at runtime or dynamically.
+**Prevention:** Always implement a secure backend proxy endpoint for external APIs instead of injecting secrets into the frontend build.
