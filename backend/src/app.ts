@@ -45,6 +45,30 @@ app.use(express.json({ limit: '256kb' }));
 app.use('/api', statusRouter);
 app.use('/api/public', publicRouter);
 
+app.post('/api/proxy/gemini', async (req, res) => {
+  // 🛡️ Sentinel: Secure backend proxy to prevent exposing Gemini API Key to the frontend
+  try {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) throw new Error('Missing GEMINI_API_KEY');
+
+    // Example secure proxy implementation
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(req.body)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Proxy request failed' });
+  }
+});
+
 app.use((req, res) => {
   res.status(404).json({ error: 'not_found' });
 });
