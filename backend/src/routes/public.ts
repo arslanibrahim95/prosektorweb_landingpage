@@ -132,4 +132,39 @@ router.post('/contact', async (req, res, next) => {
   }
 });
 
+// 🛡️ Sentinel: Secure backend proxy for Gemini API to avoid exposing GEMINI_API_KEY to the frontend.
+router.post('/ai/generate', async (req, res, next) => {
+  try {
+    const { prompt } = req.body;
+    if (!prompt || typeof prompt !== 'string') {
+      return res.status(400).json({ error: 'invalid_prompt' });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: 'ai_service_unavailable' });
+    }
+
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+    const aiRes = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      }),
+    });
+
+    if (!aiRes.ok) {
+      const errorText = await aiRes.text();
+      console.error('Gemini API Error:', errorText);
+      return res.status(aiRes.status).json({ error: 'ai_generation_failed' });
+    }
+
+    const data = await aiRes.json();
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
