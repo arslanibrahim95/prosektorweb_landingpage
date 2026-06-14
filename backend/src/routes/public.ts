@@ -8,6 +8,7 @@ import {
   updateContactNotify,
 } from '../services/supabase';
 import { notifyTeamSmsOztek } from '../services/notifySmsOztek';
+import https from 'node:https';
 
 function getErrorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
@@ -127,6 +128,48 @@ router.post('/contact', async (req, res, next) => {
         }
       }
     })();
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/gemini-proxy', async (req, res, next) => {
+  // 🛡️ Sentinel: Secure backend proxy for Gemini API to prevent exposing API key in frontend
+  try {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: 'Missing GEMINI_API_KEY' });
+    }
+
+    const payload = JSON.stringify(req.body);
+    const parsedUrl = new URL(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`);
+
+    const options = {
+      hostname: parsedUrl.hostname,
+      port: parsedUrl.port || 443,
+      path: parsedUrl.pathname + parsedUrl.search,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    const data = await new Promise<string>((resolve, reject) => {
+      const request = https.request(options, (response) => {
+        response.setEncoding('utf8');
+        let body = '';
+        response.on('data', (chunk) => { body += chunk; });
+        response.on('end', () => resolve(body));
+        response.on('error', reject);
+      });
+
+      request.on('error', reject);
+      request.write(payload);
+      request.end();
+    });
+
+    res.type('json').send(data);
   } catch (err) {
     next(err);
   }
