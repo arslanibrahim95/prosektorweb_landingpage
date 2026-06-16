@@ -1,0 +1,3 @@
+## 2025-03-09 - Missing Accessible Spinners on Submit Buttons
+**Learning:** Found an accessibility issue pattern specific to this app's components: multiple form submit buttons (e.g. around lines 275 and 428 in `frontend/App.tsx`) were missing accessible loading spinners and aria-labels when `isSubmitting` is true, providing poor feedback for screen-reader users and visual users during async operations.
+**Action:** Always include an accessible loading spinner (e.g. SVG with `role="status"` and `aria-label="Yükleniyor"`) alongside text updates to provide clear visual feedback and screen-reader announcements when disabling submit buttons.
