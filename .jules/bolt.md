@@ -1,0 +1,3 @@
+## 2024-06-16 - Prevent Layout Thrashing on Scroll
+**Learning:** Calling `getBoundingClientRect` on multiple DOM elements inside an unthrottled `scroll` event handler causes synchronous layout calculations (layout thrashing), which severely blocks the main thread and leads to janky scrolling, especially on mobile devices.
+**Action:** Always throttle scroll event listeners that perform DOM measurements using `requestAnimationFrame` to limit execution to once per frame. Additionally, mark the event listener with `{ passive: true }` so the browser doesn't wait for the JavaScript to execute before scrolling the page.
