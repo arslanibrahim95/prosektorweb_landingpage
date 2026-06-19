@@ -1,0 +1,3 @@
+## 2024-05-24 - Accessible Loading States for Async Buttons
+**Learning:** Text-only loading states on buttons (e.g., "Gönderiliyor...") lack sufficient visual feedback and are not properly announced by screen readers as a status update.
+**Action:** When disabling form submit buttons during async operations, always include an accessible loading spinner (like an SVG with role="status" and aria-label="Loading") alongside text updates.
