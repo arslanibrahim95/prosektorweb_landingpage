@@ -1,0 +1,3 @@
+## 2024-06-20 - Accessible Loading States in Async Forms
+**Learning:** In the App.tsx form submissions, disabling the button and changing the text is insufficient for screen readers and can be visually ambiguous without a clear motion indicator. Adding a scalable SVG spinner with \`role="status"\` and \`aria-label="Loading"\` ensures both visual feedback and proper ARIA announcements when the button state changes to disabled during async operations.
+**Action:** Always pair \`isSubmitting\` disabled states with an accessible motion indicator (like a spinning SVG) and \`role="status"\` to maintain accessibility and visual clarity simultaneously.
