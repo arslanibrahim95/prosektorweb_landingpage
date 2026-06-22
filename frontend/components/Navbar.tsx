@@ -15,25 +15,36 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (timeoutId) return;
+
+      timeoutId = setTimeout(() => {
+        // ⚡ Bolt: Throttled scroll listener to 100ms and added { passive: true } to prevent layout thrashing and keep main thread unblocked
+        setIsScrolled(window.scrollY > 50);
+
+        // Detect active section
+        const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+        for (const section of sections) {
+          const el = document.getElementById(section);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
+        timeoutId = null;
+      }, 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const navLinks = [
