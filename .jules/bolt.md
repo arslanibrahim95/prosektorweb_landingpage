@@ -1,0 +1,3 @@
+## 2024-06-24 - Throttling Scroll Event Layout Thrashing
+**Learning:** The previous Navbar scroll event handler was triggering synchronous `getBoundingClientRect()` on 5 distinct DOM nodes on every scroll frame (which fires multiple times during a typical scroll wheel tick). Because this triggered synchronous layout/reflow interleaved with React state updates (`setIsScrolled`), it caused significant main thread blocking and jank.
+**Action:** When binding handlers to high-frequency UI events like `scroll` or `mousemove` that require reading layout geometry, always decouple the DOM read operations from the event tick using `requestAnimationFrame`, and add `{ passive: true }` so the browser composite thread doesn't wait for JS execution before visually scrolling the page.
