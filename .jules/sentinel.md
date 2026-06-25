@@ -1,0 +1,4 @@
+## 2025-06-25 - Exposed API Key in Vite Config
+**Vulnerability:** The Vite configuration (`vite.config.ts`) was injecting the `GEMINI_API_KEY` environment variable directly into the client-side code via the `define` option (`process.env.API_KEY` and `process.env.GEMINI_API_KEY`).
+**Learning:** Any variables defined using Vite's `define` option are statically replaced with their actual values during the build process, making them accessible in the final production bundle. Since these variables were not being used anywhere in the frontend code, injecting them was a critical security risk.
+**Prevention:** Avoid using Vite's `define` option to inject sensitive secrets into the client-side code unless absolutely necessary and secure. If an API key must be used on the client-side, consider proxying the requests through a backend server. In this case, since the API key was entirely unused, the definitions should be safely removed.
