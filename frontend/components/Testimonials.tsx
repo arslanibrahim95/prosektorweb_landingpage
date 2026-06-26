@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 
-const Testimonials: React.FC = () => {
-  const testimonials = [
+const testimonials = [
     {
       quote: "Önce görüp sonra ödeme modeli gerçekten güven verici. Web sitemizi inceledikten sonra karar verdik, hiçbir sürprizle karşılaşmadık.",
       author: "Ahmet Y.",
@@ -24,8 +23,17 @@ const Testimonials: React.FC = () => {
       role: "Kurucu Ortak",
       rating: 5
     }
-  ];
+];
 
+const stats = [
+  { value: "Hızlı", suffix: "", label: "Teslimat" },
+  { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
+  { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
+  { value: "3", suffix: "", label: "Revize Hakkı" }
+];
+
+const Testimonials: React.FC = memo(() => {
+  // ⚡ Bolt: Moved static arrays outside component and added React.memo to prevent unnecessary re-renders
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -84,12 +92,7 @@ const Testimonials: React.FC = () => {
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
-          {[
-            { value: "Hızlı", suffix: "", label: "Teslimat" },
-            { value: "100", suffix: "%", label: "Müşteri Memnuniyeti" },
-            { value: "7", suffix: " Gün", label: "Ücretsiz Önizleme" },
-            { value: "3", suffix: "", label: "Revize Hakkı" }
-          ].map((stat, i) => (
+          {stats.map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-4xl md:text-5xl font-montserrat font-black text-white mb-2">
                 {stat.value}<span className="text-orange-500">{stat.suffix}</span>
@@ -101,6 +104,6 @@ const Testimonials: React.FC = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Testimonials;
