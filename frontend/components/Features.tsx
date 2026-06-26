@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 
-const Features: React.FC = () => {
-  const data = [
+const data = [
     {
       title: "Sektörel Uzmanlık",
       desc: "Çünkü dilinizi konuşuyoruz. Mevzuatı, yetki belgelerini ve operasyonel süreçlerinizi biliyoruz. Sitenizi genelgeçer kurallarla değil, İSG dinamikleriyle inşa ediyoruz.",
@@ -40,8 +39,10 @@ const Features: React.FC = () => {
         </svg>
       )
     }
-  ];
+];
 
+const Features: React.FC = memo(() => {
+  // ⚡ Bolt: Moved static data array outside component and added React.memo to prevent unnecessary re-renders
   return (
     <section id="features" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
@@ -87,6 +88,6 @@ const Features: React.FC = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Features;
