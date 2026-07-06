@@ -1,0 +1,4 @@
+## 2025-07-06 - Unused Secret Definitions in Vite Config
+**Vulnerability:** The Vite configuration included a `define` block that mapped `process.env.API_KEY` and `process.env.GEMINI_API_KEY` to the value of `env.GEMINI_API_KEY`. This globally exposes these secrets to the frontend build environment.
+**Learning:** This is often a leftover from boilerplate, starter kits, or AI generation tools attempting to wire up a backend key to the frontend unnecessarily. If the variables are completely unused in the frontend code, they should be safely removed to prevent unintentional secret leakage into the client bundle.
+**Prevention:** Thoroughly verify if the frontend genuinely requires the secret. If not, delete the `define` block completely instead of shimming it, which avoids functional regressions while eliminating the security risk.
