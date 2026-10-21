@@ -1,0 +1,3 @@
+## 2026-10-21 - Semantic Interactive Elements
+**Learning:** Interactive `div` elements lack built-in accessibility features (like keyboard focus and space/enter key activation). In a Tailwind CSS project, because it applies a CSS reset to `button`s, replacing interactive `div`s with `button`s provides native accessibility with zero visual or layout changes, making it a perfectly safe drop-in replacement.
+**Action:** Always use semantic `<button>` tags for interactive clickable elements instead of `<div onClick={...}>` to ensure automatic keyboard navigation and screen reader support without extra boilerplate.
