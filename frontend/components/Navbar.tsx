@@ -15,25 +15,41 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, isSessionActive, onLogout
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    let ticking = false;
+    let animationFrameId: number;
 
-      // Detect active section
-      const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+    // ⚡ Bolt Optimization: Throttle scroll events with requestAnimationFrame
+    // to prevent synchronous layout thrashing from getBoundingClientRect()
+    const handleScroll = () => {
+      if (!ticking) {
+        animationFrameId = window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+
+          // Detect active section
+          const sections = ['features', 'process', 'pricing', 'faq', 'contact'];
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom >= 100) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // ⚡ Bolt Optimization: Add { passive: true } to allow the browser
+    // to scroll immediately without waiting for JS execution
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   const navLinks = [
