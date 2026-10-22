@@ -1,0 +1,4 @@
+## 2024-03-24 - Remove Exposed Gemini API Key in Vite Config
+**Vulnerability:** The `GEMINI_API_KEY` was being injected into the client-side bundle via Vite's `define` configuration (`process.env.API_KEY` and `process.env.GEMINI_API_KEY`), which exposes the raw API key to any user visiting the site.
+**Learning:** Even if an API key is completely unused in the frontend code, injecting it via a bundler's global variable definition will still leave it exposed in the final build artifact, allowing it to be scraped and abused.
+**Prevention:** Thoroughly verify that no secrets or environment variables containing API keys are mapped in bundler configurations (like Vite's `define` or Webpack's `DefinePlugin`) unless they are intended to be public (e.g., `VITE_PUBLIC_*`). If unused, safely remove the definitions altogether.
