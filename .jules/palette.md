@@ -1,0 +1,3 @@
+## 2024-11-20 - Replace interactive divs with semantic buttons
+**Learning:** When fixing accessibility issues for interactive `div` elements, directly replacing them with semantic `<button>` elements is highly effective in Tailwind CSS projects. Tailwind applies a CSS reset to buttons, making them visually identical to divs by default. This approach automatically provides keyboard focusability (`tabindex`), screen reader announcement (`role="button"`), and keyboard event handling (`Enter`/`Space`) without requiring manual ARIA attributes or custom event listeners.
+**Action:** Always prefer replacing interactive `div` elements with `<button>` elements instead of adding `role="button"` and `tabIndex={0}` to divs, especially in Tailwind environments.
