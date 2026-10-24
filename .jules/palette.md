@@ -1,0 +1,3 @@
+## 2026-10-24 - Replace interactive div with semantic button
+**Learning:** The frontend React code occasionally uses `div` elements with `onClick` handlers (e.g., in WelcomeScreen and MockupScreen) acting as primary navigation or action buttons. This severely limits keyboard accessibility and screen reader support since `div` elements lack native button semantics and focus management.
+**Action:** Always replace interactive `div` elements with semantic `<button>` tags instead of adding manual roles and keyboard event listeners. Because the project uses Tailwind CSS (which resets default button styles), this is a visually seamless and completely accessible drop-in replacement.
