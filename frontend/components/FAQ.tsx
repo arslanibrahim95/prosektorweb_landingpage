@@ -87,4 +87,4 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
   );
 };
 
-export default FAQ;
+export default React.memo(FAQ);
