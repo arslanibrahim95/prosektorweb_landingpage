@@ -1,0 +1,3 @@
+## 2025-03-05 - Throttle expensive scroll event handlers with requestAnimationFrame
+**Learning:** Attaching unthrottled functions that query the DOM (like `getBoundingClientRect()`) to the `scroll` event can cause significant main-thread blocking and layout thrashing, hurting scrolling performance on lower-end devices.
+**Action:** Always wrap synchronous DOM calculations within scroll event listeners in `requestAnimationFrame()` to ensure they only execute once per display refresh, and add `{ passive: true }` to the event listener options so the browser doesn't delay painting while waiting for JS to execute.
