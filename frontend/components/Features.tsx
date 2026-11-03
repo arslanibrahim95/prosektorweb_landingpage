@@ -1,8 +1,8 @@
 
 import React from 'react';
 
-const Features: React.FC = () => {
-  const data = [
+// Extracted static data outside component body to prevent GC overhead on every render
+const data = [
     {
       title: "Sektörel Uzmanlık",
       desc: "Çünkü dilinizi konuşuyoruz. Mevzuatı, yetki belgelerini ve operasyonel süreçlerinizi biliyoruz. Sitenizi genelgeçer kurallarla değil, İSG dinamikleriyle inşa ediyoruz.",
@@ -42,6 +42,7 @@ const Features: React.FC = () => {
     }
   ];
 
+const Features: React.FC = () => {
   return (
     <section id="features" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
@@ -89,4 +90,4 @@ const Features: React.FC = () => {
   );
 };
 
-export default Features;
+export default React.memo(Features);
